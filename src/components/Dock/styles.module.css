@@ -18,26 +18,23 @@
   border-radius: 12px;
 }
 
-.dock-card-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .dock-card {
   background-color: #262626;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   cursor: pointer;
   transition: filter 0.2s ease;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
 }
 
 .dock-card:hover {
   filter: brightness(1.12) saturate(1);
+}
+
+.dock-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 .card {
@@ -45,17 +42,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
 }
 
 .card__blur {
   position: absolute;
+  opacity: 0.4;
   filter: blur(10px);
   transform: translateY(10px) scale(1.25);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .card__img {
@@ -63,5 +56,4 @@
   width: 50%;
   height: 50%;
   border-radius: 50%;
-  object-fit: cover;
 }

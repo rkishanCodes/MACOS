@@ -1,52 +1,72 @@
-import React, { useState, useRef } from "react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import * as React from "react";
+import { animated, useSpringValue } from "@react-spring/web";
+import { clamp } from "@react-spring/shared";
 
+import { useWindowResize } from "../../hooks/useWindowResize";
+import { DockContext } from "./DockContext";
+import styles from "./styles.module.css";
+
+// Define the zoom limits for the dock
 export const DOCK_ZOOM_LIMIT = [-100, 50];
 
+// Dock component
 export const Dock = ({ children }) => {
-  // State to track if the dock is being hovered
-  const [hovered, setHovered] = useState(false);
+  // State to track if the dock is hovered
+  const [hovered, setHovered] = React.useState(false);
+  // State to store the width of the dock
+  const [width, setWidth] = React.useState(0);
+  // Ref to track if zooming is happening
+  const isZooming = React.useRef(false);
+  // Ref for the dock element
+  const dockRef = React.useRef(null);
 
-  // Ref to the dock element
-  const dockRef = useRef(null);
+  // Function to set zooming state and update hover state
+  const setIsZooming = React.useCallback((value) => {
+    isZooming.current = value;
+    setHovered(!value);
+  }, []);
 
-  // Motion value to track mouse X position
-  const mouseX = useMotionValue(0);
+  // Spring value for zoom level
+  const zoomLevel = useSpringValue(1, {
+    onChange: () => {
+      if (dockRef.current) {
+        setWidth(dockRef.current.clientWidth);
+      }
+    },
+  });
 
-  // Motion value to track zoom level
-  const zoomLevel = useMotionValue(1);
-
-  // Transform zoom level to scale
-  const scale = useTransform(
-    zoomLevel,
-    [DOCK_ZOOM_LIMIT[0], 1, DOCK_ZOOM_LIMIT[1]],
-    [2, 1, 0.5]
-  );
+  // Update dock width on window resize
+  useWindowResize(() => {
+    if (dockRef.current) {
+      setWidth(dockRef.current.clientWidth);
+    }
+  });
 
   return (
-    <motion.div
-      ref={dockRef}
-      className="dock"
-      style={{ scale }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      onMouseMove={(e) => {
-        // Update mouseX when mouse moves over the dock
-        mouseX.set(e.clientX);
-      }}
-      // Enable vertical dragging for resizing
-      drag="y"
-      dragConstraints={{ top: DOCK_ZOOM_LIMIT[0], bottom: DOCK_ZOOM_LIMIT[1] }}
-      dragElastic={0.1}
-      onDrag={(_, info) => {
-        // Update zoom level based on drag position
-        zoomLevel.set(1 + info.offset.y / 100);
-      }}
-    >
-      {React.Children.map(children, (child) =>
-        // Pass mouseX and hovered state to all children
-        React.cloneElement(child, { mouseX, hovered })
-      )}
-    </motion.div>
+    <DockContext.Provider value={{ hovered, setIsZooming, width, zoomLevel }}>
+      <animated.div
+        ref={dockRef}
+        className={styles.dock}
+        onMouseOver={() => {
+          if (!isZooming.current) {
+            setHovered(true);
+          }
+        }}
+        onMouseOut={() => {
+          setHovered(false);
+        }}
+        style={{
+          x: "-50%",
+          scale: zoomLevel
+            .to({
+              range: [DOCK_ZOOM_LIMIT[0], 1, DOCK_ZOOM_LIMIT[1]],
+              output: [2, 1, 0.5],
+            })
+            .to((value) => clamp(0.5, 2, value)),
+        }}
+      >
+        {children}
+      </animated.div>
+    </DockContext.Provider>
   );
 };

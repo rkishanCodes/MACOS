@@ -1,53 +1,118 @@
-import React, { useRef } from "react";
+import * as React from "react";
 import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  useAnimationFrame,
-} from "framer-motion";
+  animated,
+  useIsomorphicLayoutEffect,
+  useSpringValue,
+} from "@react-spring/web";
+import { useMousePosition } from "../../hooks/useMousePosition";
+import { useWindowResize } from "../../hooks/useWindowResize";
+import { useDock } from "./DockContext";
+import styles from "./styles.module.css";
 
 const INITIAL_WIDTH = 48;
 
-export const DockCard = ({ children, mouseX, hovered }) => {
-  // Ref to the card element
-  const ref = useRef(null);
+export const DockCard = ({ children }) => {
+  const cardRef = React.useRef(null);
+  const [elCenterX, setElCenterX] = React.useState(0);
 
-  // Motion value to track distance from mouse
-  const distance = useMotionValue(0);
-
-  // Spring animation for card size
-  const size = useSpring(INITIAL_WIDTH, { damping: 20, stiffness: 200 });
-
-  // Transform size to y position for bounce effect
-  const y = useTransform(size, [INITIAL_WIDTH, INITIAL_WIDTH * 1.75], [0, -10]);
-
-  useAnimationFrame(() => {
-    const el = ref.current;
-    if (!el || !hovered) return;
-
-    const rect = el.getBoundingClientRect();
-    const distanceFromCenter = mouseX.get() - (rect.left + rect.width / 2);
-    distance.set(distanceFromCenter);
-
-    // Calculate hover scale based on distance from center
-    const hoverScale = 1.75 - Math.abs(distanceFromCenter) / rect.width;
-    size.set(INITIAL_WIDTH * Math.max(1, hoverScale));
+  const size = useSpringValue(INITIAL_WIDTH, {
+    config: {
+      mass: 0.1,
+      tension: 320,
+    },
   });
 
+  const opacity = useSpringValue(0);
+  const y = useSpringValue(0, {
+    config: {
+      friction: 29,
+      tension: 238,
+    },
+  });
+
+  const dock = useDock();
+
+  useMousePosition(
+    {
+      onChange: ({ value }) => {
+        const mouseX = value.x;
+
+        if (dock.width > 0) {
+          const transformedValue =
+            INITIAL_WIDTH +
+            36 *
+              Math.cos((((mouseX - elCenterX) / dock.width) * Math.PI) / 2) **
+                12;
+
+          if (dock.hovered) {
+            size.start(transformedValue);
+          }
+        }
+      },
+    },
+    [elCenterX, dock]
+  );
+
+  useIsomorphicLayoutEffect(() => {
+    if (!dock.hovered) {
+      size.start(INITIAL_WIDTH);
+    }
+  }, [dock.hovered]);
+
+  useWindowResize(() => {
+    const { x } = cardRef.current.getBoundingClientRect();
+    setElCenterX(x + INITIAL_WIDTH / 2);
+  });
+
+  const timesLooped = React.useRef(0);
+  const timeoutRef = React.useRef();
+  const isAnimating = React.useRef(false);
+
+  const handleClick = () => {
+    if (!isAnimating.current) {
+      isAnimating.current = true;
+      opacity.start(0.5);
+      timesLooped.current = 0;
+
+      y.start(-INITIAL_WIDTH / 2, {
+        loop: () => {
+          if (3 === timesLooped.current++) {
+            timeoutRef.current = setTimeout(() => {
+              opacity.start(0);
+              y.set(0);
+              isAnimating.current = false;
+              timeoutRef.current = undefined;
+            }, 2000);
+            y.stop();
+          }
+          return { reverse: true };
+        },
+      });
+    } else {
+      clearTimeout(timeoutRef.current);
+      opacity.start(0);
+      y.start(0);
+      isAnimating.current = false;
+    }
+  };
+
+  React.useEffect(() => () => clearTimeout(timeoutRef.current), []);
+
   return (
-    <motion.div
-      ref={ref}
-      className="dock-card-container"
-      style={{ width: size, height: size, y }}
-    >
-      <motion.button
-        className="dock-card"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+    <div className={styles["dock-card-container"]}>
+      <animated.button
+        ref={cardRef}
+        className={styles["dock-card"]}
+        onClick={handleClick}
+        style={{
+          width: size,
+          height: size,
+          y,
+        }}
       >
         {children}
-      </motion.button>
-    </motion.div>
+      </animated.button>
+      <animated.div className={styles["dock-dot"]} style={{ opacity }} />
+    </div>
   );
 };

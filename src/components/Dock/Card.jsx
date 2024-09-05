@@ -1,23 +1,9 @@
-import React from "react";
-import { motion } from "framer-motion";
+import * as React from "react";
+import styles from "./styles.module.css";
 
 export const Card = ({ src }) => (
-  <motion.span className="card" whileHover={{ scale: 1.05 }}>
-    <motion.img
-      className="card__blur"
-      src={src}
-      alt=""
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 0.4 }}
-      transition={{ duration: 0.3 }}
-    />
-    <motion.img
-      className="card__img"
-      src={src}
-      alt=""
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
-    />
-  </motion.span>
+  <span className={styles.card}>
+    <img className={styles.card__blur} src={src} alt="" />
+    <img className={styles.card__img} src={src} alt="" />
+  </span>
 );
