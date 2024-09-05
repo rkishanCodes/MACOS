@@ -1,0 +1,22 @@
+/* src/fonts.css */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('./fonts/SFPRODISPLAYBOLD.OTF') format('opentype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('./fonts/SFPRODISPLAYMEDIUM.OTF') format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('./fonts/SFPRODISPLAYREGULAR.OTF') format('opentype');
+  font-weight: normal;
+}
+
+body {
+  font-family: 'SF Pro Display', sans-serif;
+}

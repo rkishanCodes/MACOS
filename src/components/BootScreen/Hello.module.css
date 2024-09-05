@@ -1,0 +1,52 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+.container {
+
+  min-height: 100vh;
+  max-width: 100vw;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.hello__div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.hello__svg {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  stroke-width: 48px;
+  stroke-dasharray: 5800px;
+  stroke-dashoffset: 5800px;
+  animation: anim__hello linear 5s forwards;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@keyframes anim__hello {
+  0% {
+    stroke-dashoffset: 5800;
+  }
+  25% {
+    stroke-dashoffset: 5800;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
