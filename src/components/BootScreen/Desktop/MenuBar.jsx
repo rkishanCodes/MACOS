@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import icon from "../assets/Apple_logo_white.png";
-import icon1 from "../assets/icon1.png";
-import battery from "../assets/battery.png";
-import on from "../assets/on.png";
-import off from "../assets/off.png";
+import icon from "../../../assets/Apple_logo_white.png";
+import icon1 from "../../../assets/icon1.png";
+import battery from "../../../assets/battery.png";
+import on from "../../../assets/on.png";
+import off from "../../../assets/off.png";
 
 const MenuBar = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
