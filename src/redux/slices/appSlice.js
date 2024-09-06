@@ -8,8 +8,8 @@ const initialState = {
     exit: false,
     active: true,
     width: 500,
-    height: 500,
-    position: { x: 200, y: 200 },
+    height: 400,
+    position: { x: 400, y: 100 },
   },
   safari: {
     minimize: false,
@@ -18,7 +18,7 @@ const initialState = {
     active: false,
     width: 500,
     height: 500,
-    position: { x: 200, y: 200 },
+    position: { x: 400, y: 100 },
   },
   terminal: {
     minimize: false,
@@ -27,7 +27,7 @@ const initialState = {
     active: false,
     width: 500,
     height: 500,
-    position: { x: 200, y: 200 },
+    position: { x: 400, y: 100 },
   },
   calculator: {
     minimize: false,
@@ -36,7 +36,7 @@ const initialState = {
     active: false,
     width: 500,
     height: 500,
-    position: { x: 200, y: 200 },
+    position: { x: 400, y: 100 },
   },
   bin: {
     minimize: false,
@@ -45,7 +45,7 @@ const initialState = {
     active: false,
     width: 500,
     height: 500,
-    position: { x: 200, y: 200 },
+    position: { x: 400, y: 100 },
   },
 };
 
