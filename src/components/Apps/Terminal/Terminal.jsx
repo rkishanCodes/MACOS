@@ -1,10 +1,8 @@
-import React from 'react'
+import React from "react";
+import ResizableWindow from "../ResizableWindow";
 
-const Terminal = () => {
-  return (
-    <div className='h-[10rem] w-[10rem] bg-white  '>
-        Terminal</div>
-  )
-}
+const Terminal = React.memo(() => {
+  return <ResizableWindow appName="terminal">Terminal</ResizableWindow>;
+});
 
-export default Terminal
+export default Terminal;

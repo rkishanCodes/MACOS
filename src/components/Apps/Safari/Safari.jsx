@@ -1,7 +1,8 @@
-import React from 'react'
+import React from "react";
+import ResizableWindow from "../ResizableWindow";
 
-const Safari = () => {
-  return <div className="h-[10rem] w-[10rem] bg-white  ">Safari</div>;
-}
+const Safari = React.memo(() => {
+  return <ResizableWindow appName="safari">Safari</ResizableWindow>;
+});
 
-export default Safari
+export default Safari;

@@ -1,7 +1,8 @@
-import React from 'react'
+import React from "react";
+import ResizableWindow from "..//ResizableWindow";
 
-const Calculator = () => {
-  return <div className="h-[10rem] w-[10rem] bg-white  ">Calculator</div>;
-}
+const Calculator = React.memo(() => {
+  return <ResizableWindow appName="calculator">Calculator</ResizableWindow>;
+});
 
-export default Calculator
+export default Calculator;
