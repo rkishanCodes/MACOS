@@ -1,11 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
 
 const initialState = {
   finder: {
     minimize: false,
     fullScreen: false,
-    exit: false,
     active: true,
     width: 500,
     height: 400,
@@ -15,7 +13,6 @@ const initialState = {
   safari: {
     minimize: false,
     fullScreen: false,
-    exit: false,
     active: false,
     width: 500,
     height: 500,
@@ -25,7 +22,6 @@ const initialState = {
   terminal: {
     minimize: false,
     fullScreen: false,
-    exit: false,
     active: false,
     width: 500,
     height: 500,
@@ -35,7 +31,6 @@ const initialState = {
   calculator: {
     minimize: false,
     fullScreen: false,
-    exit: false,
     active: false,
     width: 500,
     height: 500,
@@ -45,7 +40,6 @@ const initialState = {
   bin: {
     minimize: false,
     fullScreen: false,
-    exit: false,
     active: false,
     width: 500,
     height: 500,
@@ -59,6 +53,7 @@ const appSlice = createSlice({
   initialState,
   reducers: {
     toggleAppState: (state, action) => {
+      console.log("object");
       const { app, field } = action.payload;
       state[app][field] = !state[app][field]; // Toggles any boolean field
     },
@@ -82,6 +77,6 @@ const appSlice = createSlice({
 export const { toggleAppState, updateAppState, updatePosition, updateSize } =
   appSlice.actions;
 
-export const selectApps = (state) => state.apps; // Selector to get apps state
+export const selectApps = (state) => state.apps; 
 
 export default appSlice.reducer;
