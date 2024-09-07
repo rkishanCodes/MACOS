@@ -11,7 +11,6 @@ import "./fonts.css";
 import store from "./redux/store.js";
 import { Provider } from "react-redux";
 import Desktop from "./components/BootScreen/Desktop/Desktop.jsx";
-import DockApp from "./components/Dock/DockApp.jsx";
 import TestGesture from "./components/Dock/TestGesture.jsx";
 
 
@@ -36,10 +35,7 @@ const router = createBrowserRouter([
     path: "/desktop",
     element: <Desktop />,
   },
-  {
-    path: "/dock",
-    element: <DockApp />,
-  },
+ 
   {
     path: "/test",
     element: <TestGesture />,

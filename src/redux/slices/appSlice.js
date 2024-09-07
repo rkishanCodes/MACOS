@@ -9,7 +9,8 @@ const initialState = {
     active: true,
     width: 500,
     height: 400,
-    position: { x: 400, y: 100 },
+    x: 400,
+    y: 100,
   },
   safari: {
     minimize: false,
@@ -18,7 +19,8 @@ const initialState = {
     active: false,
     width: 500,
     height: 500,
-    position: { x: 400, y: 100 },
+    x: 400,
+    y: 100,
   },
   terminal: {
     minimize: false,
@@ -27,7 +29,8 @@ const initialState = {
     active: false,
     width: 500,
     height: 500,
-    position: { x: 400, y: 100 },
+    x: 400,
+    y: 100,
   },
   calculator: {
     minimize: false,
@@ -36,7 +39,8 @@ const initialState = {
     active: false,
     width: 500,
     height: 500,
-    position: { x: 400, y: 100 },
+    x: 400,
+    y: 100,
   },
   bin: {
     minimize: false,
@@ -45,7 +49,8 @@ const initialState = {
     active: false,
     width: 500,
     height: 500,
-    position: { x: 400, y: 100 },
+    x: 400,
+    y: 100,
   },
 };
 
@@ -63,7 +68,8 @@ const appSlice = createSlice({
     },
     updatePosition: (state, action) => {
       const { app, x, y } = action.payload;
-      state[app].position = { x, y }; // Update position dynamically
+      state[app].x = x;
+      state[app].y = y;
     },
     updateSize: (state, action) => {
       const { app, width, height } = action.payload;

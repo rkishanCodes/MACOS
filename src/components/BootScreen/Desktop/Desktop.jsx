@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import { openApp } from "../../redux/slices/appSlice";
 import MenuBar from "./MenuBar";
 import Finder from "../../Apps/Finder/Finder";
@@ -11,7 +11,6 @@ import Dock from "./Dock";
 import { selectApps } from "../../../redux/slices/appSlice";
 
 const Desktop = () => {
-  const dispatch = useDispatch();
   const apps = useSelector(selectApps);
 
   return (

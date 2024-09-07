@@ -17,6 +17,7 @@ const Dock = () => {
     { src: safariIcon, appName: "safari" },
     { src: terminalIcon, appName: "terminal" },
     { src: calculatorIcon, appName: "calculator" },
+    null,
     { src: trashEmptyIcon, appName: "bin" },
   ];
 
@@ -26,23 +27,27 @@ const Dock = () => {
       onMouseLeave={() => mouseX.set(Infinity)}
       className="mx-auto flex h-24 items-center rounded-2xl border-2 border-white/30 bg-black/30"
     >
-      {appIcons.map((icon, i) => (
-        <AppIcon
-          key={i}
-          mouseX={mouseX}
-          src={icon.src}
-          name={icon.appName}
-          onClick={() =>
-            dispatch(
-              updateAppState({
-                app: icon.appName,
-                field: "active",
-                value: true,
-              })
-            )
-          } // Dispatch the action to open the app
-        />
-      ))}
+      {appIcons.map((icon, i) =>
+        icon ? (
+          <AppIcon
+            key={i}
+            mouseX={mouseX}
+            src={icon.src}
+            name={icon.appName}
+            onClick={() =>
+              dispatch(
+                updateAppState({
+                  app: icon.appName,
+                  field: "active",
+                  value: true,
+                })
+              )
+            } // Dispatch the action to open the app
+          />
+        ) : (
+          <div key={i} className="w-[1px] h-[70%] bg-white/45 mx-2"></div>
+        )
+      )}
     </motion.div>
   );
 };
@@ -76,8 +81,8 @@ const AppIcon = ({ mouseX, src, name, onClick }) => {
         src={src}
         ref={ref}
         style={{ width, y }}
-        className="cursor-pointer"
         onClick={onClick}
+        className="mx-[2px]"
       />
       {/* Indicator under the app icon */}
       {apps[name]?.active && (
