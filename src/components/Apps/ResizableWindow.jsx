@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useAppWindow } from "../../hooks/useAppWindow";
 import useWindowPosition from "../../hooks/useWindowPosition";
-import MenuActions from "./MenuActions";
 
 const ResizableWindow = ({ appName, children }) => {
   const { width, height, handleMouseDown } = useAppWindow(appName);
@@ -53,7 +52,7 @@ const ResizableWindow = ({ appName, children }) => {
   }, [handleDrag, handleDragEnd]);
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <div
         style={{
           width: `${width}px`,
@@ -61,10 +60,8 @@ const ResizableWindow = ({ appName, children }) => {
           left: `${x}px`,
           top: `${y}px`,
         }}
-        className="bg-white absolute"
+        className="bg-transparent absolute"
       >
-        {/* Controls (exit, minimize, fullscreen) */}
-
         {/* Drag Area */}
         <div
           className="bg-transparent h-8 w-[100%] absolute"
@@ -74,7 +71,12 @@ const ResizableWindow = ({ appName, children }) => {
         ></div>
 
         {/* Window content */}
-        <div className="overflow-hidden h-[calc(100%-2rem)]">{children}</div>
+        <div
+          className="w-full h-full  rounded-[10px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] "
+          style={{ outline: "1px solid rgb(0 0 0 / 0.75)" }}
+        >
+          {children}
+        </div>
 
         {/* Resize handles for all sides */}
         <div
