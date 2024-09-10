@@ -43,18 +43,18 @@ const useResizable = (
       let newY = initialPosRef.current.y;
 
       if (directionRef.current.includes("right")) {
-        newWidth = Math.max(initialSizeRef.current.width + dx, 100);
+        newWidth = Math.max(initialSizeRef.current.width + dx, 400);
       }
       if (directionRef.current.includes("bottom")) {
-        newHeight = Math.max(initialSizeRef.current.height + dy, 100);
+        newHeight = Math.max(initialSizeRef.current.height + dy, 300);
       }
       if (directionRef.current.includes("left")) {
-        const widthChange = Math.min(dx, initialSizeRef.current.width - 100);
+        const widthChange = Math.min(dx, initialSizeRef.current.width - 400);
         newWidth = initialSizeRef.current.width - widthChange;
         newX = initialPosRef.current.x + widthChange;
       }
       if (directionRef.current.includes("top")) {
-        const heightChange = Math.min(dy, initialSizeRef.current.height - 100);
+        const heightChange = Math.min(dy, initialSizeRef.current.height - 300);
         newHeight = initialSizeRef.current.height - heightChange;
         newY = initialPosRef.current.y + heightChange;
       }

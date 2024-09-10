@@ -1,27 +1,53 @@
 import React from "react";
 import ResizableWindow from "../ResizableWindow";
 import MenuActions from "../MenuActions";
-import  { useState } from "react";
-import { Folder, Info, Trash2, Copy, ChevronRight, Plus } from "lucide-react";
+import { useState, memo } from "react";
 
-const Finder = React.memo(() => {
-  const sidebarItems = [
-    {
-      name: "Favorites",
-      items: ["Recents", "Applications", "Desktop", "Documents", "Downloads"],
-    },
-    { name: "iCloud", items: ["iCloud Drive", "Shared"] },
-    {
-      name: "Tags",
-      items: ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Gray"],
-    },
-  ];
-  const [selectedItem, setSelectedItem] = useState(null);
+import recentsIcon from "../../../assets/finder/recents.png";
+import downloadsIcon from "../../../assets/finder/downloads.png";
+import desktopIcon from "../../../assets/finder/desktop.png";
+import documentsIcon from "../../../assets/finder/documents.png";
+import applicationsIcon from "../../../assets/finder/applications.png";
+
+import redIcon from "../../../assets/finder/red.png";
+import greenIcon from "../../../assets/finder/green.png";
+import yellowIcon from "../../../assets/finder/yellow.png";
+import purpleIcon from "../../../assets/finder/purple.png";
+import blueIcon from "../../../assets/finder/blue.png";
+import orangeIcon from "../../../assets/finder/orange.png";
+
+const iconMapping = {
+  Recents: recentsIcon,
+  Applications: applicationsIcon,
+  Desktop: desktopIcon,
+  Downloads: downloadsIcon,
+  Documents: documentsIcon,
+  Red: redIcon,
+  Orange: orangeIcon,
+  Yellow: yellowIcon,
+  Green: greenIcon,
+  Blue: blueIcon,
+  Purple: purpleIcon,
+};
+
+const Finder = memo(() => {
+  const [selectedItem, setSelectedItem] = useState("Recents");
   const [contextMenu, setContextMenu] = useState({
     visible: false,
     x: 0,
     y: 0,
   });
+
+  const sidebarItems = [
+    {
+      name: "Favourites",
+      items: ["Recents", "Applications", "Documents", "Desktop", "Downloads"],
+    },
+    {
+      name: "Tags",
+      items: ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"],
+    },
+  ];
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -34,83 +60,97 @@ const Finder = React.memo(() => {
   };
 
   const handleOptionClick = (option) => {
-    // Implement the logic for each option here
     console.log(`${option} clicked for ${selectedItem}`);
     setContextMenu({ visible: false, x: 0, y: 0 });
   };
+
   return (
     <ResizableWindow appName="finder">
-        <MenuActions appName="finder" />
-      
-      <div className="flex h-screen bg-gray-100 mt-8">
-        {/* Sidebar */}
-        <div className="w-64 bg-gray-200 p-4">
-          {sidebarItems.map((section) => (
-            <div key={section.name} className="mb-4">
-              <h2 className="font-bold mb-2">{section.name}</h2>
-              <ul>
-                {section.items.map((item) => (
-                  <li
-                    key={item}
-                    className={`flex items-center p-2 cursor-pointer ${
-                      selectedItem === item ? "bg-blue-200" : ""
-                    }`}
-                    onClick={() => handleItemClick(item)}
-                    onContextMenu={(e) => handleContextMenu(e, item)}
-                  >
-                    <Folder className="mr-2" size={16} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+      <MenuActions appName="finder" />
+      <div className="w-full h-full rounded-[10px] shadow-[0_35px_40px_-15px_rgba(0,0,0,0.5)] border-[1px] border-white/30 text-white cursor-default">
+        <div className="flex w-full h-full">
+          <div className="pt-2 bg-black/60 rounded-tl-[10px] rounded-bl-[10px] h-full w-[150px] border-r-[1px] border-black	">
+            {/* Sidebar */}
+            <div
+              className="h-full overflow-y-auto p-4"
+              style={{
+                scrollbarWidth: "2rem",
+                scrollbarColor: "rgb(177, 176, 172) #888", // Fallback for Firefox
+              }}
+            >
+              <style>
+                {`
+        /* Scrollbar styles for WebKit-based browsers */
+        div::-webkit-scrollbar {
+          width: 2rem;
+        }
 
-        {/* Main content area */}
-        <div className="flex-1 p-4">
-          {selectedItem && (
-            <div className="bg-white rounded shadow p-4">
-              <h2 className="text-xl font-bold mb-4">{selectedItem}</h2>
-              <p>Content for {selectedItem} goes here.</p>
-            </div>
-          )}
-        </div>
+        div::-webkit-scrollbar-thumb {
+          background-color: rgb(177, 176, 172);
+          border-radius: 10px;
+        }
 
-        {/* Context menu */}
-        {contextMenu.visible && (
-          <div
-            className="absolute bg-white shadow-md rounded py-2"
-            style={{ top: contextMenu.y, left: contextMenu.x }}
-          >
-            <button
-              className="flex items-center w-full px-4 py-2 hover:bg-gray-100"
-              onClick={() => handleOptionClick("New Folder")}
-            >
-              <Plus size={16} className="mr-2" /> New Folder
-            </button>
-            <button
-              className="flex items-center w-full px-4 py-2 hover:bg-gray-100"
-              onClick={() => handleOptionClick("Get Info")}
-            >
-              <Info size={16} className="mr-2" /> Get Info
-            </button>
-            <button
-              className="flex items-center w-full px-4 py-2 hover:bg-gray-100"
-              onClick={() => handleOptionClick("Delete")}
-            >
-              <Trash2 size={16} className="mr-2" /> Delete
-            </button>
-            <button
-              className="flex items-center w-full px-4 py-2 hover:bg-gray-100"
-              onClick={() => handleOptionClick("Copy")}
-            >
-              <Copy size={16} className="mr-2" /> Copy
-            </button>
+        div::-webkit-scrollbar-track {
+          background-color: rgb(177, 176, 172);
+        }
+      `}
+              </style>
+              {sidebarItems.map((section) => (
+                <div key={section.name} className="mt-5">
+                  <h2 className="text-[13px] font-medium text-white/40">
+                    {section.name}
+                  </h2>
+                  <ul>
+                    {section.items.map((item) => (
+                      <li
+                        key={item}
+                        className={`flex items-center p-[2px] ${
+                          selectedItem === item ? "bg-white/15 rounded-lg" : ""
+                        }`}
+                        onClick={() => handleItemClick(item)}
+                        onContextMenu={(e) => handleContextMenu(e, item)}
+                      >
+                        <img
+                          src={iconMapping[item]}
+                          alt={item}
+                          className={`mr-2 ${
+                            section.name === "Favourites"
+                              ? "w-6 h-6"
+                              : "w-3.5 h-3.5"
+                          }`}
+                        />
+                        <h6
+                          className={
+                            "text-[0.95rem] font-thin text-white/90 truncate "
+                          }
+                        >
+                          {item}
+                        </h6>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
-        )}
+          <div className="flex-1 ">
+            <div className="  h-12 border-b-[1px] border-black bg-finder-nav-dark rounded-tr-[10px] flex items-center">
+              <h4 className=" ml-6 text-[1.15rem] font-normal text-white/90">
+                {selectedItem}
+              </h4>
+            </div>
+            <div className=" w-full h-[calc(100%-3rem)] ">
+              {/* Main content area */}
+              {selectedItem && (
+                <div className="bg-finder-body-dark  shadow  w-full h-full ">
+                  <h2 className="text-xl font-bold ">{selectedItem}</h2>
+                  <p>Content for {selectedItem} goes here.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-      );
     </ResizableWindow>
   );
 });

@@ -68,10 +68,14 @@ const Calculator = React.memo(() => {
     setDisplay((parseFloat(display) * -1).toString());
   };
 
-  const Button = ({ children, onClick, className }) => (
+  const Button = ({ children, onClick, className, type }) => (
     <button
       onClick={onClick}
-      className={` text-[1.25rem] font-[200] focus:outline-none active:bg-white/50 ${className}`}
+      className={`text-[1.25rem] font-[200] cursor-default ${
+        type
+          ? "focus:outline-2 active:bg-black/30"
+          : "focus:outline-none active:bg-white/50"
+      } ${className}`}
     >
       {children}
     </button>
@@ -79,13 +83,14 @@ const Calculator = React.memo(() => {
   return (
     <ResizableWindow appName="calculator">
       <MenuActions appName="calculator" />
-      <div className="w-full h-full bg-black/65 rounded-[10px]  shadow-[0_35px_40px_-15px_rgba(0,0,0,0.5)] border-[1px] border-white/30 overflow-hidden text-white">
+      <div className="w-full h-full bg-black/65 rounded-[10px]  shadow-[0_35px_40px_-15px_rgba(0,0,0,0.5)] border-[1px] border-white/30 text-white overflow-hidden">
         <div className=" h-20 flex items-end justify-end  pr-3">
           <div className="text-white text-[2.5rem] font-[normal] truncate ">
             {display}
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-x-[1px] gap-y-[1px] grid-rows-[48px_48px_48px_48px_48px] ">
+        {/* <div className="grid grid-cols-4 gap-x-[1px] gap-y-[1px] grid-rows-[48px_48px_48px_48px_48px] "> */}
+        <div className="grid grid-cols-4 gap-x-[1px] gap-y-[1px] auto-rows-fr h-[calc(100%-5rem)] ">
           <Button onClick={handleClear} className="bg-white/10">
             {previousValue === null ? "AC" : "C"}
           </Button>
@@ -98,6 +103,7 @@ const Calculator = React.memo(() => {
           <Button
             onClick={() => handleOperationClick("÷")}
             className="bg-orange-400"
+            type="orange"
           >
             ÷
           </Button>
@@ -113,6 +119,7 @@ const Calculator = React.memo(() => {
           <Button
             onClick={() => handleOperationClick("×")}
             className="bg-orange-400 "
+            type="orange"
           >
             ×
           </Button>
@@ -128,6 +135,7 @@ const Calculator = React.memo(() => {
           <Button
             onClick={() => handleOperationClick("-")}
             className="bg-orange-400 "
+            type="orange"
           >
             -
           </Button>
@@ -143,6 +151,7 @@ const Calculator = React.memo(() => {
           <Button
             onClick={() => handleOperationClick("+")}
             className="bg-orange-400 "
+            type="orange"
           >
             +
           </Button>
@@ -158,7 +167,11 @@ const Calculator = React.memo(() => {
           >
             .
           </Button>
-          <Button onClick={handleEqualClick} className="bg-orange-400 ">
+          <Button
+            onClick={handleEqualClick}
+            className="bg-orange-400 "
+            type="orange"
+          >
             =
           </Button>
         </div>
