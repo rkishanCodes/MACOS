@@ -68,3 +68,19 @@
      )}
    </div>
  </div>;
+
+  const [contextMenu, setContextMenu] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+  });
+
+    const handleContextMenu = (e, item) => {
+      e.preventDefault();
+      setSelectedItem(item);
+      setContextMenu({ visible: true, x: e.clientX, y: e.clientY });
+    };
+  const handleOptionClick = (option) => {
+    console.log(`${option} clicked for ${selectedItem}`);
+    setContextMenu({ visible: false, x: 0, y: 0 });
+  };
