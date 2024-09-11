@@ -5,9 +5,12 @@ import SideBar from "./SideBar";
 import { memo } from "react";
 import HeaderFinder from "./HeaderFinder";
 import Content from "./Content";
+import { useSelector } from "react-redux";
 
 const Finder = memo(() => {
   const [selectedItem, setSelectedItem] = useState("Recents");
+
+ 
 
   return (
     <ResizableWindow appName="finder">
