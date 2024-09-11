@@ -10,7 +10,7 @@ const useWindowPosition = (appName) => {
     dispatch(updatePosition({ app: appName, x: newX, y: newY }));
   };
 
-  return { x, y, setPosition };
+  return { x, y, setPosition};
 };
 
 export default useWindowPosition;

@@ -13,10 +13,10 @@ const Content = ({ selectedItem }) => {
       {/* Main content area */}
       {selectedItem && (
         <div className="  w-full h-full ">
-          {console.log(FinderSlice["folders"][selectedItem][0]["name"])}
+          {/* {console.log(FinderSlice["folders"][selectedItem][0]["name"])} */}
 
-          <div class="grid grid-cols-[repeat(auto-fill,_minmax(90px,_1fr))] grid-rows-[repeat(auto-fill,_minmax(100px,_1fr))] gap-2">
-            {FinderSlice["folders"][selectedItem].map((appFolder) => (
+          <div className="grid grid-cols-[repeat(auto-fill,_minmax(90px,_1fr))] grid-rows-[repeat(auto-fill,_minmax(100px,_1fr))] gap-2">
+            {/* {FinderSlice["folders"][selectedItem].map((appFolder) => (
               <div
                 key={appFolder}
                 className="flex flex-col justify-center items-center"
@@ -28,7 +28,7 @@ const Content = ({ selectedItem }) => {
                 />
                 <h6 className="border-2 text-center">{appFolder["name"]}</h6>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       )}

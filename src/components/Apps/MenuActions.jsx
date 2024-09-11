@@ -3,7 +3,7 @@ import exitIcon from "../../assets/exit.png";
 import minimizeIcon from "../../assets/minimize.png";
 import fullScreenIcon from "../../assets/fullscreen.png";
 import { useDispatch } from "react-redux";
-import { toggleAppState } from "../../redux/slices/appSlice";
+import { minimizeApp, toggleAppState } from "../../redux/slices/appSlice";
 import { updateMaxSize } from "../../redux/slices/appSlice";
 
 const MenuActions = ({ appName }) => {
@@ -48,6 +48,10 @@ const MenuActions = ({ appName }) => {
       <span
         className="h-[0.875rem] w-[0.875rem] bg-yellow-700 rounded-full overflow-hidden"
         style={{ backgroundColor: "rgb(245, 191, 79)" }}
+        onClick={() => {
+          dispatch(minimizeApp({ app: appName })); // Dispatch minimize action
+          
+        }}
       >
         {showIcons && (
           <img src={minimizeIcon} alt="minimize" className="scale-[1.75]" />
