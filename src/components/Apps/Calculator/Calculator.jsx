@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import ResizableWindow from "..//ResizableWindow";
 import MenuActions from "../MenuActions";
+import { useSelector } from "react-redux";
+import { selectApps } from "../../../redux/slices/appSlice";
 
 const Calculator = React.memo(() => {
+      const apps = useSelector(selectApps);
+
+   
   const [display, setDisplay] = useState("0");
   const [previousValue, setPreviousValue] = useState(null);
   const [operation, setOperation] = useState(null);
@@ -80,10 +85,13 @@ const Calculator = React.memo(() => {
       {children}
     </button>
   );
+   if (apps["calculator"]["minimize"]) {
+     return null;
+   }
   return (
     <ResizableWindow appName="calculator">
       <MenuActions appName="calculator" />
-      <div className="w-full h-full bg-black/65 rounded-[10px]  shadow-[0_35px_40px_-15px_rgba(0,0,0,0.5)] border-[1px] border-white/30 text-white overflow-hidden">
+      <div className="w-full h-full bg-black/65 rounded-[10px]  shadow-[0_35px_40px_-15px_rgba(0,0,0,0.5)] border-[1px] border-white/30 text-white overflow-hidden ">
         <div className=" h-20 flex items-end justify-end  pr-3">
           <div className="text-white text-[2.5rem] font-[normal] truncate ">
             {display}

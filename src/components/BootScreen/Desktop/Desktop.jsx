@@ -16,7 +16,9 @@ const Desktop = () => {
   return (
     <div className="h-screen w-screen bg-[url('./assets/macos-sonoma-morning.jpg')] bg-cover bg-center bg-no-repeat relative">
       <MenuBar />
-      <Dock />
+      <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
+        <Dock />
+      </div>
 
       {/* Conditionally render apps based on their 'active' state */}
       {apps.finder.active && <Finder />}

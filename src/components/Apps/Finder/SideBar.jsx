@@ -12,6 +12,7 @@ import yellowIcon from "../../../assets/finder/yellow.png";
 import purpleIcon from "../../../assets/finder/purple.png";
 import blueIcon from "../../../assets/finder/blue.png";
 import orangeIcon from "../../../assets/finder/orange.png";
+import { useSelector } from "react-redux";
 
 const iconMapping = {
   Recents: recentsIcon,
@@ -28,6 +29,9 @@ const iconMapping = {
 };
 
 const SideBar = ({ setSelectedItem, selectedItem }) => {
+    const { items } = useSelector((state) => state.finder);
+    // console.log(items);
+
   const sidebarItems = [
     {
       name: "Favourites",

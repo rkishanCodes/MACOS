@@ -1,9 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import finderIcon from "../../assets/Apps/finder.svg";
-import safariIcon from "../../assets/Apps/safari.svg";
-import terminalIcon from "../../assets/Apps/terminal.svg";
-import calculatorIcon from "../../assets/Apps/calculator.svg";
-import trashEmptyIcon from "../../assets/Apps/Trash Empty.svg";
 
 const initialState = {
   finder: {
@@ -18,9 +13,9 @@ const initialState = {
     maxHeight: 600,
     originalWidth: 500,
     originalHeight: 400,
-    prevx: null,
-    prevy: null,
     scale: 1,
+    prevX: null,
+    prevY: null,
   },
   safari: {
     minimize: false,
@@ -34,6 +29,9 @@ const initialState = {
     maxHeight: 600,
     originalWidth: 500,
     originalHeight: 500,
+    scale: 1,
+    prevX: null,
+    prevY: null,
   },
   terminal: {
     minimize: false,
@@ -47,6 +45,9 @@ const initialState = {
     maxHeight: 600,
     originalWidth: 500,
     originalHeight: 500,
+    scale: 1,
+    prevX: null,
+    prevY: null,
   },
   calculator: {
     minimize: false,
@@ -60,9 +61,9 @@ const initialState = {
     maxHeight: 321,
     originalWidth: 233,
     originalHeight: 321,
-    prevx: null,
-    prevy: null,
     scale: 1,
+    prevX: null,
+    prevY: null,
   },
   bin: {
     minimize: false,
@@ -76,15 +77,19 @@ const initialState = {
     maxHeight: 600,
     originalWidth: 500,
     originalHeight: 500,
+    scale: 1,
+    prevX: null,
+    prevY: null,
   },
   // Add appIcons dynamically
   appIcons: [
-    { src: finderIcon, appName: "finder" },
-    { src: safariIcon, appName: "safari" },
-    { src: terminalIcon, appName: "terminal" },
-    { src: calculatorIcon, appName: "calculator" },
+    { src: "finderIcon", appName: "finder" },
+    { src: "safariIcon", appName: "safari" },
+    { src: "terminalIcon", appName: "terminal" },
+    { src: "calculatorIcon", appName: "calculator" },
+    { src: "chatgptIcon", appName: "chatgpt" },
     null,
-    { src: trashEmptyIcon, appName: "bin" },
+    { src: "trashEmptyIcon", appName: "bin" },
   ],
 };
 
@@ -131,16 +136,15 @@ const appSlice = createSlice({
     minimizeApp: (state, action) => {
       const { app } = action.payload;
       state[app].minimize = true;
-      state[app].scale = 0.165; // Scale for the dock
+      state["calculator"].scale = 0.165; // Scale for the dock
       state[app].prevX = state[app].x;
       state[app].prevY = state[app].y;
-      state[app].x = null; // Will be set by Dock
-      state[app].y = null; // Will be set by Dock
+     
 
       // Add to appIcons before 'bin'
       const newIcon = {
-        divContent: app,
-        appName: app,
+        "divSrc": `${app}Minimize`,
+        "divName": app,
       };
 
       const binIndex = state.appIcons.findIndex(
@@ -153,19 +157,22 @@ const appSlice = createSlice({
         state.appIcons.push(newIcon);
       }
     },
-
     restoreApp: (state, action) => {
       const { app } = action.payload;
+      console.log(app);
       state[app].minimize = false;
       state[app].active = true;
       state[app].scale = 1;
       state[app].x = state[app].prevX;
       state[app].y = state[app].prevY;
-    },
-    updateMinimizedPosition: (state, action) => {
-      const { app, x, y } = action.payload;
-      state[app].x = x;
-      state[app].y = y;
+
+      const appIconIndex = state.appIcons.findIndex(
+        (icon) => icon?.divName === app
+      );
+      console.log(appIconIndex);
+      if (appIconIndex !== -1) {
+        state.appIcons.splice(appIconIndex, 1);
+      }
     },
   },
 });

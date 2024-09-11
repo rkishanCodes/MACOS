@@ -49,8 +49,7 @@ const MenuActions = ({ appName }) => {
         className="h-[0.875rem] w-[0.875rem] bg-yellow-700 rounded-full overflow-hidden"
         style={{ backgroundColor: "rgb(245, 191, 79)" }}
         onClick={() => {
-          dispatch(minimizeApp({ app: appName })); // Dispatch minimize action
-          
+          dispatch(minimizeApp({ app: appName }));
         }}
       >
         {showIcons && (
