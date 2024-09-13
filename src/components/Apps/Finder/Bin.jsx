@@ -67,14 +67,14 @@ const Bin = () => {
 
   const getCurrentFolder = () => {
     if (selectedTag) {
-      return Object.values(folders)
+      return Object.values(folders.usr)
         .flat()
         .filter((item) => item.tag === selectedTag);
     }
     if (selectedItem === "Bin") {
       return binContent;
     }
-    let currentFolder = folders[selectedItem];
+    let currentFolder = folders.usr[selectedItem];
     for (const folderName of currentPath) {
       currentFolder =
         currentFolder.find((f) => f.name === folderName && f.type === "folder")

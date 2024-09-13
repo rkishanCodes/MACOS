@@ -4,13 +4,14 @@ import ResizableWindow from "../ResizableWindow";
 import MenuActions from "../MenuActions";
 import { selectApps } from "../../../redux/slices/appSlice";
 import { addFolder, removeFolder } from "../../../redux/slices/finderSlice";
+import { addToBin } from "../../../redux/slices/binSlice";
 
 const Terminal = () => {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([]);
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const [currentDirectory, setCurrentDirectory] = useState(["Desktop"]);
+  const [currentDirectory, setCurrentDirectory] = useState(["usr"]);
   const inputRef = useRef(null);
   const outputRef = useRef(null);
 
@@ -46,7 +47,7 @@ const Terminal = () => {
   };
 
   const processCommand = (command) => {
-    const [cmd, ...args] = command.split(" ");
+    const [cmd, ...args] = command.trim().split(/\s+/);
     switch (cmd.toLowerCase()) {
       case "cd":
         return changeDirectory(args[0]);
@@ -59,7 +60,7 @@ const Terminal = () => {
       case "rm":
         return removeFile(args[0]);
       case "pwd":
-        return currentDirectory.join("/");
+        return "/" + currentDirectory.join("/");
       case "help":
         return "Available commands: cd, ls, touch, mkdir, rm, pwd, help, clear";
       case "clear":
@@ -70,108 +71,87 @@ const Terminal = () => {
     }
   };
 
-  // const changeDirectory = (dir) => {
-  //   if (!dir || dir === ".") return "Current directory unchanged";
-  //   if (dir === "..") {
-  //     if (currentDirectory.length > 1) {
-  //       setCurrentDirectory(currentDirectory.slice(0, -1));
-  //       return `Changed to ${currentDirectory.slice(0, -1).join("/")}`;
-  //     }
-  //     return "Already at root directory";
-  //   }
-
-  //   let currentFolder = folders;
-  //   for (const folder of currentDirectory) {
-  //     currentFolder = currentFolder[folder] || [];
-  //   }
-
-  //   const targetFolder = currentFolder.find(
-  //     (f) => f.name === dir && f.type === "folder"
-  //   );
-  //   if (targetFolder) {
-  //     setCurrentDirectory([...currentDirectory, dir]);
-  //     return `Changed to ${[...currentDirectory, dir].join("/")}`;
-  //   }
-  //   return `Directory not found: ${dir}`;
-  // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const changeDirectory = (dir) => {
-//   if (!dir || dir === ".") return "Current directory unchanged";
-
-//   // Move up a directory
-//   if (dir === "..") {
-//     if (currentDirectory.length > 1) {
-//       // Remove the last folder from the current directory path
-//       const newDirectory = currentDirectory.slice(0, -1);
-//       setCurrentDirectory(newDirectory);
-//       return `Changed to ${newDirectory.join("/")}`;
-//     }
-//     return "Already at root directory";
-//   }
-
-//   // Access current folder from the Redux folder structure
-//   let currentFolder = folders;
-//   for (const folder of currentDirectory) {
-//     currentFolder =
-//       currentFolder.find((f) => f.name === folder)?.children || [];
-//   }
-
-//   // Check if the target folder exists
-//   const targetFolder = currentFolder.find(
-//     (f) => f.name === dir && f.type === "folder"
-//   );
-
-//   if (targetFolder) {
-//     // Update the current directory
-//     const newDirectory = [...currentDirectory, dir];
-//     setCurrentDirectory(newDirectory);
-//     return `Changed to ${newDirectory.join("/")}`;
-//   }
-
-//   return `Directory not found: ${dir}`;
-// };
-
-
-
-
-
-  
-  
-  const listDirectory = () => {
-    let currentFolder = folders;
-    for (const folder of currentDirectory) {
-      currentFolder = currentFolder[folder] || [];
+  const getCurrentFolder = () => {
+    let current = folders.usr;
+    for (let i = 1; i < currentDirectory.length; i++) {
+      if (Array.isArray(current)) {
+        current = current.find(
+          (item) => item.name === currentDirectory[i] && item.type === "folder"
+        )?.children;
+      } else {
+        current = current[currentDirectory[i]];
+      }
+      if (!current) return null;
     }
-    return currentFolder
-      .map((item) => `${item.type === "folder" ? "d" : "-"} ${item.name}`)
-      .join("\n");
+    return current;
+  };
+
+  const changeDirectory = (dir) => {
+    if (!dir) return "Please specify a directory";
+
+    let newPath;
+    if (dir === "/") {
+      newPath = ["usr"];
+    } else if (dir === "..") {
+      if (currentDirectory.length > 1) {
+        newPath = currentDirectory.slice(0, -1);
+      } else {
+        return "Already at root directory";
+      }
+    } else if (dir.startsWith("/")) {
+      newPath = ["usr", ...dir.split("/").filter(Boolean)];
+    } else {
+      newPath = [...currentDirectory, ...dir.split("/").filter(Boolean)];
+    }
+
+    let current = folders.usr;
+    for (let i = 1; i < newPath.length; i++) {
+      const folder = newPath[i];
+      if (Array.isArray(current)) {
+        current = current.find(
+          (item) => item.name === folder && item.type === "folder"
+        )?.children;
+      } else {
+        current = current[folder];
+      }
+      if (!current) return `Directory not found: ${folder}`;
+    }
+
+    setCurrentDirectory(newPath);
+    return `Changed to /${newPath.join("/")}`;
+  };
+
+  const listDirectory = () => {
+    const current = getCurrentFolder();
+    if (!current) return "Invalid directory";
+
+    if (Array.isArray(current)) {
+      return current
+        .map((item) => `${item.type === "folder" ? "d" : "-"} ${item.name}`)
+        .join("\n");
+    } else {
+      return Object.keys(current)
+        .map((name) => `d ${name}`)
+        .join("\n");
+    }
   };
 
   const createFile = (filename) => {
     if (!filename) return "Please provide a filename";
+    const current = getCurrentFolder();
+    if (!current) return "Invalid directory";
+
+    if (Array.isArray(current)) {
+      if (current.some((item) => item.name === filename))
+        return `File already exists: ${filename}`;
+    } else {
+      return "Cannot create file in this directory";
+    }
+    let passDirectory = currentDirectory.slice(1);
+
     dispatch(
       addFolder({
-        path: currentDirectory,
+        path: passDirectory,
         folder: {
           name: filename,
           type: "file",
@@ -185,9 +165,21 @@ const Terminal = () => {
 
   const makeDirectory = (dirname) => {
     if (!dirname) return "Please provide a directory name";
+    const current = getCurrentFolder();
+    if (!current) return "Invalid directory";
+
+    if (Array.isArray(current)) {
+      if (current.some((item) => item.name === dirname))
+        return `Directory already exists: ${dirname}`;
+    } else {
+      return "Cannot create directory here";
+    }
+
+    let passDirectory = currentDirectory.slice(1);
+
     dispatch(
       addFolder({
-        path: currentDirectory,
+        path: passDirectory,
         folder: {
           name: dirname,
           type: "folder",
@@ -202,9 +194,45 @@ const Terminal = () => {
 
   const removeFile = (filename) => {
     if (!filename) return "Please provide a filename";
+    if (
+      [
+        "Desktop",
+        "Documents",
+        "Downloads",
+        "Applications",
+        "Recents",
+        "-rf",
+      ].includes(filename)
+    ) {
+      return `Nice try! But I can't let you delete ${
+        filename == "-rf" ? "all system files" : `${filename}`
+      }. It's like trying to erase your own shadow – entertaining, but ultimately futile.`;
+    }
+    const current = getCurrentFolder();
+    if (!current) return "Invalid directory";
+
+
+    let itemToRemove;
+    if (Array.isArray(current)) {
+      itemToRemove = current.find((item) => item.name === filename);
+    } else {
+      return "Cannot remove items from this directory";
+    }
+
+    if (!itemToRemove) return `File or directory not found: ${filename}`;
+
+    let passDirectory = currentDirectory.slice(1);
+
+ console.log({...itemToRemove});
+
+dispatch(
+  addToBin({
+    ...itemToRemove,
+  })
+);
     dispatch(
       removeFolder({
-        path: [...currentDirectory, filename],
+        path: [...passDirectory, ...filename],
       })
     );
     return `Removed: ${filename}`;
@@ -250,7 +278,7 @@ const Terminal = () => {
           ))}
         </div>
         <form onSubmit={handleSubmit} className="flex mt-2">
-          <span className="mr-2">{`${currentDirectory.join("/")}>`}</span>
+          <span className="mr-2">{`/${currentDirectory.join("/")}>`}</span>
           <input
             ref={inputRef}
             type="text"

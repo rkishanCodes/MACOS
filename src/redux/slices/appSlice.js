@@ -36,7 +36,7 @@ const initialState = {
   terminal: {
     minimize: false,
     fullScreen: false,
-    active: false,
+    active: true,
     width: 500,
     height: 500,
     x: 400,
@@ -81,22 +81,7 @@ const initialState = {
     prevX: null,
     prevY: null,
   },
-  chatGPT: {
-    minimize: false,
-    fullScreen: false,
-    active: true,
-    width: 500,
-    height: 500,
-    x: 400,
-    y: 100,
-    maxWidth: 800,
-    maxHeight: 600,
-    originalWidth: 500,
-    originalHeight: 500,
-    scale: 1,
-    prevX: null,
-    prevY: null,
-  },
+
   // Add appIcons dynamically
   appIcons: [
     { src: "finderIcon", appName: "finder" },

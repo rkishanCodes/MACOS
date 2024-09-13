@@ -12,6 +12,7 @@ const binSlice = createSlice({
       state.binContent = action.payload;
     },
     addToBin: (state, action) => {
+      console.log(action.payload);
       state.binContent.push(action.payload);
     },
     removeFromBin: (state, action) => {
@@ -23,6 +24,7 @@ const binSlice = createSlice({
       state.binContent = state.binContent.filter(
         (item) => item.name !== action.payload.name
       );
+      //add removed file to finder slice
     },
     emptyBin: (state) => {
       state.binContent = [];
