@@ -8,7 +8,6 @@ import { div } from "framer-motion/client";
 const ResizableWindow = ({ appName, children }) => {
   const { width, height, handleMouseDown } = useAppWindow(appName);
   const apps = useSelector(selectApps);
-  const { scale, minimize } = apps[appName];
 
   const { x, y, setPosition } = useWindowPosition(appName);
   const isDragging = useRef(false);
@@ -58,7 +57,7 @@ const ResizableWindow = ({ appName, children }) => {
   }, [handleDrag, handleDragEnd]);
 
   return (
-    <div className="relative ]">
+    <div className={`${apps[appName]["minimize"] ? "hidden" : "relative"} `}>
       <div className={`absolute  `}>
         <div
           style={{

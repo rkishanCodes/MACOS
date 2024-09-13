@@ -85,9 +85,11 @@ const Calculator = React.memo(() => {
       {children}
     </button>
   );
-   if (apps["calculator"]["minimize"]) {
-     return null;
-   }
+
+  //  if (apps["calculator"]["minimize"]) {
+  //    return null;
+  //  }
+
   return (
     <ResizableWindow appName="calculator">
       <MenuActions appName="calculator" />

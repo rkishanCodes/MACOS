@@ -116,7 +116,6 @@ const initialState = {
         2048,
         "file"
       ),
-     
     ],
     Downloads: [
       createFolder(
@@ -158,25 +157,20 @@ const finderSlice = createSlice({
     addFolder: (state, action) => {
       const { path, folder } = action.payload;
       let current = state.folders;
-      // console.log(folder);
 
-      // Navigate to the correct location in the folder structure
       for (let i = 0; i < path.length; i++) {
         if (i === 0) {
-          // For the root level folders (Recents, Applications, etc.)
           if (!current[path[i]]) {
             current[path[i]] = [];
           }
           current = current[path[i]];
         } else {
-          // For nested folders
           const found = current.find(
             (f) => f.name === path[i] && f.type === "folder"
           );
           if (found) {
             current = found.children;
           } else {
-            // If the path doesn't exist, create it
             const newFolder = createFolder(path[i], []);
             current.push(newFolder);
             current = newFolder.children;
@@ -184,16 +178,24 @@ const finderSlice = createSlice({
         }
       }
 
-      // Add the new folder
       current.push(
-        createFolder(folder.name, folder.children, folder.created, folder.size,folder.type)
+        createFolder(
+          folder.name,
+          folder.children,
+          folder.created,
+          folder.size,
+          folder.type
+        )
       );
     },
     removeFolder: (state, action) => {
       const { path } = action.payload;
       let current = state.folders;
       for (let i = 0; i < path.length - 1; i++) {
-        current = current[path[i]].children;
+        current =
+          current[path[i]] ||
+          current.find((f) => f.name === path[i] && f.type === "folder")
+            .children;
       }
       const index = current.findIndex((f) => f.name === path[path.length - 1]);
       if (index !== -1) {
@@ -204,17 +206,40 @@ const finderSlice = createSlice({
       const { path, updates } = action.payload;
       let current = state.folders;
       for (let i = 0; i < path.length - 1; i++) {
-        current = current[path[i]].children;
+        current =
+          current[path[i]] ||
+          current.find((f) => f.name === path[i] && f.type === "folder")
+            .children;
       }
       const folder = current.find((f) => f.name === path[path.length - 1]);
       if (folder) {
         Object.assign(folder, updates);
       }
-    }, 
+    },
+    setSelectedTag: (state, action) => {
+      state.selectedTag = action.payload;
+    },
+    restoreItem: (state, action) => {
+      const { item } = action.payload;
+      let currentFolder = state.folders;
+      for (const folderName of item.originalPath) {
+        if (!currentFolder[folderName]) {
+          currentFolder[folderName] = [];
+        }
+        currentFolder = currentFolder[folderName];
+      }
+      currentFolder.push(item);
+    },
   },
 });
 
-export const { setSelectedItem, addFolder, removeFolder, updateFolder } =
-  finderSlice.actions;
+export const {
+  setSelectedItem,
+  addFolder,
+  removeFolder,
+  updateFolder,
+  setSelectedTag,
+  restoreItem,
+} = finderSlice.actions;
 
 export default finderSlice.reducer;

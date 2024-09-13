@@ -11,7 +11,6 @@ import safariIcon from "../../../assets/Apps/safari.svg";
 import terminalIcon from "../../../assets/Apps/terminal.svg";
 import calculatorIcon from "../../../assets/Apps/calculator.svg";
 import trashEmptyIcon from "../../../assets/Apps/Trash Empty.svg";
-import chatgptIcon from "../../../assets/Apps/chatgpt1.svg";
 
 import finderMinimize from "../../../assets/finderMinimize.png";
 import calculatorMinimize from "../../../assets/calculatorMinimize.png";
@@ -25,7 +24,6 @@ const imgIcon = {
   terminalIcon,
   calculatorIcon,
   trashEmptyIcon,
-  chatgptIcon,
 };
 
 const minimizeIcon = {

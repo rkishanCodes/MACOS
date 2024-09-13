@@ -81,13 +81,28 @@ const initialState = {
     prevX: null,
     prevY: null,
   },
+  chatGPT: {
+    minimize: false,
+    fullScreen: false,
+    active: true,
+    width: 500,
+    height: 500,
+    x: 400,
+    y: 100,
+    maxWidth: 800,
+    maxHeight: 600,
+    originalWidth: 500,
+    originalHeight: 500,
+    scale: 1,
+    prevX: null,
+    prevY: null,
+  },
   // Add appIcons dynamically
   appIcons: [
     { src: "finderIcon", appName: "finder" },
     { src: "safariIcon", appName: "safari" },
     { src: "terminalIcon", appName: "terminal" },
     { src: "calculatorIcon", appName: "calculator" },
-    { src: "chatgptIcon", appName: "chatgpt" },
     null,
     { src: "trashEmptyIcon", appName: "bin" },
   ],
@@ -191,3 +206,5 @@ export const {
 export const selectApps = (state) => state.apps;
 
 export default appSlice.reducer;
+
+

@@ -70,31 +70,93 @@ const Terminal = () => {
     }
   };
 
-  const changeDirectory = (dir) => {
-    if (!dir || dir === ".") return "Current directory unchanged";
-    if (dir === "..") {
-      if (currentDirectory.length > 1) {
-        setCurrentDirectory(currentDirectory.slice(0, -1));
-        return `Changed to ${currentDirectory.slice(0, -1).join("/")}`;
-      }
-      return "Already at root directory";
-    }
+  // const changeDirectory = (dir) => {
+  //   if (!dir || dir === ".") return "Current directory unchanged";
+  //   if (dir === "..") {
+  //     if (currentDirectory.length > 1) {
+  //       setCurrentDirectory(currentDirectory.slice(0, -1));
+  //       return `Changed to ${currentDirectory.slice(0, -1).join("/")}`;
+  //     }
+  //     return "Already at root directory";
+  //   }
 
-    let currentFolder = folders;
-    for (const folder of currentDirectory) {
-      currentFolder = currentFolder[folder] || [];
-    }
+  //   let currentFolder = folders;
+  //   for (const folder of currentDirectory) {
+  //     currentFolder = currentFolder[folder] || [];
+  //   }
 
-    const targetFolder = currentFolder.find(
-      (f) => f.name === dir && f.type === "folder"
-    );
-    if (targetFolder) {
-      setCurrentDirectory([...currentDirectory, dir]);
-      return `Changed to ${[...currentDirectory, dir].join("/")}`;
-    }
-    return `Directory not found: ${dir}`;
-  };
+  //   const targetFolder = currentFolder.find(
+  //     (f) => f.name === dir && f.type === "folder"
+  //   );
+  //   if (targetFolder) {
+  //     setCurrentDirectory([...currentDirectory, dir]);
+  //     return `Changed to ${[...currentDirectory, dir].join("/")}`;
+  //   }
+  //   return `Directory not found: ${dir}`;
+  // };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const changeDirectory = (dir) => {
+//   if (!dir || dir === ".") return "Current directory unchanged";
+
+//   // Move up a directory
+//   if (dir === "..") {
+//     if (currentDirectory.length > 1) {
+//       // Remove the last folder from the current directory path
+//       const newDirectory = currentDirectory.slice(0, -1);
+//       setCurrentDirectory(newDirectory);
+//       return `Changed to ${newDirectory.join("/")}`;
+//     }
+//     return "Already at root directory";
+//   }
+
+//   // Access current folder from the Redux folder structure
+//   let currentFolder = folders;
+//   for (const folder of currentDirectory) {
+//     currentFolder =
+//       currentFolder.find((f) => f.name === folder)?.children || [];
+//   }
+
+//   // Check if the target folder exists
+//   const targetFolder = currentFolder.find(
+//     (f) => f.name === dir && f.type === "folder"
+//   );
+
+//   if (targetFolder) {
+//     // Update the current directory
+//     const newDirectory = [...currentDirectory, dir];
+//     setCurrentDirectory(newDirectory);
+//     return `Changed to ${newDirectory.join("/")}`;
+//   }
+
+//   return `Directory not found: ${dir}`;
+// };
+
+
+
+
+
+  
+  
   const listDirectory = () => {
     let currentFolder = folders;
     for (const folder of currentDirectory) {
@@ -176,7 +238,7 @@ const Terminal = () => {
   return (
     <ResizableWindow appName="terminal">
       <MenuActions appName="terminal" />
-      <div className="w-full h-full bg-gray-900 text-green-500 font-mono p-4 overflow-hidden flex flex-col">
+      <div className="w-full h-full bg-gray-900 text-green-500 font-mono p-4 overflow-hidden flex flex-col rounded-[10px] pt-[10%]">
         <div ref={outputRef} className="flex-1 overflow-y-auto">
           {history.map((item, index) => (
             <div

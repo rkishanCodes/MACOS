@@ -1,12 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-// import { openApp } from "../../redux/slices/appSlice";
 import MenuBar from "./MenuBar";
 import Finder from "../../Apps/Finder/Finder";
+import Bin from "../../Apps/Finder/Bin";
 import Safari from "../../Apps/Safari/Safari";
 import Terminal from "../../Apps/Terminal/Terminal";
 import Calculator from "../../Apps/Calculator/Calculator";
-import Bin from "../../Apps/Bin/Bin";
 import Dock from "./Dock";
 import { selectApps } from "../../../redux/slices/appSlice";
 

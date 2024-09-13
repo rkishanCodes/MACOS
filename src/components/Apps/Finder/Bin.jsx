@@ -7,8 +7,9 @@ import HeaderFinder from "./HeaderFinder";
 import Content from "./Content";
 import MenuActions from "../MenuActions";
 import ResizableWindow from "../ResizableWindow";
+import { setSelectedItem } from "../../../redux/slices/finderSlice";
 
-const Finder = () => {
+const Bin = () => {
   const dispatch = useDispatch();
   const { selectedItem, selectedTag, folders } = useSelector(
     (state) => state.finder
@@ -40,6 +41,7 @@ const Finder = () => {
       },
     ];
     dispatch(setBinContent(fetchedBinContent));
+    dispatch(setSelectedItem("Bin"));
   }, [dispatch]);
 
   const handleFolderClick = (folderName) => {
@@ -82,8 +84,8 @@ const Finder = () => {
   };
 
   return (
-    <ResizableWindow appName="finder">
-      <MenuActions appName="finder" />
+    <ResizableWindow appName="bin">
+      <MenuActions appName="bin" />
       <div className="w-full h-full rounded-[10px] shadow-[0_35px_40px_-15px_rgba(0,0,0,0.5)] border-[1px] border-white/30 text-white cursor-default">
         <div className="flex w-full h-full ">
           <SideBar />
@@ -109,4 +111,4 @@ const Finder = () => {
   );
 };
 
-export default Finder;
+export default Bin;
