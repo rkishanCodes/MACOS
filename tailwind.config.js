@@ -4,9 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        "finder-nav-dark": "rgb(59, 59, 56)", 
+        "finder-nav-dark": "rgb(59, 59, 56)",
         "finder-body-dark": "rgb(40, 37, 34)",
         "hover-finder-bg-blue": "rgb(51, 104, 188)",
+        "safari-nav-dark": "rgb(78, 83, 85)",
       },
     },
   },

@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ResizableWindow from "../ResizableWindow";
 import MenuActions from "../MenuActions";
-import { selectApps } from "../../../redux/slices/appSlice";
 import { addFolder, removeFolder } from "../../../redux/slices/finderSlice";
 import { addToBin } from "../../../redux/slices/binSlice";
 
@@ -15,7 +14,6 @@ const Terminal = () => {
   const inputRef = useRef(null);
   const outputRef = useRef(null);
 
-  const apps = useSelector(selectApps);
   const { folders } = useSelector((state) => state.finder);
   const dispatch = useDispatch();
 
@@ -127,11 +125,11 @@ const Terminal = () => {
 
     if (Array.isArray(current)) {
       return current
-        .map((item) => `${item.type === "folder" ? "d" : "-"} ${item.name}`)
+        .map((item) => `${item.type === "folder" ? "" : ""} ${item.name}`)
         .join("\n");
     } else {
       return Object.keys(current)
-        .map((name) => `d ${name}`)
+        .map((name) => `${name}`)
         .join("\n");
     }
   };
@@ -223,7 +221,6 @@ const Terminal = () => {
 
     let passDirectory = currentDirectory.slice(1);
 
- console.log({...itemToRemove});
 
 dispatch(
   addToBin({
@@ -232,9 +229,10 @@ dispatch(
 );
     dispatch(
       removeFolder({
-        path: [...passDirectory, ...filename],
+        path: [...passDirectory, filename],
       })
     );
+
     return `Removed: ${filename}`;
   };
 
@@ -259,9 +257,6 @@ dispatch(
     }
   };
 
-  if (apps["terminal"]["minimize"]) {
-    return null;
-  }
 
   return (
     <ResizableWindow appName="terminal">

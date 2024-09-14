@@ -4,7 +4,7 @@ const initialState = {
   finder: {
     minimize: false,
     fullScreen: false,
-    active: true,
+    active: false,
     width: 500,
     height: 400,
     x: 400,
@@ -20,9 +20,9 @@ const initialState = {
   safari: {
     minimize: false,
     fullScreen: false,
-    active: false,
-    width: 233,
-    height: 321,
+    active: true,
+    width: 500,
+    height: 400,
     x: 400,
     y: 100,
     maxWidth: 800,
@@ -36,7 +36,7 @@ const initialState = {
   terminal: {
     minimize: false,
     fullScreen: false,
-    active: true,
+    active: false,
     width: 500,
     height: 500,
     x: 400,
@@ -82,7 +82,6 @@ const initialState = {
     prevY: null,
   },
 
-  // Add appIcons dynamically
   appIcons: [
     { src: "finderIcon", appName: "finder" },
     { src: "safariIcon", appName: "safari" },
