@@ -1,13 +1,20 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useAppWindow } from "../../hooks/useAppWindow";
 import useWindowPosition from "../../hooks/useWindowPosition";
-import { useSelector } from "react-redux";
-import { selectApps } from "../../redux/slices/appSlice";
-import { div } from "framer-motion/client";
+import { useDispatch, useSelector } from "react-redux";
+import { SetActiveApp, selectApps } from "../../redux/slices/appSlice";
 
 const ResizableWindow = ({ appName, children }) => {
+  const dispatch = useDispatch();
   const { width, height, handleMouseDown } = useAppWindow(appName);
   const apps = useSelector(selectApps);
+  const activeAppName = useSelector((state) => state.apps.activeApp);
 
   const { x, y, setPosition } = useWindowPosition(appName);
   const isDragging = useRef(false);
@@ -56,8 +63,22 @@ const ResizableWindow = ({ appName, children }) => {
     };
   }, [handleDrag, handleDragEnd]);
 
+const handleClick = useCallback(
+  (e) => {
+    if (!isDragging.current && activeAppName !== appName) {
+      console.log(`Clicked on ${appName}`);
+      dispatch(SetActiveApp({ appName }));
+    }
+    e.stopPropagation();
+  },
+  [dispatch, appName, activeAppName]
+);
+
   return (
-    <div className={`${apps[appName]["minimize"] ? "hidden" : "relative"} `}>
+    <div
+      className={`${apps[appName]["minimize"] ? "hidden" : "relative"} `}
+      onClick={handleClick}
+    >
       <div className={`absolute  `}>
         <div
           style={{

@@ -4,9 +4,14 @@ import icon1 from "../../../assets/icon1.png";
 import battery from "../../../assets/battery.png";
 import on from "../../../assets/on.png";
 import off from "../../../assets/off.png";
+import { useSelector } from "react-redux";
+import { useCapitalizeFirstLetter } from "../../../hooks/useCapitalizeFirstLetter";
 
 const MenuBar = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+   const activeAppName = useSelector((state) => state.apps.activeApp);
+     const capitalizeFirstLetter = useCapitalizeFirstLetter();
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -42,7 +47,7 @@ const MenuBar = () => {
     <div className="w-screen h-6 flex justify-between bg-[linear-gradient(-45deg,#6793ff,#d85e81)] backdrop-blur-sm">
       <div className="flex gap-4 text-white justify-center items-center">
         <img src={icon1} alt="" className="w-[1.15rem] h-[1.15rem] ml-4" />
-        <h6 className="font-[600] text-[1vw]">Finder</h6>
+        <h6 className="font-[600] text-[1vw]">{capitalizeFirstLetter(activeAppName)}</h6>
         {menuItems.map((item, index) => (
           <h6 key={index} className="text-[0.85rem] font-[500]">
             {item}

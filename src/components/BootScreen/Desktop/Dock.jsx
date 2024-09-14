@@ -1,22 +1,27 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import {
   restoreApp,
   selectApps,
   updateAppState,
+  SetActiveApp,
 } from "../../../redux/slices/appSlice";
+import { useCapitalizeFirstLetter } from "../../../hooks/useCapitalizeFirstLetter";
+
 import finderIcon from "../../../assets/Apps/finder.svg";
 import safariIcon from "../../../assets/Apps/safari.svg";
 import terminalIcon from "../../../assets/Apps/terminal.svg";
 import calculatorIcon from "../../../assets/Apps/calculator.svg";
-import trashEmptyIcon from "../../../assets/Apps/Trash Empty.svg";
+import trashEmptyIcon from "../../../assets/Apps/Trash Full.svg";
+import aboutIcon from "../../../assets/Apps/about.png"
 
 import finderMinimize from "../../../assets/finderMinimize.png";
 import calculatorMinimize from "../../../assets/calculatorMinimize.png";
 import safariMinimize from "../../../assets/safariMinimize.png";
 import binMinimize from "../../../assets/binMinimize.png";
 import terminalMinimize from "../../../assets/terminalMinimize.png";
+import aboutMinimize from "../../../assets/aboutMinimize.png";
 
 const imgIcon = {
   finderIcon,
@@ -24,6 +29,7 @@ const imgIcon = {
   terminalIcon,
   calculatorIcon,
   trashEmptyIcon,
+  aboutIcon
 };
 
 const minimizeIcon = {
@@ -34,15 +40,39 @@ const minimizeIcon = {
   terminalMinimize,
 };
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
+// const capitalizeFirstLetter = (string) => {
+//   return string.charAt(0).toUpperCase() + string.slice(1);
+// };
+
 
 const Dock = () => {
   let mouseX = useMotionValue(Infinity);
   const dispatch = useDispatch();
   const appIcons = useSelector((state) => state.apps.appIcons);
   const apps = useSelector(selectApps);
+  const activeAppName = useSelector((state) => state.apps.activeApp);
+
+  const handleClick = useCallback(
+    (appName) => {
+      if (activeAppName !== appName) {
+        console.log(`Clicked on ${appName}`);
+        dispatch(SetActiveApp({ appName }));
+      }
+
+      if (apps[appName]?.minimize) {
+        dispatch(restoreApp({ app: appName }));
+      }
+
+      dispatch(
+        updateAppState({
+          app: appName,
+          field: "active",
+          value: true,
+        })
+      );
+    },
+    [dispatch, activeAppName, apps]
+  );
 
   return (
     <motion.div
@@ -58,23 +88,7 @@ const Dock = () => {
               mouseX={mouseX}
               src={imgIcon[icon.src]}
               name={icon.appName}
-              onClick={() => {
-                dispatch(
-                  updateAppState({
-                    app: icon.appName,
-                    field: "active",
-                    value: true,
-                  })
-                );
-
-                if (apps[icon.appName]["minimize"]) {
-                  dispatch(
-                    restoreApp({
-                      app: icon.appName,
-                    })
-                  );
-                }
-              }}
+              onClick={() => handleClick(icon.appName)}
             />
           ) : (
             <AppDiv
@@ -82,13 +96,7 @@ const Dock = () => {
               mouseX={mouseX}
               src={minimizeIcon[icon.divSrc]}
               name={icon.divName}
-              onClick={() =>
-                dispatch(
-                  restoreApp({
-                    app: icon.divName,
-                  })
-                )
-              }
+              onClick={() => handleClick(icon.divName)}
             />
           )
         ) : (
@@ -100,6 +108,8 @@ const Dock = () => {
 };
 
 const AppIcon = ({ mouseX, src, name, onClick }) => {
+  const capitalizeFirstLetter = useCapitalizeFirstLetter();
+
   const apps = useSelector(selectApps);
   const ref = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -132,9 +142,9 @@ const AppIcon = ({ mouseX, src, name, onClick }) => {
       <motion.img
         src={src}
         ref={ref}
-        style={{ width, y, }}
+        style={{ width, y }}
         onClick={onClick}
-        className="mx-[2px] "
+        className="mx-[2px]"
       />
       {apps[name]?.active && (
         <span className="w-1 h-1 rounded-full bg-white fixed bottom-1"></span>
@@ -158,6 +168,8 @@ const AppIcon = ({ mouseX, src, name, onClick }) => {
 };
 
 const AppDiv = ({ mouseX, src, name, onClick }) => {
+  const capitalizeFirstLetter = useCapitalizeFirstLetter();
+
   const ref = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -189,8 +201,7 @@ const AppDiv = ({ mouseX, src, name, onClick }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <motion.img src={src} className="mx-[2px] " style={{ width, y 
-      }} />
+      <motion.img src={src} className="mx-[2px]" style={{ width, y }} />
       {isHovered && (
         <div className="absolute bottom-full mb-8 flex flex-col items-center">
           <div
