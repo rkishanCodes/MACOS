@@ -6,6 +6,7 @@ import Bin from "../../Apps/Finder/Bin";
 import Safari from "../../Apps/Safari/Safari";
 import Terminal from "../../Apps/Terminal/Terminal";
 import Calculator from "../../Apps/Calculator/Calculator";
+import About from "../../Apps/About/About";
 import Dock from "./Dock";
 import { selectApps } from "../../../redux/slices/appSlice";
 
@@ -25,6 +26,7 @@ const Desktop = () => {
       {apps.terminal.active && <Terminal />}
       {apps.calculator.active && <Calculator />}
       {apps.bin.active && <Bin />}
+      {apps.about.active && <About />}
     </div>
   );
 };

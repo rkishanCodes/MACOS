@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  X,
-  Plus,
-  ChevronLeft,
-  ChevronRight,
-  RotateCcw,
-  Home,
-} from "lucide-react";
+
 import ResizableWindow from "../ResizableWindow";
 import MenuActions from "../MenuActions";
 import ContentSafari from "./ContentSafari";
