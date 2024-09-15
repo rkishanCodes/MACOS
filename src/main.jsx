@@ -11,6 +11,7 @@ import store from "./redux/store.js";
 import { Provider } from "react-redux";
 import Desktop from "./components/BootScreen/Desktop/Desktop.jsx";
 import { Achievements } from "./components/Apps/About/Achievements.jsx";
+import { Experience } from "./components/Apps/About/Experience.jsx";
 
 
 const router = createBrowserRouter([
@@ -32,10 +33,9 @@ const router = createBrowserRouter([
     element: <Desktop />,
   },
   {
-    path: "/achievements",
-    element: <Achievements />,
+    path: "/experience",
+    element: <Experience />,
   },
-
 ]);
 
 createRoot(document.getElementById("root")).render(

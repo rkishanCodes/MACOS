@@ -6,6 +6,8 @@ import { AboutNav } from "./AboutNav";
 import { AboutFooter } from "./AboutFooter";
 import { Bento } from "./Bento";
 import { Achievements } from "./Achievements";
+import { Experience } from "./Experience";
+import Projects from "./Projects";
 
 const About = () => {
   return (
@@ -33,7 +35,16 @@ const About = () => {
             <Achievements />
           </div>
         )}
-        {true && <Bento/>}
+        {false && (
+          <div className="relative h-full overflow-y-scroll">
+            <Experience />
+          </div>
+        )}
+        {true && (
+          <div className="relative h-full overflow-y-scroll  bg-zinc-900 py-5">
+            <Projects />
+          </div>
+        )}
         <AboutFooter />
       </div>
     </ResizableWindow>

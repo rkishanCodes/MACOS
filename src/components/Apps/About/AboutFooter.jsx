@@ -13,17 +13,12 @@ export const AboutFooter = () => {
           href="#"
         />
         <Link
-          heading="Clients"
+          heading="Projects"
           subheading="We work with great people"
           imgSrc="/imgs/random/6.jpg"
           href="#"
         />
-        <Link
-          heading="Portfolio"
-          subheading="Our work speaks for itself"
-          imgSrc="/imgs/random/4.jpg"
-          href="#"
-        />
+
         <Link
           heading="Careers"
           subheading="We want cool people"
@@ -31,7 +26,13 @@ export const AboutFooter = () => {
           href="#"
         />
         <Link
-          heading="Fun"
+          heading="Achievements"
+          subheading="Our work speaks for itself"
+          imgSrc="/imgs/random/4.jpg"
+          href="#"
+        />
+        <Link
+          heading="Connect"
           subheading="Incase you're bored"
           imgSrc="/imgs/random/10.jpg"
           href="#"
