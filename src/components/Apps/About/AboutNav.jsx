@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export const AboutNav = () => {
   return (
-    <div className="bg-neutral-100 py-20">
+    <div className=" bg-finder-nav-dark pt-8 pb-2 ">
       <SlideTabs />
     </div>
   );
@@ -24,12 +24,11 @@ const SlideTabs = () => {
           opacity: 0,
         }));
       }}
-      className="relative mx-auto flex w-fit rounded-full border-2 border-black bg-white p-1"
+      className="relative mx-auto flex w-fit rounded-full border-2 border-white/50 bg-finder-nav-dark  p-1"
     >
       <Tab setPosition={setPosition}>About</Tab>
       <Tab setPosition={setPosition}>Projects</Tab>
       <Tab setPosition={setPosition}>Experience</Tab>
-  
 
       <Cursor position={position} />
     </ul>
@@ -66,7 +65,7 @@ const Cursor = ({ position }) => {
       animate={{
         ...position,
       }}
-      className="absolute z-0 h-7 rounded-full bg-black md:h-12"
+      className="absolute z-0 h-7 rounded-full bg-white/20 md:h-12"
     />
   );
 };

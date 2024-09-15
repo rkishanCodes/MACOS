@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { FiArrowRight, FiMail, FiMapPin } from "react-icons/fi";
-import { SiGithub, SiTiktok, SiTwitter, SiYoutube } from "react-icons/si";
+import { SiGithub, SiTiktok, SiYoutube } from "react-icons/si";
 
 export const Bento = () => {
   return (
@@ -22,7 +22,6 @@ export const Bento = () => {
         <LocationBlock />
         <EmailListBlock />
       </motion.div>
-      <Footer />
     </div>
   );
 };
@@ -134,7 +133,6 @@ const SocialsBlock = () => (
         href="#"
         className="grid h-full place-content-center text-3xl text-white"
       >
-        <SiTwitter />
       </a>
     </Block>
   </>
@@ -205,15 +203,3 @@ const Logo = () => {
   );
 };
 
-const Footer = () => {
-  return (
-    <footer className="mt-12">
-      <p className="text-center text-zinc-400">
-        Made with ❤️ by{" "}
-        <a href="#" className="text-red-300 hover:underline">
-          @tomisloading
-        </a>
-      </p>
-    </footer>
-  );
-};
