@@ -9,7 +9,7 @@ const Example = () => {
   );
 };
 
-const BubbleText = () => {
+const BubbleText = (text) => {
   return (
     <h2 className="text-center text-5xl font-thin text-indigo-300">
       {"Bubbbbbbbble text".split("").map((child, idx) => (

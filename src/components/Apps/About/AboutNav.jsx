@@ -26,9 +26,10 @@ const SlideTabs = () => {
       }}
       className="relative mx-auto flex w-fit rounded-full border-2 border-white/50 bg-finder-nav-dark  p-1"
     >
-      <Tab setPosition={setPosition}>About</Tab>
-      <Tab setPosition={setPosition}>Projects</Tab>
-      <Tab setPosition={setPosition}>Experience</Tab>
+      <Tab setPosition={setPosition}>Bio</Tab>
+      <Tab setPosition={setPosition}>Works</Tab>
+      <Tab setPosition={setPosition}>Career</Tab>
+      <Tab setPosition={setPosition}>Milestones</Tab>
 
       <Cursor position={position} />
     </ul>
@@ -52,7 +53,7 @@ const Tab = ({ children, setPosition }) => {
           opacity: 1,
         });
       }}
-      className="relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:py-3 md:text-base"
+      className="relative z-10 block  cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:py-3 md:text-base"
     >
       {children}
     </li>

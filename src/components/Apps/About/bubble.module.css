@@ -1,18 +1,29 @@
+.wordWrapper {
+  display: inline-block;
+  margin-right: 0.1em; 
+  /* Adds space between words */
+}
+
 .hoverText {
   transition:
     0.35s font-weight,
     0.35s color;
+  display: inline-block;
+}
+
+/* Preserve whitespace */
+.hoverText:empty::before {
+  content: '\00A0';
+  display: inline-block;
 }
 
 .hoverText:hover {
   font-weight: 900;
-  color: rgb(238, 242, 255);
 }
 
 /* To the right */
 .hoverText:hover + .hoverText {
   font-weight: 500;
-  color: rgb(199, 210, 254);
 }
 
 .hoverText:hover + .hoverText + .hoverText {
@@ -22,9 +33,41 @@
 /* To the left */
 .hoverText:has(+ .hoverText:hover) {
   font-weight: 500;
-  color: rgb(199, 210, 254);
 }
 
 .hoverText:has(+ .hoverText + .hoverText:hover) {
   font-weight: 300;
+}
+
+/* Color transitions for white text */
+.whiteText {
+  color: white;
+}
+
+.whiteText .hoverText:hover,
+.whiteText .hoverText:hover + .hoverText,
+.whiteText .hoverText:has(+ .hoverText:hover) {
+  color: #717177; /* zinc-400 */
+}
+
+/* Color transitions for zinc text */
+.zincText {
+  color: #a1a1aa; /* zinc-400 */
+}
+
+.zincText .hoverText:hover,
+.zincText .hoverText:hover + .hoverText,
+.zincText .hoverText:has(+ .hoverText:hover) {
+  color: white;
+}
+
+/* Color transitions for red text */
+.redText {
+  color: #fca5a5; /* red-300 */
+}
+
+.redText .hoverText:hover,
+.redText .hoverText:hover + .hoverText,
+.redText .hoverText:has(+ .hoverText:hover) {
+  color: #ef4444; /* red-500 */
 }

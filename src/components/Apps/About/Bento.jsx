@@ -1,13 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
-import { FiArrowRight, FiMail, FiMapPin } from "react-icons/fi";
-import { SiGithub, SiTiktok, SiYoutube } from "react-icons/si";
+import { FiArrowRight } from "react-icons/fi";
+import userLogo from "../../../assets/kishan.jpeg";
+import styles from "./bubble.module.css";
 
 export const Bento = () => {
   return (
-    <div className="min-h-screen bg-zinc-900 px-4 py-12 text-zinc-50">
-      <Logo />
+    <div className="min-h-screen bg-zinc-900 px-4 py-8 text-zinc-50">
       <motion.div
         initial="initial"
         animate="animate"
@@ -17,10 +17,7 @@ export const Bento = () => {
         className="mx-auto grid max-w-4xl grid-flow-dense grid-cols-12 gap-4"
       >
         <HeaderBlock />
-        <SocialsBlock />
         <AboutBlock />
-        <LocationBlock />
-        <EmailListBlock />
       </motion.div>
     </div>
   );
@@ -55,151 +52,57 @@ const Block = ({ className, ...rest }) => {
     />
   );
 };
-
-const HeaderBlock = () => (
-  <Block className="col-span-12 row-span-2 md:col-span-6">
-    <img
-      src="https://api.dicebear.com/8.x/lorelei-neutral/svg?seed=John"
-      alt="avatar"
-      className="mb-4 size-14 rounded-full"
-    />
-    <h1 className="mb-12 text-4xl font-medium leading-tight">
-      Hi, I'm Tom.{" "}
-      <span className="text-zinc-400">
-        I build cool websites like this one.
+const BubbleText = ({ text, className }) => (
+  <span className={className}>
+    {text.split(/(\s+)/).map((segment, idx) => (
+      <span key={idx} className={styles.wordWrapper}>
+        {segment.split("").map((char, charIdx) => (
+          <span className={styles.hoverText} key={charIdx}>
+            {char}
+          </span>
+        ))}
       </span>
-    </h1>
-    <a
-      href="#"
-      className="flex items-center gap-1 text-red-300 hover:underline"
-    >
-      Contact me <FiArrowRight />
-    </a>
-  </Block>
+    ))}
+  </span>
 );
 
-const SocialsBlock = () => (
-  <>
-    <Block
-      whileHover={{
-        rotate: "2.5deg",
-        scale: 1.1,
-      }}
-      className="col-span-6 bg-red-500 md:col-span-3"
+const HeaderBlock = () => (
+  <Block className="col-span-12 row-span-2">
+    <img src={userLogo} alt="" className="h-32 w-32 rounded-full" />
+    <h1 className="my-2 text-4xl font-medium leading-tight">
+      <BubbleText text="Hi, I'm R Kishan. " className={styles.whiteText} />
+      <BubbleText
+        text="I'm a Full Stack Developer & AI Enthusiast. I love to build "
+        className={styles.zincText}
+      />
+      <BubbleText text="unique " className={`${styles.whiteText} underline`} />
+      <BubbleText text="website like this." className={styles.zincText} />
+    </h1>
+    <a
+      href="https://www.linkedin.com/in/r-kishan-34913631a/"
+      className={`flex items-center gap-1 ${styles.redText} hover:underline`}
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      <a
-        href="#"
-        className="grid h-full place-content-center text-3xl text-white"
-      >
-        <SiYoutube />
-      </a>
-    </Block>
-    <Block
-      whileHover={{
-        rotate: "-2.5deg",
-        scale: 1.1,
-      }}
-      className="col-span-6 bg-green-600 md:col-span-3"
-    >
-      <a
-        href="#"
-        className="grid h-full place-content-center text-3xl text-white"
-      >
-        <SiGithub />
-      </a>
-    </Block>
-    <Block
-      whileHover={{
-        rotate: "-2.5deg",
-        scale: 1.1,
-      }}
-      className="col-span-6 bg-zinc-50 md:col-span-3"
-    >
-      <a
-        href="#"
-        className="grid h-full place-content-center text-3xl text-black"
-      >
-        <SiTiktok />
-      </a>
-    </Block>
-    <Block
-      whileHover={{
-        rotate: "2.5deg",
-        scale: 1.1,
-      }}
-      className="col-span-6 bg-blue-500 md:col-span-3"
-    >
-      <a
-        href="#"
-        className="grid h-full place-content-center text-3xl text-white"
-      >
-      </a>
-    </Block>
-  </>
+      <BubbleText text="Contact me " className={styles.redText} />
+      <FiArrowRight />
+    </a>
+  </Block>
 );
 
 const AboutBlock = () => (
   <Block className="col-span-12 text-3xl leading-snug">
     <p>
-      My passion is building cool stuff.{" "}
-      <span className="text-zinc-400">
-        I build primarily with React, Tailwind CSS, and Framer Motion. I love
-        this stack so much that I even built a website about it. I've made over
-        a hundred videos on the subject across YouTube and TikTok.
-      </span>
+      <BubbleText
+        text="I'm a BCA graduate with an 8.96 CGPA. I started my journey in Machine Learning, worked on research papers, and even got them published. Along the way, I fell in love with web development and the art of building the web. Now, I enjoy creating scalable projects for fun. "
+        className={styles.zincText}
+      />
+      <BubbleText
+        text="My passion is building cool and impactful stuff that solves real problems."
+        className={styles.whiteText}
+      />
     </p>
   </Block>
 );
 
-const LocationBlock = () => (
-  <Block className="col-span-12 flex flex-col items-center gap-4 md:col-span-3">
-    <FiMapPin className="text-3xl" />
-    <p className="text-center text-lg text-zinc-400">Cyberspace</p>
-  </Block>
-);
-
-const EmailListBlock = () => (
-  <Block className="col-span-12 md:col-span-9">
-    <p className="mb-3 text-lg">Join my mailing list</p>
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className="flex items-center gap-2"
-    >
-      <input
-        type="email"
-        placeholder="Enter your email"
-        className="w-full rounded border border-zinc-700 bg-zinc-800 px-3 py-1.5 transition-colors focus:border-red-300 focus:outline-0"
-      />
-      <button
-        type="submit"
-        className="flex items-center gap-2 whitespace-nowrap rounded bg-zinc-50 px-3 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-300"
-      >
-        <FiMail /> Join the list
-      </button>
-    </form>
-  </Block>
-);
-
-const Logo = () => {
-  // Temp logo from https://logoipsum.com/
-  return (
-    <svg
-      width="40"
-      height="auto"
-      viewBox="0 0 50 39"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="mx-auto mb-12 fill-zinc-50"
-    >
-      <path
-        d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
-        stopColor="#000000"
-      ></path>
-      <path
-        d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
-        stopColor="#000000"
-      ></path>
-    </svg>
-  );
-};
-
+export default Bento;

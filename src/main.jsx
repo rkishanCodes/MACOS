@@ -5,13 +5,12 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BootScreen from "./components/BootScreen/BootScreen.jsx";
 import Hello from "./components/BootScreen/Hello.jsx";
-import LockScreen from "./LockScreen.jsx";
 import "./fonts.css";
 
 import store from "./redux/store.js";
 import { Provider } from "react-redux";
 import Desktop from "./components/BootScreen/Desktop/Desktop.jsx";
-import TestGesture from "./components/Dock/TestGesture.jsx";
+import { Achievements } from "./components/Apps/About/Achievements.jsx";
 
 
 const router = createBrowserRouter([
@@ -27,19 +26,16 @@ const router = createBrowserRouter([
     path: "/hello",
     element: <Hello />,
   },
-  {
-    path: "/lock",
-    element: <LockScreen />,
-  },
+
   {
     path: "/desktop",
     element: <Desktop />,
   },
- 
   {
-    path: "/test",
-    element: <TestGesture />,
+    path: "/achievements",
+    element: <Achievements />,
   },
+
 ]);
 
 createRoot(document.getElementById("root")).render(
