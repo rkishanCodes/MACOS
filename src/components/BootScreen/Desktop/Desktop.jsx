@@ -20,7 +20,6 @@ const Desktop = () => {
         <Dock />
       </div>
 
-      {/* Conditionally render apps based on their 'active' state */}
       {apps.finder.active && <Finder />}
       {apps.safari.active && <Safari />}
       {apps.terminal.active && <Terminal />}

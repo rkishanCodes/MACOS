@@ -1,48 +1,60 @@
 import { useMotionValue, motion, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import { FiArrowRight } from "react-icons/fi";
+import aboutImg from "../../../assets/About/bio.webp";
+import connectImg from "../../../assets/About/connect.jpeg";
+import careersImg from "../../../assets/About/Careers.avif";
+import projectImg from "../../../assets/About/project.jpg";
+import achievementsImg from "../../../assets/About/achievements.webp";
 
-export const AboutFooter = () => {
+export const AboutFooter = ({ setActiveTab, scrollableRef }) => {
+  const handleClick = (tab) => {
+    setActiveTab(tab);
+    if (scrollableRef && scrollableRef.current) {
+      scrollableRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="bg-neutral-950 p-4 md:p-8">
       <div className="mx-auto max-w-5xl">
         <Link
           heading="About"
-          subheading="Learn what we do here"
-          imgSrc="/imgs/random/11.jpg"
-          href="#"
+          subheading="Get to know me better"
+          imgSrc={aboutImg}
+          onClick={() => handleClick("Bio")}
         />
         <Link
           heading="Projects"
-          subheading="We work with great people"
-          imgSrc="/imgs/random/6.jpg"
-          href="#"
+          subheading="Explore my work and collaborations"
+          imgSrc={projectImg}
+          onClick={() => handleClick("Works")}
         />
-
         <Link
           heading="Careers"
-          subheading="We want cool people"
-          imgSrc="/imgs/random/5.jpg"
-          href="#"
+          subheading="Join forces and build something great"
+          imgSrc={careersImg}
+          onClick={() => handleClick("Career")}
         />
         <Link
           heading="Achievements"
-          subheading="Our work speaks for itself"
-          imgSrc="/imgs/random/4.jpg"
-          href="#"
+          subheading="Celebrating key milestones"
+          imgSrc={achievementsImg}
+          onClick={() => handleClick("Milestones")}
         />
         <Link
           heading="Connect"
-          subheading="Incase you're bored"
-          imgSrc="/imgs/random/10.jpg"
-          href="#"
+          subheading="Reach out and stay in touch"
+          imgSrc={connectImg}
+          href="https://www.linkedin.com/in/r-kishan-34913631a/"
+          external={true}
         />
       </div>
     </section>
   );
 };
 
-const Link = ({ heading, imgSrc, subheading, href }) => {
+const Link = ({ heading, imgSrc, subheading, href, onClick, external }) => {
   const ref = useRef(null);
 
   const x = useMotionValue(0);
@@ -70,15 +82,17 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
     y.set(yPct);
   };
 
-  return (
-    <motion.a
-      href={href}
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      initial="initial"
-      whileHover="whileHover"
-      className="group relative flex items-center justify-between border-b-2 border-neutral-700 py-4 transition-colors duration-500 hover:border-neutral-50 md:py-8"
-    >
+  const commonProps = {
+    ref: ref,
+    onMouseMove: handleMouseMove,
+    initial: "initial",
+    whileHover: "whileHover",
+    className:
+      "group relative flex items-center justify-between border-b-2 border-neutral-700 py-4 transition-colors duration-500 hover:border-neutral-50 md:py-8 cursor-pointer",
+  };
+
+  const linkContent = (
+    <>
       <div>
         <motion.span
           variants={{
@@ -124,7 +138,7 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
         }}
         transition={{ type: "spring" }}
         src={imgSrc}
-        className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
+        className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-56"
         alt={`Image representing a link for ${heading}`}
       />
 
@@ -144,6 +158,21 @@ const Link = ({ heading, imgSrc, subheading, href }) => {
       >
         <FiArrowRight className="text-5xl text-neutral-50" />
       </motion.div>
+    </>
+  );
+
+  return external ? (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...commonProps}
+    >
+      {linkContent}
     </motion.a>
+  ) : (
+    <motion.div onClick={onClick} {...commonProps}>
+      {linkContent}
+    </motion.div>
   );
 };
