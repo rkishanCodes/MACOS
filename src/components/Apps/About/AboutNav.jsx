@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export const AboutNav = ({ activeTab, setActiveTab }) => {
   return (
-    <div className="bg-finder-nav-dark pt-8 pb-2">
+    <div className="bg-finder-nav-dark pt-12 pb-2">
       <SlideTabs activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );

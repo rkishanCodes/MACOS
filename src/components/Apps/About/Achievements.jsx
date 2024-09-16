@@ -72,7 +72,7 @@ const Schedule = () => {
       </motion.h1>
       <AchievementItem
         title="Research Paper"
-        content="Authored research papers in the fields of IoT and Machine Learning, contributing to advancements in technology and innovation."
+        content="Authored research papers in the fields of IoT and Machine Learning, contributing to advancements in technology and innovation. Won First Prize in an Intra-Collegiate Student Annual Research Convention."
       />
       <AchievementItem
         title="IT Club"

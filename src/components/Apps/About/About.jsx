@@ -9,7 +9,7 @@ import { Experience } from "./Experience";
 import Projects from "./Projects";
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState("Bio");
+  const [activeTab, setActiveTab] = useState("Works");
    const scrollableRef = useRef(null);
 
   const renderContent = () => {
@@ -18,7 +18,7 @@ const About = () => {
         return <Bento />;
       case "Works":
         return (
-          <div className="relative h-full overflow-y-scroll bg-zinc-900 py-5">
+          <div className="relative h-full overflow-y-scroll bg-zinc-900 pt-5 ">
             <Projects />
           </div>
         );
