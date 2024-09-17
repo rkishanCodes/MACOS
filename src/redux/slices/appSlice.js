@@ -5,7 +5,7 @@ const initialState = {
   finder: {
     minimize: false,
     fullScreen: false,
-    active: false,
+    active: true,
     width: 500,
     height: 400,
     x: 400,
@@ -98,11 +98,10 @@ const initialState = {
     prevX: null,
     prevY: null,
   },
-
   gemini: {
     minimize: false,
     fullScreen: false,
-    active: true,
+    active: false,
     width: 500,
     height: 500,
     x: 400,
@@ -125,6 +124,7 @@ const initialState = {
     null,
     { src: "trashEmptyIcon", appName: "bin" },
   ],
+  isMobile: false,
 };
 
 const appSlice = createSlice({
@@ -180,7 +180,6 @@ const appSlice = createSlice({
     minimizeApp: (state, action) => {
       const { app } = action.payload;
       state[app].minimize = true;
-      state["calculator"].scale = 0.165; // Scale for the dock
       state[app].prevX = state[app].x;
       state[app].prevY = state[app].y;
 
@@ -217,6 +216,36 @@ const appSlice = createSlice({
         state.appIcons.splice(appIconIndex, 1);
       }
     },
+    setDeviceType: (state, action) => {
+      state.isMobile = action.payload.isMobile;
+    },
+
+    minimizeAllOtherAppsOnMobile: (state, action) => {
+      if (!state.isMobile) return; // Only proceed if on mobile
+
+      const { clickedApp } = action.payload;
+      Object.keys(state).forEach((app) => {
+        if (
+          typeof state[app] === "object" &&
+          app !== clickedApp &&
+          app !== "appIcons"
+        ) {
+          if (!state[app].minimize) {
+            state[app].minimize = true;
+            state[app].prevX = state[app].x;
+            state[app].prevY = state[app].y;
+          }
+        }
+      });
+
+      // Restore the clicked app if it was minimized
+      if (state[clickedApp].minimize) {
+        state[clickedApp].minimize = false;
+        state[clickedApp].active = true;
+      }
+
+      state.activeApp = clickedApp;
+    },
   },
 });
 
@@ -230,6 +259,8 @@ export const {
   restoreApp,
   updateMinimizedPosition,
   SetActiveApp,
+  setDeviceType,
+  minimizeAllOtherAppsOnMobile,
 } = appSlice.actions;
 
 export const selectApps = (state) => state.apps;

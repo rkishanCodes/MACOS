@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,6 +6,8 @@ import {
   selectApps,
   updateAppState,
   SetActiveApp,
+  setDeviceType,
+  minimizeAllOtherAppsOnMobile,
 } from "../../../redux/slices/appSlice";
 import { useCapitalizeFirstLetter } from "../../../hooks/useCapitalizeFirstLetter";
 
@@ -43,44 +45,55 @@ const minimizeIcon = {
   geminiMinimize,
 };
 
-// const capitalizeFirstLetter = (string) => {
-//   return string.charAt(0).toUpperCase() + string.slice(1);
-// };
-
 const Dock = () => {
   let mouseX = useMotionValue(Infinity);
   const dispatch = useDispatch();
   const appIcons = useSelector((state) => state.apps.appIcons);
   const apps = useSelector(selectApps);
   const activeAppName = useSelector((state) => state.apps.activeApp);
+  const isMobile = useSelector((state) => state.apps.isMobile);
 
   const handleClick = useCallback(
     (appName) => {
-      if (activeAppName !== appName) {
-        console.log(`Clicked on ${appName}`);
-        dispatch(SetActiveApp({ appName }));
-      }
+      if (isMobile) {
+        dispatch(minimizeAllOtherAppsOnMobile({ clickedApp: appName }));
+      } else {
+        if (activeAppName !== appName) {
+          dispatch(SetActiveApp({ appName }));
+        }
 
-      if (apps[appName]?.minimize) {
-        dispatch(restoreApp({ app: appName }));
-      }
+        if (apps[appName]?.minimize) {
+          dispatch(restoreApp({ app: appName }));
+        }
 
-      dispatch(
-        updateAppState({
-          app: appName,
-          field: "active",
-          value: true,
-        })
-      );
+        dispatch(
+          updateAppState({
+            app: appName,
+            field: "active",
+            value: true,
+          })
+        );
+      }
     },
-    [dispatch, activeAppName, apps]
+    [dispatch, activeAppName, apps, isMobile]
   );
+
+  useEffect(() => {
+    const handleResize = () => {
+      dispatch(setDeviceType({ isMobile: window.innerWidth <= 1024 }));
+    };
+
+    handleResize(); // Set initial state
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [dispatch]);
 
   return (
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
-      className="mx-auto flex h-24 items-end rounded-2xl border-2 border-white/30 bg-black/30 pb-1"
+      className="mx-auto flex h-[6.5vw]  items-end rounded-2xl border-2 border-white/30 bg-black/30 pb-1 max-xs:scale-150 max-xs:h-[9vw]  max-xxs:scale-[1.75] max-xxs:h-[9.5vw] "
     >
       {appIcons.map((icon, i) =>
         icon ? (

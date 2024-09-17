@@ -24,7 +24,7 @@ const HeaderFinder = ({
       >
         <IoIosArrowForward size={25} />
       </button>
-      <div className="text-white font-medium">
+      <div className="text-white font-medium truncate">
         {selectedItem}
         {currentPath.length > 0 && (
           <>

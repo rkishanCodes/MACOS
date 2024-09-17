@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import Desktop from "./components/BootScreen/Desktop/Desktop.jsx";
 import { Achievements } from "./components/Apps/About/Achievements.jsx";
 import { Experience } from "./components/Apps/About/Experience.jsx";
+import LockScreen from "./components/BootScreen/LockScreen.jsx";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/boot",
     element: <BootScreen />,
+  },
+  {
+    path: "/lock",
+    element: <LockScreen  />,
   },
   {
     path: "/hello",

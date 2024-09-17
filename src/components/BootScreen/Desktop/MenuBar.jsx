@@ -116,7 +116,7 @@ const MenuBar = () => {
         {menuItems.map((item, index) => (
           <div
             key={index}
-            className="relative menu-item"
+            className="relative menu-item w-[3vw] "
             onClick={() => handleMenuClick(item)}
             onMouseEnter={() => handleMenuHover(item)}
           >
@@ -130,7 +130,7 @@ const MenuBar = () => {
               />
             ) : (
               <h6
-                className={`text-[0.85rem] font-[500] cursor-default px-1 py-1 rounded ${
+                className={`text-[80%] font-[500] cursor-default px-1 py-1 rounded ${
                   activeMenu === item ? "bg-black/30" : ""
                 }`}
               >
@@ -145,13 +145,12 @@ const MenuBar = () => {
           </div>
         ))}
       </div>
-      <div className="flex gap-4 items-center">
-        <img src={battery} alt="" className="h-6 w-6" />
+      <div className="flex gap-4 items-center ">
         <div className="flex flex-col gap-0">
           <img src={off} alt="" className="h-4 w-[1.15rem]" />
           <img src={on} alt="" className="h-4 w-[1.15rem] mt-[-38%]" />
         </div>
-        <h6 className="text-[0.85rem] font-[200] text-white mr-4">
+        <h6 className="text-[1vw] font-[200] text-white mr-4 max-lg:text-[1.25vw] max-md:text-[1.75vw] max-xs:text-[3vw]">
           {formatDateTime(currentTime)}
         </h6>
       </div>

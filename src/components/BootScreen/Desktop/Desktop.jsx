@@ -13,6 +13,23 @@ import Gemini from "../../Apps/ChatGpt/Gemini";
 
 const Desktop = () => {
   const apps = useSelector(selectApps);
+  const activeApp = useSelector((state) => state.apps.activeApp);
+
+  const appComponents = [
+    { name: "finder", component: <Finder key="finder" /> },
+    { name: "safari", component: <Safari key="safari" /> },
+    { name: "terminal", component: <Terminal key="terminal" /> },
+    { name: "calculator", component: <Calculator key="calculator" /> },
+    { name: "bin", component: <Bin key="bin" /> },
+    { name: "about", component: <About key="about" /> },
+    { name: "gemini", component: <Gemini key="gemini" /> },
+  ];
+
+  const sortedApps = appComponents.sort((a, b) => {
+    if (a.name === activeApp) return 1;
+    if (b.name === activeApp) return -1;
+    return apps[b.name].active - apps[a.name].active;
+  });
 
   return (
     <div className="h-screen w-screen bg-[url('./assets/macos-sonoma-morning.jpg')] bg-cover bg-center bg-no-repeat relative">
@@ -21,13 +38,7 @@ const Desktop = () => {
         <Dock />
       </div>
 
-      {apps.finder.active && <Finder />}
-      {apps.safari.active && <Safari />}
-      {apps.terminal.active && <Terminal />}
-      {apps.calculator.active && <Calculator />}
-      {apps.bin.active && <Bin />}
-      {apps.about.active && <About />}
-      {apps.gemini.active && <Gemini />}
+      {sortedApps.map(({ name, component }) => apps[name].active && component)}
     </div>
   );
 };
