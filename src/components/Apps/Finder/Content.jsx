@@ -10,7 +10,7 @@ import {
   removeFromBin,
   restoreFromBin,
 } from "../../../redux/slices/binSlice";
-import folderIcon from "../../../assets/finder/folderIcon.svg";
+import folderIcon from "../../../assets/finder/folder.webp";
 import fileIcon from "../../../assets/finder/documents.png";
 
 
@@ -247,7 +247,7 @@ const Content = ({
                 <img
                   src={item.type === "folder" ? folderIcon : fileIcon}
                   alt=""
-                  className="w-14 h-14"
+                  className="w-18 h-14"
                 />
                 <span className="text-center text-sm mt-2 w-full truncate">
                   {renameItem && renameItem.name === item.name ? (

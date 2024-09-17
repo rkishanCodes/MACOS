@@ -11,13 +11,13 @@ import {
 } from "../../../redux/slices/appSlice";
 import { useCapitalizeFirstLetter } from "../../../hooks/useCapitalizeFirstLetter";
 
-import finderIcon from "../../../assets/Apps/finder.svg";
-import safariIcon from "../../../assets/Apps/safari.svg";
-import terminalIcon from "../../../assets/Apps/terminal.svg";
-import calculatorIcon from "../../../assets/Apps/calculator.svg";
-import trashEmptyIcon from "../../../assets/Apps/Trash Full.svg";
-import aboutIcon from "../../../assets/Apps/about.png";
-import geminiIcon from "../../../assets/Apps/gemini.svg";
+import finderIcon from "../../../assets/Apps/Finder.png";
+import safariIcon from "../../../assets/Apps/Safari.png";
+import terminalIcon from "../../../assets/Apps/Terminal.png";
+import calculatorIcon from "../../../assets/Apps/Calculator.png";
+import trashEmptyIcon from "../../../assets/Apps/TrashFull.png";
+import aboutIcon from "../../../assets/Apps/About.png";
+import geminiIcon from "../../../assets/Apps/Gemini.svg";
 
 import finderMinimize from "../../../assets/finderMinimize.png";
 import calculatorMinimize from "../../../assets/calculatorMinimize.png";

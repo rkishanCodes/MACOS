@@ -5,7 +5,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useRef } from "react";
-import AvishkarAward from "../../../assets/AvishkarAward.png";
+import AvishkarAward from "../../../assets/AvishkarAward.jpeg";
 
 export const Achievements = () => {
   const scrollRef = useRef(null);

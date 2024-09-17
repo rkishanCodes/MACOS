@@ -120,7 +120,7 @@ const initialState = {
     { src: "aboutIcon", appName: "about" },
     { src: "terminalIcon", appName: "terminal" },
     { src: "calculatorIcon", appName: "calculator" },
-    { src: "geminiIcon", appName: "gemini" },
+    // { src: "geminiIcon", appName: "gemini" },
     null,
     { src: "trashEmptyIcon", appName: "bin" },
   ],
