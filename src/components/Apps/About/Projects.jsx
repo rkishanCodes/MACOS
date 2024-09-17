@@ -1,4 +1,5 @@
 import React from "react";
+
 import html from "../../../assets/Tools/html.svg";
 import js from "../../../assets/Tools/javaScript.svg";
 import css from "../../../assets/Tools/css.svg";
@@ -17,7 +18,6 @@ import aws from "../../../assets/Tools/aws.svg";
 import graphQl from "../../../assets/Tools/graphQl.svg";
 import nextJs from "../../../assets/Tools/nextJs.svg";
 import PostgreSQL from "../../../assets/Tools/PostgreSQL.svg";
-
 import redis from "../../../assets/Tools/redis.svg";
 import supabase from "../../../assets/Tools/supabase.svg";
 import typescript from "../../../assets/Tools/typescript.svg";

@@ -9,6 +9,7 @@ import Calculator from "../../Apps/Calculator/Calculator";
 import About from "../../Apps/About/About";
 import Dock from "./Dock";
 import { selectApps } from "../../../redux/slices/appSlice";
+import Gemini from "../../Apps/ChatGpt/Gemini";
 
 const Desktop = () => {
   const apps = useSelector(selectApps);
@@ -26,6 +27,7 @@ const Desktop = () => {
       {apps.calculator.active && <Calculator />}
       {apps.bin.active && <Bin />}
       {apps.about.active && <About />}
+      {apps.gemini.active && <Gemini />}
     </div>
   );
 };

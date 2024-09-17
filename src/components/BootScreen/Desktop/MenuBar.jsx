@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import icon from "../../../assets/Apple_logo_white.png";
 import icon1 from "../../../assets/icon1.png";
 import battery from "../../../assets/battery.png";
 import on from "../../../assets/on.png";
@@ -9,15 +8,15 @@ import { useCapitalizeFirstLetter } from "../../../hooks/useCapitalizeFirstLette
 
 const MenuBar = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-   const activeAppName = useSelector((state) => state.apps.activeApp);
-     const capitalizeFirstLetter = useCapitalizeFirstLetter();
-
+  const [activeMenu, setActiveMenu] = useState(null);
+  const [isMenuActive, setIsMenuActive] = useState(false);
+  const activeAppName = useSelector((state) => state.apps.activeApp);
+  const capitalizeFirstLetter = useCapitalizeFirstLetter();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-
     return () => clearInterval(intervalId);
   }, []);
 
@@ -31,27 +30,119 @@ const MenuBar = () => {
       second: "2-digit",
       hour12: true,
     };
-
-    // Format date and time
     const formattedDateTime = new Intl.DateTimeFormat("en-US", options).format(
       date
     );
-
-    // Remove comma
     return formattedDateTime.replace(/,/g, "");
   };
 
-  const menuItems = ["File", "Edit", "Go", "Window", "Help"];
+  const menuItems = [
+    "Apple",
+    capitalizeFirstLetter(activeAppName),
+    "File",
+    "Edit",
+    "Go",
+    "Window",
+    "Help",
+  ];
+
+  const handleMenuClick = (menu) => {
+    if (activeMenu === menu) {
+      setActiveMenu(null);
+      setIsMenuActive(false);
+    } else {
+      setActiveMenu(menu);
+      setIsMenuActive(true);
+    }
+  };
+
+  const handleMenuHover = (menu) => {
+    if (isMenuActive) {
+      setActiveMenu(menu);
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".menu-item")) {
+        setActiveMenu(null);
+        setIsMenuActive(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const renderMenuContent = (item) => {
+    return (
+      <ul className="w-full h-full px-1 py-2 border-[1px] border-white/30 rounded-[8px] text-[1vw]">
+        <li className="flex items-center justify-between py-[2px] hover:bg-hover-finder-bg-blue px-2 hover:rounded-md">
+          <span>New Window</span>
+          <span>⌘N</span>
+        </li>
+        <li className="flex items-center justify-between py-[2px] hover:bg-hover-finder-bg-blue px-2 hover:rounded-md">
+          <span>Open</span>
+          <span>⌘O</span>
+        </li>
+        <li className="flex items-center justify-between py-[2px] hover:bg-hover-finder-bg-blue px-2 hover:rounded-md">
+          <span>Get Info</span>
+          <span>⌘I</span>
+        </li>
+        <li className="flex items-center justify-between py-[2px] hover:bg-hover-finder-bg-blue px-2 hover:rounded-md">
+          <span>Copy</span>
+          <span>⌘C</span>
+        </li>
+        <li className="flex items-center justify-between py-[2px] hover:bg-hover-finder-bg-blue px-2 hover:rounded-md">
+          <span>Paste</span>
+          <span>⌘V</span>
+        </li>
+        <li className="flex items-center justify-between py-[2px] hover:bg-hover-finder-bg-blue px-2 hover:rounded-md">
+          <span>Print</span>
+          <span>⌘P</span>
+        </li>
+        <li className="flex items-center justify-between py-[2px] hover:bg-hover-finder-bg-blue px-2 hover:rounded-md">
+          <span>Close Window</span>
+          <span>⌘W</span>
+        </li>
+      </ul>
+    );
+  };
 
   return (
     <div className="w-screen h-6 flex justify-between bg-[linear-gradient(-45deg,#6793ff,#d85e81)] backdrop-blur-sm">
       <div className="flex gap-4 text-white justify-center items-center">
-        <img src={icon1} alt="" className="w-[1.15rem] h-[1.15rem] ml-4" />
-        <h6 className="font-[600] text-[1vw]">{capitalizeFirstLetter(activeAppName)}</h6>
         {menuItems.map((item, index) => (
-          <h6 key={index} className="text-[0.85rem] font-[500]">
-            {item}
-          </h6>
+          <div
+            key={index}
+            className="relative menu-item"
+            onClick={() => handleMenuClick(item)}
+            onMouseEnter={() => handleMenuHover(item)}
+          >
+            {item === "Apple" ? (
+              <img
+                src={icon1}
+                alt=""
+                className={`w-[1.15rem] h-[1.15rem] ml-4 ${
+                  activeMenu === item ? "bg-black/30 rounded" : ""
+                }`}
+              />
+            ) : (
+              <h6
+                className={`text-[0.85rem] font-[500] cursor-default px-1 py-1 rounded ${
+                  activeMenu === item ? "bg-black/30" : ""
+                }`}
+              >
+                {item}
+              </h6>
+            )}
+            {activeMenu === item && (
+              <div className="bg-black/30 h-auto w-[15vw] absolute top-6 border-[1px] border-black rounded-[8px]">
+                {renderMenuContent(item)}
+              </div>
+            )}
+          </div>
         ))}
       </div>
       <div className="flex gap-4 items-center">

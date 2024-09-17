@@ -14,22 +14,24 @@ import safariIcon from "../../../assets/Apps/safari.svg";
 import terminalIcon from "../../../assets/Apps/terminal.svg";
 import calculatorIcon from "../../../assets/Apps/calculator.svg";
 import trashEmptyIcon from "../../../assets/Apps/Trash Full.svg";
-import aboutIcon from "../../../assets/Apps/about.png"
+import aboutIcon from "../../../assets/Apps/about.png";
+import geminiIcon from "../../../assets/Apps/gemini.svg";
 
 import finderMinimize from "../../../assets/finderMinimize.png";
 import calculatorMinimize from "../../../assets/calculatorMinimize.png";
 import safariMinimize from "../../../assets/safariMinimize.png";
 import binMinimize from "../../../assets/binMinimize.png";
 import terminalMinimize from "../../../assets/terminalMinimize.png";
-import aboutMinimize from "../../../assets/aboutMinimize.png";
-
+import aboutMinimize from "../../../assets/aboutMinimize.png"; // make screenshoot and edit
+import geminiMinimize from "../../../assets/geminiMinimize.png";
 const imgIcon = {
   finderIcon,
   safariIcon,
   terminalIcon,
   calculatorIcon,
   trashEmptyIcon,
-  aboutIcon
+  geminiIcon,
+  aboutIcon,
 };
 
 const minimizeIcon = {
@@ -38,12 +40,12 @@ const minimizeIcon = {
   safariMinimize,
   binMinimize,
   terminalMinimize,
+  geminiMinimize,
 };
 
 // const capitalizeFirstLetter = (string) => {
 //   return string.charAt(0).toUpperCase() + string.slice(1);
 // };
-
 
 const Dock = () => {
   let mouseX = useMotionValue(Infinity);
