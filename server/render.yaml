@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: gemini-backend
+    env: node
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false  # Prevents sync with GitHub, set it manually in Render dashboard
