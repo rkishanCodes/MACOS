@@ -17,7 +17,7 @@ import terminalIcon from "../../../assets/Apps/Terminal.png";
 import calculatorIcon from "../../../assets/Apps/Calculator.png";
 import trashEmptyIcon from "../../../assets/Apps/TrashFull.png";
 import aboutIcon from "../../../assets/Apps/About.png";
-import geminiIcon from "../../../assets/Gemini.svg";
+import geminiIcon from "../../../assets/Apps/Gemini.svg";
 
 import finderMinimize from "../../../assets/finderMinimize.png";
 import calculatorMinimize from "../../../assets/calculatorMinimize.png";
