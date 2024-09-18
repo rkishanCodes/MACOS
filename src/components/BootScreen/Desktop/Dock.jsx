@@ -24,8 +24,9 @@ import calculatorMinimize from "../../../assets/calculatorMinimize.png";
 import safariMinimize from "../../../assets/safariMinimize.png";
 import binMinimize from "../../../assets/binMinimize.png";
 import terminalMinimize from "../../../assets/terminalMinimize.png";
-import aboutMinimize from "../../../assets/aboutMinimize.png"; // make screenshoot and edit
+import aboutMinimize from "../../../assets/aboutMinimize.png";
 import geminiMinimize from "../../../assets/geminiMinimize.png";
+
 const imgIcon = {
   finderIcon,
   safariIcon,
@@ -104,6 +105,7 @@ const Dock = () => {
               src={imgIcon[icon.src]}
               name={icon.appName}
               onClick={() => handleClick(icon.appName)}
+              isMobile={isMobile}
             />
           ) : (
             <AppDiv
@@ -112,6 +114,7 @@ const Dock = () => {
               src={minimizeIcon[icon.divSrc]}
               name={icon.divName}
               onClick={() => handleClick(icon.divName)}
+              isMobile={isMobile}
             />
           )
         ) : (
@@ -122,7 +125,7 @@ const Dock = () => {
   );
 };
 
-const AppIcon = ({ mouseX, src, name, onClick }) => {
+const AppIcon = ({ mouseX, src, name, onClick, isMobile }) => {
   const capitalizeFirstLetter = useCapitalizeFirstLetter();
 
   const apps = useSelector(selectApps);
@@ -134,18 +137,26 @@ const AppIcon = ({ mouseX, src, name, onClick }) => {
     return val - bounds.x - bounds.width / 2;
   });
 
-  const widthSync = useTransform(distance, [-150, 0, 150], [80, 140, 80]);
+  const widthSync = useTransform(
+    distance,
+    [-150, 0, 150],
+    isMobile ? [90, 110, 90] : [80, 140, 80]
+  );
   const width = useSpring(widthSync, {
     mass: 0.1,
-    stiffness: 150,
-    damping: 12,
+    stiffness: isMobile ? 300 : 150,
+    damping: isMobile ? 20 : 12,
   });
 
-  const ySync = useTransform(distance, [-150, 0, 150], [0, -25, 0]);
+  const ySync = useTransform(
+    distance,
+    [-150, 0, 150],
+    isMobile ? [0, -10, 0] : [0, -25, 0]
+  );
   const y = useSpring(ySync, {
     mass: 0.1,
-    stiffness: 150,
-    damping: 12,
+    stiffness: isMobile ? 300 : 150,
+    damping: isMobile ? 20 : 12,
   });
 
   return (
@@ -164,7 +175,7 @@ const AppIcon = ({ mouseX, src, name, onClick }) => {
       {apps[name]?.active && (
         <span className="w-1 h-1 rounded-full bg-white fixed bottom-1"></span>
       )}
-      {isHovered && (
+      {isHovered && !isMobile && (
         <div className="absolute bottom-full mb-6 flex flex-col items-center">
           <div
             className="px-4 py-1 bg-black/55 border-[1px] border-white/40 text-white text-[0.85rem] rounded whitespace-nowrap"
@@ -182,7 +193,7 @@ const AppIcon = ({ mouseX, src, name, onClick }) => {
   );
 };
 
-const AppDiv = ({ mouseX, src, name, onClick }) => {
+const AppDiv = ({ mouseX, src, name, onClick, isMobile }) => {
   const capitalizeFirstLetter = useCapitalizeFirstLetter();
 
   const ref = useRef(null);
@@ -193,18 +204,26 @@ const AppDiv = ({ mouseX, src, name, onClick }) => {
     return val - bounds.x - bounds.width / 2;
   });
 
-  const widthSync = useTransform(distance, [-150, 0, 150], [80, 140, 80]);
+  const widthSync = useTransform(
+    distance,
+    [-150, 0, 150],
+    isMobile ? [90, 110, 90] : [80, 140, 80]
+  );
   const width = useSpring(widthSync, {
     mass: 0.1,
-    stiffness: 150,
-    damping: 12,
+    stiffness: isMobile ? 300 : 150,
+    damping: isMobile ? 20 : 12,
   });
 
-  const ySync = useTransform(distance, [-150, 0, 150], [0, -20, 0]);
+  const ySync = useTransform(
+    distance,
+    [-150, 0, 150],
+    isMobile ? [0, -8, 0] : [0, -20, 0]
+  );
   const y = useSpring(ySync, {
     mass: 0.1,
-    stiffness: 150,
-    damping: 12,
+    stiffness: isMobile ? 300 : 150,
+    damping: isMobile ? 20 : 12,
   });
 
   return (
@@ -217,7 +236,7 @@ const AppDiv = ({ mouseX, src, name, onClick }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.img src={src} className="mx-[2px]" style={{ width, y }} />
-      {isHovered && (
+      {isHovered && !isMobile && (
         <div className="absolute bottom-full mb-8 flex flex-col items-center">
           <div
             className="px-4 py-1 bg-black/55 border-[1px] border-white/40 text-white text-[0.85rem] rounded whitespace-nowrap"
