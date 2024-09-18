@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ResizableWindow from "../ResizableWindow";
 import MenuActions from "../MenuActions";
-import geminiIcon from "../../../assets/Apps/gemini.svg";
+import geminiIcon from "../../../assets/Apps/Gemini.svg";
 import userIcon from "../../../assets/geminiUser.svg";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
