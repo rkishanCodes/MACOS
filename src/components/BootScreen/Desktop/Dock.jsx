@@ -53,9 +53,11 @@ const Dock = () => {
   const apps = useSelector(selectApps);
   const activeAppName = useSelector((state) => state.apps.activeApp);
   const isMobile = useSelector((state) => state.apps.isMobile);
+  const dockRef = useRef(null);
 
   const handleClick = useCallback(
     (appName) => {
+      console.log("object");
       if (isMobile) {
         dispatch(minimizeAllOtherAppsOnMobile({ clickedApp: appName }));
       } else {
@@ -90,11 +92,30 @@ const Dock = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [dispatch]);
 
+  const handleTouchMove = useCallback(
+    (e) => {
+      if (dockRef.current) {
+        const touch = e.touches[0];
+        const dockRect = dockRef.current.getBoundingClientRect();
+        const touchX = touch.clientX - dockRect.left;
+        mouseX.set(touchX);
+      }
+    },
+    [mouseX]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    mouseX.set(Infinity);
+  }, [mouseX]);
+
   return (
     <motion.div
-      onMouseMove={(e) => mouseX.set(e.pageX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
-      className="mx-auto flex h-[6.5vw]  items-end rounded-2xl border-2 border-white/30 bg-black/30 pb-1 max-xs:scale-150 max-xs:h-[9vw]  max-xxs:scale-[1.75] max-xxs:h-[9.5vw] "
+      ref={dockRef}
+      onMouseMove={(e) => !isMobile && mouseX.set(e.pageX)}
+      onMouseLeave={() => !isMobile && mouseX.set(Infinity)}
+      onTouchMove={isMobile ? handleTouchMove : undefined}
+      onTouchEnd={isMobile ? handleTouchEnd : undefined}
+      className="mx-auto flex h-[6.5vw] items-end rounded-2xl border-2 border-white/30 bg-black/30 pb-1 max-xs:scale-150 max-xs:h-[9vw] max-xxs:scale-[1.75] max-xxs:h-[9.5vw]"
     >
       {appIcons.map((icon, i) =>
         icon ? (
@@ -162,8 +183,8 @@ const AppIcon = ({ mouseX, src, name, onClick, isMobile }) => {
   return (
     <motion.div
       className="flex flex-col justify-center items-center relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
     >
       <motion.img
         src={src}
@@ -192,6 +213,7 @@ const AppIcon = ({ mouseX, src, name, onClick, isMobile }) => {
     </motion.div>
   );
 };
+
 
 const AppDiv = ({ mouseX, src, name, onClick, isMobile }) => {
   const capitalizeFirstLetter = useCapitalizeFirstLetter();
