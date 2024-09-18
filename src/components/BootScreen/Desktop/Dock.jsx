@@ -57,7 +57,6 @@ const Dock = () => {
 
   const handleClick = useCallback(
     (appName) => {
-      console.log("object");
       if (isMobile) {
         dispatch(minimizeAllOtherAppsOnMobile({ clickedApp: appName }));
       } else {

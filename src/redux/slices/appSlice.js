@@ -201,7 +201,6 @@ const appSlice = createSlice({
 
     restoreApp: (state, action) => {
       const { app } = action.payload;
-      console.log(app);
       state[app].minimize = false;
       state[app].active = true;
       state[app].scale = 1;
@@ -211,7 +210,6 @@ const appSlice = createSlice({
       const appIconIndex = state.appIcons.findIndex(
         (icon) => icon?.divName === app
       );
-      console.log(appIconIndex);
       if (appIconIndex !== -1) {
         state.appIcons.splice(appIconIndex, 1);
       }

@@ -65,7 +65,6 @@ const ResizableWindow = ({ appName, children }) => {
   const handleClick = useCallback(
     (e) => {
       if (!isDragging.current && activeAppName !== appName) {
-        console.log(`Clicked on ${appName}`);
         dispatch(SetActiveApp({ appName }));
       }
       e.stopPropagation();
