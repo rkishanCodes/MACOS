@@ -54,7 +54,6 @@ const LockScreen = () => {
           transition: { duration: 0.5, times: [0, 0.2, 0.4, 0.6, 0.8, 1] },
         });
       } else {
-        console.log("true");
         dispatch(setLock(false));
         dispatch(setDesktop(true));
       }

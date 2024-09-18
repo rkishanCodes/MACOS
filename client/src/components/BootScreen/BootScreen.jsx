@@ -14,7 +14,6 @@ const BootScreen = () => {
 
 
   useEffect(() => {
-    console.log("playing");
     if (isAudio) {
       audioRef.current.play().catch((error) => {
         console.error("Playback error:", error);
