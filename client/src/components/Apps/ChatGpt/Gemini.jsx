@@ -15,7 +15,7 @@ const Gemini = () => {
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = "https://portfolio-l3am.onrender.com/api/gemini";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ const Gemini = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${backendUrl}/api/gemini`, {
+      const response = await fetch(`${backendUrl}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
