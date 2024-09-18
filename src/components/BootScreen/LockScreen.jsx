@@ -109,7 +109,7 @@ const LockScreen = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center gap-2 border-2 max-md:translate-y-[-10vw]">
+      <div className="flex flex-col justify-center items-center gap-2 max-md:translate-y-[-10vw]">
         <div className="h-12 w-12 rounded-full bg-yellow-200  flex justify-center items-center">
           <img src={userLogo} alt="" className="h-7 w-7 " />
         </div>
