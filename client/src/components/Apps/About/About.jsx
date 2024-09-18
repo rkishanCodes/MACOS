@@ -9,7 +9,7 @@ import { Experience } from "./Experience";
 import Projects from "./Projects";
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState("Works");
+  const [activeTab, setActiveTab] = useState("Bio");
    const scrollableRef = useRef(null);
 
   const renderContent = () => {

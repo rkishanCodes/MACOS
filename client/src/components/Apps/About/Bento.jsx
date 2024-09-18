@@ -72,7 +72,7 @@ const HeaderBlock = () => (
     <h1 className="my-2 text-4xl font-medium leading-tight">
       <BubbleText text="Hi, I'm R Kishan. " className={styles.whiteText} />
       <BubbleText
-        text="I'm a Full Stack Developer & AI Enthusiast. I love to build "
+        text="I'm a Software Developer & AI Enthusiast. I love to build "
         className={styles.zincText}
       />
       <BubbleText text="unique " className={`${styles.whiteText} underline`} />

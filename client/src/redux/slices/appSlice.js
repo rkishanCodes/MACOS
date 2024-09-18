@@ -5,7 +5,7 @@ const initialState = {
   finder: {
     minimize: false,
     fullScreen: false,
-    active: true,
+    active: false,
     width: 500,
     height: 400,
     x: 400,
@@ -85,13 +85,13 @@ const initialState = {
   about: {
     minimize: false,
     fullScreen: false,
-    active: false,
+    active: true,
     width: 500,
     height: 500,
     x: 400,
     y: 100,
-    maxWidth: 800,
-    maxHeight: 600,
+    maxWidth: 1500,
+    maxHeight: 800,
     originalWidth: 500,
     originalHeight: 500,
     scale: 1,
@@ -264,3 +264,5 @@ export const {
 export const selectApps = (state) => state.apps;
 
 export default appSlice.reducer;
+
+

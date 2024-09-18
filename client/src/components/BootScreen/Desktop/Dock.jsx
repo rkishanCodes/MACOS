@@ -44,6 +44,7 @@ const minimizeIcon = {
   binMinimize,
   terminalMinimize,
   geminiMinimize,
+  aboutMinimize,
 };
 
 const Dock = () => {
@@ -239,7 +240,7 @@ const AppDiv = ({ mouseX, src, name, onClick, isMobile }) => {
   const ySync = useTransform(
     distance,
     [-150, 0, 150],
-    isMobile ? [0, -8, 0] : [0, -20, 0]
+    isMobile ? [0, -8, 0] : [0, -10, 0]
   );
   const y = useSpring(ySync, {
     mass: 0.1,

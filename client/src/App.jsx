@@ -11,6 +11,8 @@ const App = () => {
     (state) => state.boot
   );
 
+  // console.log(isDesktop);
+
   return (
     <AnimatePresence>
       {isHello && <Hello />}
@@ -18,9 +20,7 @@ const App = () => {
       {isLock && (
         <motion.div
           key="lock"
-          // initial={{ opacity: 0.99 }}
-          // animate={{ opacity: 1 }}
-          // // exit={{ opacity: 0.7 }}
+         
           transition={{ duration: 0.5}}
         >
           <LockScreen />
@@ -29,9 +29,7 @@ const App = () => {
       {isDesktop && (
         <motion.div
           key="desktop"
-          // initial={{ opacity: 0.99 }}
-          // animate={{ opacity: 1 }}
-          // exit={{ opacity: 0.7 }}
+       
           transition={{ duration: 0.5 }}
         >
           <Desktop />

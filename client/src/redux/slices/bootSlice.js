@@ -22,6 +22,7 @@ const bootSlice = createSlice({
       state.isLock = action.payload;
     },
     setDesktop: (state, action) => {
+      console.log(action.payload);
       state.isDesktop = action.payload;
     },
     setAudio: (state, action) => {
