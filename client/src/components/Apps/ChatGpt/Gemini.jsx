@@ -28,13 +28,16 @@ const Gemini = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/gemini", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: input }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/gemini`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: input }),
+        }
+      );
       const data = await response.json();
       setHistory([...newHistory, { type: "gemini", content: data.content }]);
     } catch (error) {
