@@ -17,7 +17,7 @@ import chartJs from "../../../assets/Tools/chartJs.png";
 import aws from "../../../assets/Tools/aws.svg";
 import graphQl from "../../../assets/Tools/graphQl.svg";
 import nextJs from "../../../assets/Tools/nextJs.svg";
-import PostgreSQL from "../../../assets/Tools/PostgreSQL.svg";
+import PostgreSQL from "../../../assets/Tools/postgresql.svg";
 import redis from "../../../assets/Tools/redis.svg";
 import supabase from "../../../assets/Tools/supabase.svg";
 import typescript from "../../../assets/Tools/typescript.svg";
