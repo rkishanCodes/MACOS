@@ -164,6 +164,8 @@ export default function Home({ containerSize }) {
     if (canvas) {
       const backendURL = import.meta.env.VITE_CAL_API;
 
+       console.log(backendURL);
+
       const response = await axios({
         method: "post",
         url: ` ${backendURL}`,
