@@ -13,6 +13,8 @@ import Desktop from "./components/BootScreen/Desktop/Desktop.jsx";
 import { Achievements } from "./components/Apps/About/Achievements.jsx";
 import { Experience } from "./components/Apps/About/Experience.jsx";
 import LockScreen from "./components/BootScreen/LockScreen.jsx";
+import AICalculator from "./components/Apps/Calculator/AICalculator.jsx";
+import { MantineProvider } from "@mantine/core";
 
 
 const router = createBrowserRouter([
@@ -41,12 +43,18 @@ const router = createBrowserRouter([
     path: "/experience",
     element: <Experience />,
   },
+  {
+    path: "/AIcal",
+    element: <AICalculator />,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <MantineProvider>
+        <RouterProvider router={router} />
+      </MantineProvider>
     </Provider>
   </StrictMode>
 );

@@ -15,8 +15,8 @@ const Gemini = () => {
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
-  const backendUrl = "https://portfolio-l3am.onrender.com/api/gemini";
-
+  const backendUrl = import.meta.env.VITE_GEMINI_API;
+  console.log(backendUrl);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return;
