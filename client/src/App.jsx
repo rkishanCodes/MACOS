@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import Hello from "./components/BootScreen/Hello";
