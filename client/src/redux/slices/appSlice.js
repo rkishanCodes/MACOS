@@ -5,7 +5,7 @@ const initialState = {
   finder: {
     minimize: false,
     fullScreen: false,
-    active: false,
+    active: true,
     width: 500,
     height: 400,
     x: 400,
@@ -53,15 +53,15 @@ const initialState = {
   calculator: {
     minimize: false,
     fullScreen: false,
-    active: true,
+    active: false,
     width: 800,
-    height: 601,
+    height: 600,
     x: 400,
     y: 50,
     maxWidth: 800,
     maxHeight: 601,
-    originalWidth: 800,
-    originalHeight: 601,
+    originalWidth: 231,
+    originalHeight: 361,
     scale: 1,
     prevX: null,
     prevY: null,
@@ -175,6 +175,7 @@ const appSlice = createSlice({
         state[app].x = 0;
         state[app].y = 0;
       }
+      
     },
 
     minimizeApp: (state, action) => {

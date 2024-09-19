@@ -24,6 +24,7 @@ const MenuBar = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [showControlCentre, setShowControlCentre] = useState(false);
   const controlCentreRef = useRef(null);
+  const menuRef = useRef(null); // New ref for the menu container
   const toggleRef = useRef(null); // New ref for toggle
 
   const activeAppName = useSelector((state) => state.apps.activeApp);
@@ -32,7 +33,6 @@ const MenuBar = () => {
   const capitalizeFirstLetter = useCapitalizeFirstLetter();
   const dispatch = useDispatch();
 
-  // Update current time every second
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
@@ -40,7 +40,6 @@ const MenuBar = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Handle clicks outside the ControlCentre and toggle to close it
   const handleClickOutside = useCallback((event) => {
     if (
       controlCentreRef.current &&
@@ -49,6 +48,11 @@ const MenuBar = () => {
       !toggleRef.current.contains(event.target)
     ) {
       setShowControlCentre(false);
+    }
+
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setActiveMenu(null);
+      setIsMenuActive(false);
     }
   }, []);
 
@@ -85,6 +89,11 @@ const MenuBar = () => {
     dispatch(setAudio(false));
   }, [dispatch]);
 
+  const handleLockScreen = useCallback(() => {
+    dispatch(setLock(true));
+    dispatch(setDesktop(false));
+  }, [dispatch]);
+
   // Toggle ControlCentre visibility
   const handleControlCentreToggle = useCallback(() => {
     setShowControlCentre((prev) => !prev);
@@ -96,14 +105,18 @@ const MenuBar = () => {
       {
         name: "Minimize",
         cmd: "⌘M",
-        action: () => dispatch(minimizeApp({ app: activeAppName })),
+        action: () =>
+          !activeAppState.minimize &&
+          dispatch(minimizeApp({ app: activeAppName })),
       },
       {
         name: activeAppState.fullScreen
           ? "Exit Full Screen"
           : "Enter Full Screen",
         cmd: "⌃⌘F",
-        action: () => dispatch(updateMaxSize({ app: activeAppName })),
+        action: () => {
+          dispatch(updateMaxSize({ app: activeAppName }));
+        },
       },
     ],
     Help: [
@@ -134,6 +147,7 @@ const MenuBar = () => {
         action: () => console.log("About this Mac"),
       },
       { name: "Settings...", cmd: " ", action: () => console.log("Settings") },
+      { name: "Lock Screen", cmd: "⌃⌘Q ", action: handleLockScreen },
       { name: "Restart", cmd: " ", action: handleRestart },
     ],
     App: [
@@ -151,12 +165,12 @@ const MenuBar = () => {
         name: `Quit ${capitalizeFirstLetter(activeAppName)}`,
         cmd: "⌘Q",
         action: () =>
+          activeAppState.active &&
           dispatch(toggleAppState({ app: activeAppName, field: "active" })),
       },
     ],
   };
 
-  // Define which menu items to show based on device type
   const menuItems = isMobile
     ? ["Apple", capitalizeFirstLetter(activeAppName)]
     : [
@@ -168,16 +182,14 @@ const MenuBar = () => {
         "Help",
       ];
 
-  // Handle menu item click
   const handleMenuClick = useCallback(
     (menu) => {
       setActiveMenu((prev) => (prev === menu ? null : menu));
-      setIsMenuActive((prev) => (prev ? prev === menu : false));
+      setIsMenuActive((prev) => !prev);
     },
     [activeMenu]
   );
 
-  // Handle menu item hover
   const handleMenuHover = useCallback(
     (menu) => {
       if (isMenuActive && !isMobile) {
@@ -209,7 +221,10 @@ const MenuBar = () => {
   return (
     <div className="w-screen h-6 flex justify-between bg-[linear-gradient(-45deg,#6793ff,#d85e81)] backdrop-blur-sm ">
       {/* Left Side Menu Items */}
-      <div className="flex gap-4 text-white justify-center items-center">
+      <div
+        ref={menuRef}
+        className="flex gap-4 text-white justify-center items-center"
+      >
         {menuItems.map((item, index) => (
           <div
             key={index}

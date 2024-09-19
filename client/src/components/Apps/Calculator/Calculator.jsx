@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import ResizableWindow from "../ResizableWindow";
 import MenuActions from "../MenuActions";
-import { useSelector } from "react-redux";
-import { selectApps } from "../../../redux/slices/appSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectApps, updateAppState } from "../../../redux/slices/appSlice";
 import NormalCalculator from "./NormalCalculator";
 import AICalculator from "./AICalculator";
 
@@ -10,6 +10,7 @@ const Calculator = React.memo(() => {
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef(null);
   const [showAI, setShowAI] = useState(true);
+  const dispatch=useDispatch()
 
   useEffect(() => {
     const updateSize = () => {
@@ -50,7 +51,23 @@ const Calculator = React.memo(() => {
             className={`  px-4 py-2 rounded text-[1.25rem] ${
               !showAI ? "bg-orange-400" : "bg-gray-700"
             }`}
-            onClick={() => setShowAI(false)}
+            onClick={() => {setShowAI(false);
+              dispatch(
+                updateAppState({
+                  app: "calculator",
+                  field: "width",
+                  value:"321"
+                })
+              );
+              dispatch(
+                updateAppState({
+                  app: "calculator",
+                  field: "height",
+                  value: "361",
+                })
+              );
+
+            }}
           >
             Normal
           </button>
@@ -58,7 +75,29 @@ const Calculator = React.memo(() => {
             className={`  px-4 py-2 rounded ${
               showAI ? "bg-orange-400" : "bg-gray-700"
             }`}
-            onClick={() => setShowAI(true)}
+            onClick={() => {setShowAI(true);
+              dispatch(
+                updateAppState({
+                  app: "calculator",
+                  field: "width",
+                  value: "800",
+                })
+              );
+              dispatch(
+                updateAppState({
+                  app: "calculator",
+                  field: "height",
+                  value: "550",
+                })
+              );
+              dispatch(
+                updateAppState({
+                  app: "calculator",
+                  field: "y",
+                  value: "25",
+                })
+              );
+            }}
           >
             AI
           </button>
