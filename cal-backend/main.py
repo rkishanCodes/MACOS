@@ -25,6 +25,10 @@ app.add_middleware(
 async def root():
     return {"message": "Server is running"}
 
+@app.get("/ping")
+async def ping():
+    return {"message": "Pong! Server is active"}
+
 app.include_router(calculator_router, prefix="/calculate", tags=["calculate"])
 
 

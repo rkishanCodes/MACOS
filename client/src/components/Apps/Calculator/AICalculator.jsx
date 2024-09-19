@@ -167,7 +167,7 @@ export default function Home({ containerSize }) {
 
       const response = await axios({
         method: "post",
-        url: ` ${backendURL}`,
+        url: `${backendURL}/calculate`,
         data: {
           image: canvas.toDataURL("image/png"),
           dict_of_vars: dictOfVars,
