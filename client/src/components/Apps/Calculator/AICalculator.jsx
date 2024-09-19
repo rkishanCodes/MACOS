@@ -5,8 +5,9 @@ import axios from "axios";
 import Draggable from "react-draggable";
 import { SWATCHES } from "./constants";
 
-export default function Home() {
+export default function Home({ containerSize }) {
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState("rgb(255, 255, 255)");
   const [reset, setReset] = useState(false);
@@ -14,6 +15,7 @@ export default function Home() {
   const [result, setResult] = useState(null);
   const [latexPosition, setLatexPosition] = useState({ x: 10, y: 200 });
   const [latexExpression, setLatexExpression] = useState([]);
+  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     if (latexExpression.length > 0 && window.MathJax) {
@@ -40,17 +42,22 @@ export default function Home() {
   }, [reset]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight - canvas.offsetTop;
-        ctx.lineCap = "round";
-        ctx.lineWidth = 3;
+    const handleResize = () => {
+      if (containerRef.current) {
+        setCanvasSize({
+          width: containerRef.current.offsetWidth,
+          height: containerRef.current.offsetHeight - 50, // Subtracting 50px for the control bar
+        });
       }
+    };
+
+    handleResize(); // Set initial size
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
     }
+
     const script = document.createElement("script");
     script.src =
       "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML";
@@ -69,9 +76,25 @@ export default function Home() {
     };
 
     return () => {
+      if (containerRef.current) {
+        resizeObserver.unobserve(containerRef.current);
+      }
       document.head.removeChild(script);
     };
   }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        canvas.width = canvasSize.width;
+        canvas.height = canvasSize.height;
+        ctx.lineCap = "round";
+        ctx.lineWidth = 3;
+      }
+    }
+  }, [canvasSize]);
 
   const renderLatexToCanvas = (expression, answer) => {
     const latex = `\\(\\LARGE{${expression} = ${answer}}\\)`;
@@ -103,8 +126,11 @@ export default function Home() {
       canvas.style.background = "black";
       const ctx = canvas.getContext("2d");
       if (ctx) {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         ctx.beginPath();
-        ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+        ctx.moveTo(x, y);
         setIsDrawing(true);
       }
     }
@@ -118,8 +144,11 @@ export default function Home() {
     if (canvas) {
       const ctx = canvas.getContext("2d");
       if (ctx) {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         ctx.strokeStyle = color;
-        ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+        ctx.lineTo(x, y);
         ctx.stroke();
       }
     }
@@ -133,11 +162,11 @@ export default function Home() {
     const canvas = canvasRef.current;
 
     if (canvas) {
-      console.log("API URL:", import.meta.env.VITE_API_URL);
+      const backendURL = import.meta.env.VITE_CAL_API;
 
       const response = await axios({
         method: "post",
-        url: `http://localhost:8900/calculate`,
+        url: ` ${backendURL}`,
         data: {
           image: canvas.toDataURL("image/png"),
           dict_of_vars: dictOfVars,
@@ -190,8 +219,15 @@ export default function Home() {
   };
 
   return (
-    <>
-      <div className="grid grid-cols-3 gap-2">
+    <div
+      ref={containerRef}
+      style={{
+        width: containerSize.width,
+        height: containerSize.height,
+        overflow: "hidden",
+      }}
+    >
+      <div className="flex justify-between items-center p-2 bg-gray-800">
         <Button
           onClick={() => setReset(true)}
           className="z-20 bg-black text-white"
@@ -200,12 +236,13 @@ export default function Home() {
         >
           Reset
         </Button>
-        <Group className="z-20">
+        <Group className="z-20 flex-wrap justify-center">
           {SWATCHES.map((swatch) => (
             <ColorSwatch
               key={swatch}
               color={swatch}
               onClick={() => setColor(swatch)}
+              size="sm"
             />
           ))}
         </Group>
@@ -218,28 +255,34 @@ export default function Home() {
           Run
         </Button>
       </div>
-      <canvas
-        ref={canvasRef}
-        id="canvas"
-        className="absolute top-0 left-0 w-full h-full"
-        onMouseDown={startDrawing}
-        onMouseMove={draw}
-        onMouseUp={stopDrawing}
-        onMouseOut={stopDrawing}
-      />
+      <div className="relative" style={{ height: "calc(100% - 50px)" }}>
+        <canvas
+          ref={canvasRef}
+          id="canvas"
+          className="absolute top-0 left-0 w-full h-full"
+          onMouseDown={startDrawing}
+          onMouseMove={draw}
+          onMouseUp={stopDrawing}
+          onMouseOut={stopDrawing}
+          onTouchStart={startDrawing}
+          onTouchMove={draw}
+          onTouchEnd={stopDrawing}
+        />
 
-      {latexExpression &&
-        latexExpression.map((latex, index) => (
-          <Draggable
-            key={index}
-            defaultPosition={latexPosition}
-            onStop={(e, data) => setLatexPosition({ x: data.x, y: data.y })}
-          >
-            <div className="absolute p-2 text-white rounded shadow-md">
-              <div className="latex-content">{latex}</div>
-            </div>
-          </Draggable>
-        ))}
-    </>
+        {latexExpression &&
+          latexExpression.map((latex, index) => (
+            <Draggable
+              key={index}
+              defaultPosition={latexPosition}
+              onStop={(e, data) => setLatexPosition({ x: data.x, y: data.y })}
+              bounds="parent"
+            >
+              <div className="absolute p-2 text-white rounded shadow-md">
+                <div className="latex-content">{latex}</div>
+              </div>
+            </Draggable>
+          ))}
+      </div>
+    </div>
   );
 }

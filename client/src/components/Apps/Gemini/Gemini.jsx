@@ -5,6 +5,7 @@ import geminiIcon from "../../../assets/Apps/Gemini.svg";
 import userIcon from "../../../assets/geminiUser.svg";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
+import axios from "axios";
 
 const Gemini = () => {
   const [input, setInput] = useState("");
@@ -15,8 +16,9 @@ const Gemini = () => {
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
+
   const backendUrl = import.meta.env.VITE_GEMINI_API;
-  console.log(backendUrl);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return;
@@ -29,15 +31,13 @@ const Gemini = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`${backendUrl}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: input }),
+      const response = await axios.post(`${backendUrl}`, {
+        message: input,
       });
-      const data = await response.json();
-      setHistory([...newHistory, { type: "gemini", content: data.content }]);
+      setHistory([
+        ...newHistory,
+        { type: "gemini", content: response.data.content },
+      ]);
     } catch (error) {
       console.error("Error:", error);
       setHistory([
