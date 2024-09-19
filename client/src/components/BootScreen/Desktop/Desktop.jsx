@@ -10,7 +10,7 @@ import About from "../../Apps/About/About";
 import Dock from "./Dock";
 import { selectApps } from "../../../redux/slices/appSlice";
 import Gemini from "../../Apps/Gemini/Gemini";
-import ControlCentre from "./ControlCentre";
+
 
 const Desktop = () => {
   const apps = useSelector(selectApps);
@@ -38,7 +38,6 @@ const Desktop = () => {
       <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
         <Dock />
       </div>
-
 
       {sortedApps.map(({ name, component }) => apps[name].active && component)}
     </div>

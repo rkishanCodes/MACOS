@@ -54,6 +54,10 @@ app.post("/api/gemini", async (req, res) => {
   }
 });
 
+app.get("/ping", (req, res) => {
+  res.status(200).send("pong");
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

@@ -75,9 +75,9 @@ const ResizableWindow = ({ appName, children }) => {
   const windowStyle = isMobile
     ? {
         width: "75vw",
-        height: "60vh",
+        height: "50vh",
         left: "15vw",
-        top: "15vw",
+        top: "22vw",
       }
     : {
         width: `${width}px`,

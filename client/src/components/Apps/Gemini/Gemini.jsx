@@ -31,7 +31,7 @@ const Gemini = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${backendUrl}`, {
+      const response = await axios.post(`${backendUrl}/api/gemini`, {
         message: input,
       });
       setHistory([

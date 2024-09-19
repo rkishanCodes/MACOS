@@ -207,7 +207,7 @@ const MenuBar = () => {
   };
 
   return (
-    <div className="w-screen h-6 flex justify-between bg-[linear-gradient(-45deg,#6793ff,#d85e81)] backdrop-blur-sm">
+    <div className="w-screen h-6 flex justify-between bg-[linear-gradient(-45deg,#6793ff,#d85e81)] backdrop-blur-sm ">
       {/* Left Side Menu Items */}
       <div className="flex gap-4 text-white justify-center items-center">
         {menuItems.map((item, index) => (

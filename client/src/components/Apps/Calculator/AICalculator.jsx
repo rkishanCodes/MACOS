@@ -236,7 +236,7 @@ export default function Home({ containerSize }) {
         >
           Reset
         </Button>
-        <Group className="z-20 flex-wrap justify-center">
+        {/* <div className="z-20 flex-wrap justify-center">
           {SWATCHES.map((swatch) => (
             <ColorSwatch
               key={swatch}
@@ -245,14 +245,15 @@ export default function Home({ containerSize }) {
               size="sm"
             />
           ))}
-        </Group>
+        </div> */}
+        <h1>Draw for Math</h1>
         <Button
           onClick={runRoute}
           className="z-20 bg-black text-white"
           variant="default"
           color="white"
         >
-          Run
+          Calculate
         </Button>
       </div>
       <div className="relative" style={{ height: "calc(100% - 50px)" }}>
