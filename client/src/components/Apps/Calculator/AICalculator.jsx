@@ -164,7 +164,6 @@ export default function Home({ containerSize }) {
     if (canvas) {
       const backendURL = import.meta.env.VITE_CAL_API;
 
-       console.log(backendURL);
 
       const response = await axios({
         method: "post",
@@ -176,7 +175,6 @@ export default function Home({ containerSize }) {
       });
 
       const resp = await response.data;
-      console.log("Response", resp);
       resp.data.forEach((data) => {
         if (data.assign === true) {
           setDictOfVars({

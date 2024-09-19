@@ -92,41 +92,41 @@ const projectsArr = [
     ],
   },
 
-  {
-    title: "TweetHub",
-    description: [
-      "used Next and typescript",
-      "PostgreSQL for database ",
-      "its a mini SAAS",
-    ],
-    images: [
-      {
-        top: framerMotion,
-        bottom: typescript,
-      },
-      {
-        top: tailwind,
-        bottom: nodeJs,
-      },
-      {
-        top: aws,
-        bottom: nextJs,
-      },
+  // {
+  //   title: "TweetHub",
+  //   description: [
+  //     "used Next and typescript",
+  //     "PostgreSQL for database ",
+  //     "its a mini SAAS",
+  //   ],
+  //   images: [
+  //     {
+  //       top: framerMotion,
+  //       bottom: typescript,
+  //     },
+  //     {
+  //       top: tailwind,
+  //       bottom: nodeJs,
+  //     },
+  //     {
+  //       top: aws,
+  //       bottom: nextJs,
+  //     },
 
-      {
-        top: googleAuth2,
-        bottom: jwt,
-      },
-      {
-        top: graphQl,
-        bottom: PostgreSQL,
-      },
-      {
-        top: supabase,
-        bottom: redis,
-      },
-    ],
-  },
+  //     {
+  //       top: googleAuth2,
+  //       bottom: jwt,
+  //     },
+  //     {
+  //       top: graphQl,
+  //       bottom: PostgreSQL,
+  //     },
+  //     {
+  //       top: supabase,
+  //       bottom: redis,
+  //     },
+  //   ],
+  // },
 
   {
     title: "Street2Site",
@@ -196,7 +196,7 @@ const Projects = () => {
 
 const ProjectItem = ({ title, description, images }) => {
   return (
-    <div className="h-[80%] w-[80%]  mb-8 rounded-[5vh] border-2 border-white/40 flex flex-col  justify-around  relative left-[50%] transform translate-x-[-50%]">
+    <div className=" w-[80%]  mb-8 rounded-[5vh] border-2 border-white/40 flex flex-col  justify-around  relative left-[50%] transform translate-x-[-50%] px-2 py-4">
       <div className="flex items-center justify-between">
         <h1 className="text-white text-[1.5rem] font-[900] pl-6">{title}</h1>
         <a href="" className="pr-6">
