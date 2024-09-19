@@ -13,7 +13,6 @@ import {
 import folderIcon from "../../../assets/finder/folder.webp";
 import fileIcon from "../../../assets/finder/documents.png";
 
-
 const Content = ({
   selectedItem,
   folders,
@@ -28,12 +27,25 @@ const Content = ({
   const [newName, setNewName] = useState("");
   const contentRef = useRef(null);
   const inputRef = useRef(null);
+  const contextMenuRef = useRef(null);
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (
+      contextMenuRef.current &&
+      !contextMenuRef.current.contains(event.target)
+    ) {
+      setContextMenu(null);
+    }
+  };
 
-  useEffect(() => {
-    const handleClickOutside = () => setContextMenu(null);
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  if (contextMenu) {
+    document.addEventListener("mousedown", handleClickOutside);
+  }
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, [contextMenu]);
 
   useEffect(() => {
     if (renameItem && inputRef.current) {
@@ -112,7 +124,6 @@ const Content = ({
     setContextMenu(null);
   };
 
-
   const handleRename = () => {
     if (renameItem && newName.trim() !== renameItem.name) {
       dispatch(
@@ -139,7 +150,8 @@ const Content = ({
 
   const renderContentContextMenu = () => (
     <div
-      className="absolute bg-white/5 border border-white/40 rounded shadow-lg"
+      ref={contextMenuRef}
+      className="absolute bg-white/10 border border-white/40 rounded shadow-lg"
       style={{
         top: contextMenu.y,
         left: contextMenu.x,
@@ -159,7 +171,8 @@ const Content = ({
 
   const renderItemContextMenu = () => (
     <div
-      className="absolute bg-white/5 border border-white/40 rounded shadow-lg"
+      ref={contextMenuRef}
+      className="absolute bg-white/10 border border-white/40 rounded shadow-lg"
       style={{
         top: contextMenu.y,
         left: contextMenu.x,
@@ -199,7 +212,7 @@ const Content = ({
               className="px-4 py-2 hover:bg-hover-bg-blue cursor-pointer text-[0.85rem]"
               onClick={() => {
                 setRenameItem(contextMenu.item);
-                setNewName(contextMenu.item.name); 
+                setNewName(contextMenu.item.name);
               }}
             >
               Rename
@@ -238,7 +251,7 @@ const Content = ({
             {folders.map((item, index) => (
               <div
                 key={index}
-                className="flex flex-col justify-center items-center"
+                className="flex flex-col justify-center items-center context-menu-trigger"
                 onDoubleClick={() =>
                   item.type === "folder" && onFolderClick(item.name)
                 }
