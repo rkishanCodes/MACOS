@@ -28,24 +28,24 @@ const Content = ({
   const contentRef = useRef(null);
   const inputRef = useRef(null);
   const contextMenuRef = useRef(null);
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (
-      contextMenuRef.current &&
-      !contextMenuRef.current.contains(event.target)
-    ) {
-      setContextMenu(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        contextMenuRef.current &&
+        !contextMenuRef.current.contains(event.target)
+      ) {
+        setContextMenu(null);
+      }
+    };
+
+    if (contextMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
     }
-  };
 
-  if (contextMenu) {
-    document.addEventListener("mousedown", handleClickOutside);
-  }
-
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, [contextMenu]);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [contextMenu]);
 
   useEffect(() => {
     if (renameItem && inputRef.current) {
@@ -123,7 +123,6 @@ useEffect(() => {
     dispatch(removeFromBin(item.name));
     setContextMenu(null);
   };
-
   const handleRename = () => {
     if (renameItem && newName.trim() !== renameItem.name) {
       dispatch(
@@ -135,8 +134,9 @@ useEffect(() => {
     }
     setRenameItem(null);
     setNewName(""); // Clear the new name after renaming
-    setContextMenu(null);
   };
+
+  
 
   const handleAddToTag = (item, tag) => {
     dispatch(
@@ -201,7 +201,6 @@ useEffect(() => {
       {!isBin && (
         <ul>
           <>
-            {" "}
             <li
               className="px-4 py-2 hover:bg-hover-bg-blue cursor-pointer text-[0.85rem]"
               onClick={() => handleMoveToBin(contextMenu.item)}
@@ -213,6 +212,7 @@ useEffect(() => {
               onClick={() => {
                 setRenameItem(contextMenu.item);
                 setNewName(contextMenu.item.name);
+                setContextMenu(null); // Hide the context menu when starting rename
               }}
             >
               Rename

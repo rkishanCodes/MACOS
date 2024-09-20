@@ -214,7 +214,7 @@ const ProjectItem = ({ title, description, images }) => {
         ))}
       </ul>
       <div>
-        <h4 className="text-white text-[1.125rem] font-[900] pl-6">Tools</h4>
+        <h4 className="text-white text-[1.125rem] font-[900] pl-6 m-2">Tools</h4>
         <SwapLogos images={images} />
       </div>
     </div>
@@ -231,7 +231,7 @@ const SwapLogos = ({ images }) => {
           className="h-16  flex justify-center items-center px-4"
           key={index}
         >
-          <div className="h-12  overflow-hidden ">
+          <div className="h-12  overflow-hidden scale-110 ">
             <motion.div
               className="w-12 h-12 border-[1px] rounded-full relative top-[-50%] transform translate-y-[50%] "
               animate={{ rotate: [0, 180, 180, 360, 360] }}

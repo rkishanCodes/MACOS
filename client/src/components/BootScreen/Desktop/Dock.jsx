@@ -115,7 +115,7 @@ const Dock = () => {
       onMouseLeave={() => !isMobile && mouseX.set(Infinity)}
       onTouchMove={isMobile ? handleTouchMove : undefined}
       onTouchEnd={isMobile ? handleTouchEnd : undefined}
-      className="mx-auto flex h-[6.5vw] items-end rounded-2xl border-2 border-white/30 bg-black/30 pb-1 max-xs:scale-150 max-xs:h-[9vw] max-xxs:scale-[1.75] max-xxs:h-[9.5vw]"
+      className="mx-auto flex h-[6.5vw] items-end rounded-2xl border-2 border-white/30 bg-black/30 pb-1 max-xs:scale-150 max-xs:h-[9vw] max-xs:translate-y-[-10px]  max-xxs:h-[9.5vw]"
     >
       {appIcons.map((icon, i) =>
         icon ? (

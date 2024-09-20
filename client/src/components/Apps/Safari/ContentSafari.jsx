@@ -41,7 +41,7 @@ const ContentSafari = () => {
         <h1 className="text-black font-[600] text-[1.125rem] text-center mb-[2%]">
           Favourites
         </h1>
-        <div className="flex gap-4 justify-center items-center ">
+        <div className="flex gap-4 justify-center items-center flex-wrap">
           {iconMapping.map((app) => (
             <div
               key={app.name}

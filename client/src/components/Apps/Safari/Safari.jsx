@@ -12,35 +12,35 @@ const Safari = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [inputUrl, setInputUrl] = useState("https://www.apple.com");
 
-  const addTab = () => {
-    const newTab = {
-      id: Date.now(),
-      url: "https://www.apple.com",
-      title: "New Tab",
-    };
-    setTabs([...tabs, newTab]);
-    setActiveTab(newTab.id);
-    setInputUrl("https://www.apple.com");
-  };
+  // const addTab = () => {
+  //   const newTab = {
+  //     id: Date.now(),
+  //     url: "https://www.apple.com",
+  //     title: "New Tab",
+  //   };
+  //   setTabs([...tabs, newTab]);
+  //   setActiveTab(newTab.id);
+  //   setInputUrl("https://www.apple.com");
+  // };
 
-  const removeTab = (id) => {
-    const newTabs = tabs.filter((tab) => tab.id !== id);
-    setTabs(newTabs);
-    if (activeTab === id && newTabs.length > 0) {
-      setActiveTab(newTabs[newTabs.length - 1].id);
-      setInputUrl(newTabs[newTabs.length - 1].url);
-    }
-  };
+  // const removeTab = (id) => {
+  //   const newTabs = tabs.filter((tab) => tab.id !== id);
+  //   setTabs(newTabs);
+  //   if (activeTab === id && newTabs.length > 0) {
+  //     setActiveTab(newTabs[newTabs.length - 1].id);
+  //     setInputUrl(newTabs[newTabs.length - 1].url);
+  //   }
+  // };
 
-  const changeTab = (id) => {
-    setActiveTab(id);
-    const tab = tabs.find((tab) => tab.id === id);
-    setInputUrl(tab.url);
-  };
+  // const changeTab = (id) => {
+  //   setActiveTab(id);
+  //   const tab = tabs.find((tab) => tab.id === id);
+  //   setInputUrl(tab.url);
+  // };
 
-  const handleUrlChange = (e) => {
-    setInputUrl(e.target.value);
-  };
+  // const handleUrlChange = (e) => {
+  //   setInputUrl(e.target.value);
+  // };
 
   const handleUrlSubmit = (e) => {
     e.preventDefault();
