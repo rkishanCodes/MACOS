@@ -9,7 +9,7 @@ const HeaderFinder = ({
   canGoForward,
 }) => {
   return (
-    <div className="h-12 border-b-[1px] border-black bg-finder-nav-dark rounded-tr-[10px] flex items-center">
+    <div className=" h-[3.25em] pt-1 border-b-[1px] border-black bg-finder-nav-dark rounded-tr-[10px] flex items-center overflow-hidden">
       <button
         onClick={onGoBack}
         disabled={currentPath.length === 0}
