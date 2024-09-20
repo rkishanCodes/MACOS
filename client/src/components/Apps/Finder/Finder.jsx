@@ -9,7 +9,6 @@ import MenuActions from "../MenuActions";
 import ResizableWindow from "../ResizableWindow";
 
 const Finder = () => {
-  const dispatch = useDispatch();
   const { selectedItem, selectedTag, folders } = useSelector(
     (state) => state.finder
   );
@@ -17,30 +16,7 @@ const Finder = () => {
   const [currentPath, setCurrentPath] = useState([]);
   const [forwardStack, setForwardStack] = useState([]);
 
-  useEffect(() => {
-    const fetchedBinContent = [
-      {
-        name: "Deleted File 1",
-        type: "file",
-        created: "2023-09-15T10:00:00Z",
-        size: 1024,
-      },
-      {
-        name: "Deleted Folder",
-        type: "folder",
-        created: "2023-09-14T15:30:00Z",
-        size: 0,
-        children: [],
-      },
-      {
-        name: "Deleted File 2",
-        type: "file",
-        created: "2023-09-13T09:45:00Z",
-        size: 2048,
-      },
-    ];
-    dispatch(setBinContent(fetchedBinContent));
-  }, [dispatch]);
+
 
   const handleFolderClick = (folderName) => {
     setCurrentPath([...currentPath, folderName]);

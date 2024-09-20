@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-import { setBinContent } from "../../../redux/slices/binSlice";
+import { setBinContent, emptyBin } from "../../../redux/slices/binSlice";
 import SideBar from "./SideBar";
 import HeaderFinder from "./HeaderFinder";
 import Content from "./Content";
@@ -19,28 +18,6 @@ const Bin = () => {
   const [forwardStack, setForwardStack] = useState([]);
 
   useEffect(() => {
-    const fetchedBinContent = [
-      {
-        name: "Deleted File 1",
-        type: "file",
-        created: "2023-09-15T10:00:00Z",
-        size: 1024,
-      },
-      {
-        name: "Deleted Folder",
-        type: "folder",
-        created: "2023-09-14T15:30:00Z",
-        size: 0,
-        children: [],
-      },
-      {
-        name: "Deleted File 2",
-        type: "file",
-        created: "2023-09-13T09:45:00Z",
-        size: 2048,
-      },
-    ];
-    dispatch(setBinContent(fetchedBinContent));
     dispatch(setSelectedItem("Bin"));
   }, [dispatch]);
 
@@ -66,21 +43,11 @@ const Bin = () => {
   };
 
   const getCurrentFolder = () => {
-    if (selectedTag) {
-      return Object.values(folders.usr)
-        .flat()
-        .filter((item) => item.tag === selectedTag);
-    }
-    if (selectedItem === "Bin") {
-      return binContent;
-    }
-    let currentFolder = folders.usr[selectedItem];
-    for (const folderName of currentPath) {
-      currentFolder =
-        currentFolder.find((f) => f.name === folderName && f.type === "folder")
-          ?.children || [];
-    }
-    return currentFolder;
+    return binContent;
+  };
+
+  const handleEmptyBin = () => {
+    dispatch(emptyBin());
   };
 
   return (
@@ -91,19 +58,20 @@ const Bin = () => {
           <SideBar />
           <div className="flex-1">
             <HeaderFinder
-              selectedItem={selectedItem || selectedTag}
+              selectedItem="Bin"
               currentPath={currentPath}
               onGoBack={handleGoBack}
               onGoForward={handleGoForward}
               canGoForward={forwardStack.length > 0}
             />
             <Content
-              selectedItem={selectedItem || selectedTag}
+              selectedItem="Bin"
               folders={getCurrentFolder()}
               onFolderClick={handleFolderClick}
               currentPath={currentPath}
-              isBin={selectedItem === "Bin"}
+              isBin={true}
             />
+            
           </div>
         </div>
       </div>

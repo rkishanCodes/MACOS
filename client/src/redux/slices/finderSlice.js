@@ -273,27 +273,15 @@ const finderSlice = createSlice({
       state.selectedTag = action.payload;
     },
     restoreItem: (state, action) => {
-      const { path, folder } = action.payload;
-      let current = state.folders.usr; // Start at the root (usr)
-
-      // Traverse the folder structure based on the provided path
-      for (let i = 0; i < path.length; i++) {
-        const folderAtPath = current[path[i]];
-
-        if (folderAtPath) {
-          current = folderAtPath; // Move deeper into the folder structure
-        } else {
-          return; // If path is invalid, stop here
-        }
+      const { item, originalPath } = action.payload;
+      let currentFolder = state.folders.usr;
+      for (let i = 0; i < originalPath.length - 1; i++) {
+        currentFolder = currentFolder[originalPath[i]];
       }
-
-      // Restore the folder to the final location in the correct path
-      current.push(folder); // Assuming `folder` contains its full data
-
-      // Optionally, remove the folder from the bin
-      const binIndex = state.bin.findIndex((f) => f.name === folder.name);
-      if (binIndex !== -1) {
-        state.bin.splice(binIndex, 1);
+      if (Array.isArray(currentFolder)) {
+        currentFolder.push(item);
+      } else if (currentFolder.children) {
+        currentFolder.children.push(item);
       }
     },
   },

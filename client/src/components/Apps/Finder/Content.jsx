@@ -7,6 +7,7 @@ import {
 } from "../../../redux/slices/finderSlice";
 import {
   addToBin,
+  emptyBin,
   removeFromBin,
   restoreFromBin,
 } from "../../../redux/slices/binSlice";
@@ -113,9 +114,9 @@ const Content = ({
     dispatch(removeFolder({ path: [selectedItem, ...currentPath, item.name] }));
     setContextMenu(null);
   };
-
   const handleRestoreFromBin = (item) => {
     dispatch(restoreFromBin(item));
+    dispatch(restoreItem({ item, originalPath: item.originalPath }));
     setContextMenu(null);
   };
 
@@ -135,8 +136,6 @@ const Content = ({
     setRenameItem(null);
     setNewName(""); // Clear the new name after renaming
   };
-
-  
 
   const handleAddToTag = (item, tag) => {
     dispatch(
@@ -159,12 +158,21 @@ const Content = ({
       }}
     >
       <ul>
-        <li
-          className="px-4 py-2 hover:bg-hover-bg-blue cursor-pointer text-[0.85rem]"
-          onClick={handleNewFolder}
-        >
-          New Folder
-        </li>
+        {isBin ? (
+          <li
+            className="px-4 py-2 hover:bg-hover-bg-blue cursor-pointer text-[0.85rem]"
+            onClick={() => dispatch(emptyBin())}
+          >
+            Empty Bin
+          </li>
+        ) : (
+          <li
+            className="px-4 py-2 hover:bg-hover-bg-blue cursor-pointer text-[0.85rem]"
+            onClick={handleNewFolder}
+          >
+            New Folder
+          </li>
+        )}
       </ul>
     </div>
   );
