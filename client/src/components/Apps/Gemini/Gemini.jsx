@@ -19,6 +19,8 @@ const Gemini = () => {
     setInput(e.target.value);
   };
 
+  const placeHolderContent = `Ask Gemini ${isMobile ? "" : "anything..."}`;
+
   const backendUrl = import.meta.env.VITE_GEMINI_API;
 
   const handleSubmit = async (e) => {
@@ -190,7 +192,7 @@ const Gemini = () => {
             value={input}
             onChange={handleInputChange}
             className="flex-1 bg-transparent outline-none text-white"
-            placeholder="Ask Gemini anything..."
+            placeholder={placeHolderContent}
             autoFocus
           />
           <button
