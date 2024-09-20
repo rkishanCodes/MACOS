@@ -60,23 +60,22 @@ const Dock = () => {
     (appName) => {
       if (isMobile) {
         dispatch(minimizeAllOtherAppsOnMobile({ clickedApp: appName }));
-      } else {
-        if (activeAppName !== appName) {
-          dispatch(SetActiveApp({ appName }));
-        }
-
-        if (apps[appName]?.minimize) {
-          dispatch(restoreApp({ app: appName }));
-        }
-
-        dispatch(
-          updateAppState({
-            app: appName,
-            field: "active",
-            value: true,
-          })
-        );
       }
+      if (activeAppName !== appName) {
+        dispatch(SetActiveApp({ appName }));
+      }
+
+      if (apps[appName]?.minimize) {
+        dispatch(restoreApp({ app: appName }));
+      }
+
+      dispatch(
+        updateAppState({
+          app: appName,
+          field: "active",
+          value: true,
+        })
+      );
     },
     [dispatch, activeAppName, apps, isMobile]
   );
@@ -86,7 +85,7 @@ const Dock = () => {
       dispatch(setDeviceType({ isMobile: window.innerWidth <= 800 }));
     };
 
-    handleResize(); 
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
@@ -213,7 +212,6 @@ const AppIcon = ({ mouseX, src, name, onClick, isMobile }) => {
     </motion.div>
   );
 };
-
 
 const AppDiv = ({ mouseX, src, name, onClick, isMobile }) => {
   const capitalizeFirstLetter = useCapitalizeFirstLetter();
