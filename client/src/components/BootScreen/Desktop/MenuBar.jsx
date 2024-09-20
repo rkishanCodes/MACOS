@@ -33,6 +33,7 @@ const MenuBar = () => {
   const capitalizeFirstLetter = useCapitalizeFirstLetter();
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
@@ -245,12 +246,12 @@ const MenuBar = () => {
               </h6>
             )}
             {activeMenu === item && !isMobile && (
-              <div className="bg-black/30 w-40 absolute top-full mt-1 border border-black rounded-lg">
+              <div className="bg-black/30 w-40 absolute top-full mt-1 border border-black rounded-[8px]">
                 {renderMenuContent(item)}
               </div>
             )}
             {activeMenu === item && isMobile && (
-              <div className="bg-black/30 w-40 absolute top-full mt-1 border border-black rounded-lg">
+              <div className="bg-black/30 w-40 absolute top-full mt-1 border border-black rounded-[8px]">
                 {renderMenuContent(item)}
               </div>
             )}

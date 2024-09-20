@@ -3,7 +3,11 @@ import exitIcon from "../../assets/exit.png";
 import minimizeIcon from "../../assets/minimize.png";
 import fullScreenIcon from "../../assets/fullscreen.png";
 import { useDispatch } from "react-redux";
-import { minimizeApp, toggleAppState } from "../../redux/slices/appSlice";
+import {
+  minimizeApp,
+  SetActiveApp,
+  toggleAppState,
+} from "../../redux/slices/appSlice";
 import { updateMaxSize } from "../../redux/slices/appSlice";
 
 const MenuActions = ({ appName }) => {
@@ -39,6 +43,11 @@ const MenuActions = ({ appName }) => {
         style={{ backgroundColor: "rgb(237, 106, 94)" }}
         onClick={() => {
           dispatch(toggleAppState({ app: appName, field: "active" }));
+          dispatch(
+            SetActiveApp({
+              appName: "finder",
+            })
+          );
         }}
       >
         {showIcons && (
