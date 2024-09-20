@@ -60,7 +60,7 @@ const Finder = () => {
   return (
     <ResizableWindow appName="finder">
       <MenuActions appName="finder" />
-      <div className="w-full h-full rounded-[10px] shadow-[0_35px_40px_-15px_rgba(0,0,0,0.5)] border-[1px] border-white/30 text-white cursor-default">
+      <div className="w-full h-full rounded-[10px] shadow-[0_35px_40px_-15px_rgba(0,0,0,0.5)] border-[1px] border-white/30 text-white cursor-default overflow-x-hidden">
         <div className="flex w-full h-full ">
           <SideBar />
           <div className="flex-1">

@@ -249,7 +249,7 @@ const Content = ({
 
   return (
     <div
-      className="w-full h-[calc(100%-3.25rem)] bg-finder-body-dark rounded-br-[10px] relative"
+      className="w-full h-[calc(100%-3.25rem)] bg-finder-body-dark rounded-br-[10px] relative "
       onContextMenu={handleContentContextMenu}
       ref={contentRef}
     >
