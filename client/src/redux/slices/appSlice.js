@@ -5,7 +5,7 @@ const initialState = {
   finder: {
     minimize: false,
     fullScreen: false,
-    active: true,
+    active: false,
     width: 500,
     height: 400,
     x: 400,
@@ -101,7 +101,7 @@ const initialState = {
   gemini: {
     minimize: false,
     fullScreen: false,
-    active: false,
+    active: true,
     width: 500,
     height: 500,
     x: 400,
