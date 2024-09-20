@@ -14,12 +14,11 @@ const ResizableWindow = ({ appName, children }) => {
   const isDragging = useRef(false);
   const dragOffset = useRef({ x: 0, y: 0 });
 
-  // Check if the screen is mobile (you can adjust the breakpoint as needed)
   const isMobile = window.innerWidth <= 1024;
 
   const handleDragStart = useCallback(
     (e) => {
-      if (isMobile) return; // Disable dragging on mobile
+      if (isMobile) return; 
       isDragging.current = true;
       dragOffset.current = { x: e.clientX - x, y: e.clientY - y };
     },
@@ -28,7 +27,7 @@ const ResizableWindow = ({ appName, children }) => {
 
   const handleDrag = useCallback(
     (e) => {
-      if (isMobile) return; // Disable dragging on mobile
+      if (isMobile) return; 
       if (isDragging.current) {
         const newX = e.clientX - dragOffset.current.x;
         const newY = e.clientY - dragOffset.current.y;

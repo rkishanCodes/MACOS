@@ -11,8 +11,7 @@ import {
   Volume,
   Volume2,
 } from "react-feather";
-import SliderDemo from "./Slider"; // Adjust the path if needed
-
+import SliderDemo from "./Slider"; 
 const ControlCentre = memo(() => {
   const [connections, setConnections] = useState([
     { icon: Wifi, name: "Wi-Fi", status: "Home", off: "off", active: true },

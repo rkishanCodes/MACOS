@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setBinContent, emptyBin } from "../../../redux/slices/binSlice";
 import SideBar from "./SideBar";
 import HeaderFinder from "./HeaderFinder";
 import Content from "./Content";
@@ -10,9 +9,7 @@ import { setSelectedItem } from "../../../redux/slices/finderSlice";
 
 const Bin = () => {
   const dispatch = useDispatch();
-  const { selectedItem, selectedTag, folders } = useSelector(
-    (state) => state.finder
-  );
+
   const { binContent } = useSelector((state) => state.bin);
   const [currentPath, setCurrentPath] = useState([]);
   const [forwardStack, setForwardStack] = useState([]);
@@ -46,10 +43,6 @@ const Bin = () => {
     return binContent;
   };
 
-  const handleEmptyBin = () => {
-    dispatch(emptyBin());
-  };
-
   return (
     <ResizableWindow appName="bin">
       <MenuActions appName="bin" />
@@ -71,7 +64,6 @@ const Bin = () => {
               currentPath={currentPath}
               isBin={true}
             />
-            
           </div>
         </div>
       </div>

@@ -10,8 +10,8 @@ const SliderDemo = ({ className, value, onChange, icon: Icon, ...props }) => {
   };
 
   const thumbPosition = useMemo(() => {
-    const thumbWidth = 28; // 7px * 4 (assuming 1rem = 4px)
-    const trackWidth = 100; // 100% of track width
+    const thumbWidth = 28; 
+    const trackWidth = 100; 
     const adjustedValue = Math.min(
       Math.max((value / 100) * trackWidth, thumbWidth / 2),
       trackWidth - thumbWidth / 2

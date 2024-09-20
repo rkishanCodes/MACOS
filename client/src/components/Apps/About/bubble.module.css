@@ -1,7 +1,6 @@
 .wordWrapper {
   display: inline-block;
   margin-right: 0.1em; 
-  /* Adds space between words */
 }
 
 .hoverText {
@@ -11,7 +10,6 @@
   display: inline-block;
 }
 
-/* Preserve whitespace */
 .hoverText:empty::before {
   content: '\00A0';
   display: inline-block;
@@ -21,7 +19,6 @@
   font-weight: 900;
 }
 
-/* To the right */
 .hoverText:hover + .hoverText {
   font-weight: 500;
 }
@@ -30,7 +27,6 @@
   font-weight: 300;
 }
 
-/* To the left */
 .hoverText:has(+ .hoverText:hover) {
   font-weight: 500;
 }
@@ -39,7 +35,6 @@
   font-weight: 300;
 }
 
-/* Color transitions for white text */
 .whiteText {
   color: white;
 }
@@ -50,7 +45,6 @@
   color: #717177; /* zinc-400 */
 }
 
-/* Color transitions for zinc text */
 .zincText {
   color: #a1a1aa; /* zinc-400 */
 }
@@ -61,13 +55,12 @@
   color: white;
 }
 
-/* Color transitions for red text */
 .redText {
-  color: #fca5a5; /* red-300 */
+  color: #fca5a5; 
 }
 
 .redText .hoverText:hover,
 .redText .hoverText:hover + .hoverText,
 .redText .hoverText:has(+ .hoverText:hover) {
-  color: #ef4444; /* red-500 */
+  color: #ef4444; 
 }

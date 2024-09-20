@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import appleLogo from "../../assets/Apple_logo_white.png";
 import bootSound from "../../assets/mac_boot_sound.mp3";
 import { useDispatch, useSelector } from "react-redux";
-import { use } from "framer-motion/client";
 import { setBoot, setDesktop, setLock } from "../../redux/slices/bootSlice";
 
 const BootScreen = () => {
@@ -19,7 +18,6 @@ const BootScreen = () => {
         console.error("Playback error:", error);
       });
 
-      // Set progress to 0 and then start progress animation after 2 seconds
       setProgress(0);
 
       setTimeout(() => {

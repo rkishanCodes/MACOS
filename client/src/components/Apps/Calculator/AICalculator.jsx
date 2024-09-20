@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ColorSwatch, Group } from "@mantine/core";
 import { Button } from "../../ui/button";
 import axios from "axios";
 import Draggable from "react-draggable";
-import { SWATCHES } from "./constants";
 
 export default function Home({ containerSize }) {
   const canvasRef = useRef(null);
@@ -46,12 +44,12 @@ export default function Home({ containerSize }) {
       if (containerRef.current) {
         setCanvasSize({
           width: containerRef.current.offsetWidth,
-          height: containerRef.current.offsetHeight - 50, // Subtracting 50px for the control bar
+          height: containerRef.current.offsetHeight - 50,
         });
       }
     };
 
-    handleResize(); // Set initial size
+    handleResize(); 
 
     const resizeObserver = new ResizeObserver(handleResize);
     if (containerRef.current) {
@@ -100,7 +98,6 @@ export default function Home({ containerSize }) {
     const latex = `\\(\\LARGE{${expression} = ${answer}}\\)`;
     setLatexExpression([...latexExpression, latex]);
 
-    // Clear the main canvas
     const canvas = canvasRef.current;
     if (canvas) {
       const ctx = canvas.getContext("2d");
@@ -194,7 +191,6 @@ export default function Home({ containerSize }) {
         for (let x = 0; x < canvas.width; x++) {
           const i = (y * canvas.width + x) * 4;
           if (imageData.data[i + 3] > 0) {
-            // If pixel is not transparent
             minX = Math.min(minX, x);
             minY = Math.min(minY, y);
             maxX = Math.max(maxX, x);

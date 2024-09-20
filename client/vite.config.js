@@ -6,17 +6,17 @@ import path from "path";
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: "0.0.0.0", // Allows external connections
-    port: 5173, // Make sure this matches your port
+    host: "0.0.0.0", 
+    port: 5173, 
 
     proxy: {
       "/api": {
-        target: "http://localhost:3000", // Proxy to backend server
+        target: "http://localhost:3000", 
       },
     },
   },
   build: {
-    chunkSizeWarningLimit: 1000, // Adjust this limit as needed
+    chunkSizeWarningLimit: 1000, 
   },
   resolve: {
     alias: {

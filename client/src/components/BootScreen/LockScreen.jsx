@@ -6,9 +6,9 @@ import { setDesktop, setLock } from "../../redux/slices/bootSlice";
 
 const LockScreen = () => {
   const [time, setTime] = useState(new Date());
-  const inputRef = useRef(null); // Ref to access the input field directly
-  const hintRef = useRef(null); // Ref to access the hint element directly
-  const controls = useAnimation(); // Animation controls for the shake effect
+  const inputRef = useRef(null);
+  const hintRef = useRef(null); 
+  const controls = useAnimation(); 
   const dispatch = useDispatch();
 
   useEffect(() => {

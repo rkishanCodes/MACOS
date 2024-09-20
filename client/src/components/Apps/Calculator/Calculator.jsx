@@ -22,16 +22,13 @@ const Calculator = React.memo(() => {
       }
     };
 
-    // Initial size calculation
     updateSize();
 
-    // Create a ResizeObserver to watch for container size changes
     const resizeObserver = new ResizeObserver(updateSize);
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
     }
 
-    // Cleanup
     return () => {
       if (containerRef.current) {
         resizeObserver.unobserve(containerRef.current);

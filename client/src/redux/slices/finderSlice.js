@@ -247,23 +247,20 @@ const finderSlice = createSlice({
 
     updateFolder: (state, action) => {
       const { path, updates } = action.payload;
-      let current = state.folders.usr; // Start at the root (usr)
+      let current = state.folders.usr; 
 
-      // Traverse the folder structure based on the provided path
       for (let i = 0; i < path.length - 1; i++) {
         const folderAtPath = current[path[i]];
 
         if (folderAtPath) {
-          current = folderAtPath; // Go to the next level
+          current = folderAtPath; 
         } else {
-          return; // If the path is invalid, just return early
+          return; 
         }
       }
 
-      // Find the folder to be renamed
       const folder = current.find((f) => f.name === path[path.length - 1]);
 
-      // If folder is found, apply updates (like renaming)
       if (folder) {
         Object.assign(folder, updates);
       }

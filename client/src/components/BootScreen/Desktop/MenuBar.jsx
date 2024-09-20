@@ -24,8 +24,8 @@ const MenuBar = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [showControlCentre, setShowControlCentre] = useState(false);
   const controlCentreRef = useRef(null);
-  const menuRef = useRef(null); // New ref for the menu container
-  const toggleRef = useRef(null); // New ref for toggle
+  const menuRef = useRef(null);  
+  const toggleRef = useRef(null);
 
   const activeAppName = useSelector((state) => state.apps.activeApp);
   const activeAppState = useSelector((state) => state.apps[activeAppName]);
@@ -63,7 +63,6 @@ const MenuBar = () => {
     };
   }, [handleClickOutside]);
 
-  // Format date and time
   const formatDateTime = (date) => {
     const options = {
       weekday: "short",
@@ -80,7 +79,6 @@ const MenuBar = () => {
     return formattedDateTime.replace(/,/g, "");
   };
 
-  // Handle system restart
   const handleRestart = useCallback(() => {
     dispatch(setHello(true));
     dispatch(setBoot(false));
@@ -94,12 +92,10 @@ const MenuBar = () => {
     dispatch(setDesktop(false));
   }, [dispatch]);
 
-  // Toggle ControlCentre visibility
   const handleControlCentreToggle = useCallback(() => {
     setShowControlCentre((prev) => !prev);
   }, [showControlCentre]);
 
-  // Define menu item content
   const menuItemContent = {
     Window: [
       {
@@ -199,7 +195,6 @@ const MenuBar = () => {
     [isMenuActive, isMobile]
   );
 
-  // Render menu content
   const renderMenuContent = (item) => {
     const content = menuItemContent[item] || menuItemContent["App"];
     return (
@@ -267,7 +262,7 @@ const MenuBar = () => {
       <div className="flex gap-4 items-center">
         {!isMobile && (
           <div
-            ref={toggleRef} // Assign the toggle ref
+            ref={toggleRef} 
             className="flex flex-col gap-0 cursor-pointer"
             onClick={handleControlCentreToggle}
           >

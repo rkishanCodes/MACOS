@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import ResizableWindow from "..//ResizableWindow";
-import MenuActions from "../MenuActions";
+
 
 const NormalCalculator = React.memo(() => {
 

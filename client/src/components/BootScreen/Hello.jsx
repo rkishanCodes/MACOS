@@ -10,7 +10,6 @@ const Hello = () => {
   const elementRef = useRef(null);
   const [startAnimation, setStartAnimation] = useState(false);
   const [view, setView] = useState(false);
-  const { isHello, isBoot } = useSelector((state) => state.boot);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,29 +61,29 @@ const Hello = () => {
         <motion.button
           className="text-white absolute bottom-[20%] border-2 rounded-full px-6 py-3 border-slate-100  bg-white"
           whileHover={{
-            scale: 1.1, // Slightly increases the size
-            backgroundColor: "#ffffff", // Changes background to white
-            color: "#000000", // Changes text color to black
+            scale: 1.1, 
+            backgroundColor: "#ffffff", 
+            color: "#000000", 
             boxShadow: "0px 0px 15px rgba(255, 255, 255, 0.8)",
-            fontWeight: "600", // Adds a glowing effect
+            fontWeight: "600", 
             transition: {
-              duration: 0.3, // Smooth transition
-              ease: "easeInOut", // Easing function for smoother animation
+              duration: 0.3, 
+              ease: "easeInOut", 
             },
           }}
           whileTap={{
-            scale: 0.95, // Slightly decreases size on click
-            backgroundColor: "#e2e8f0", // Changes background to a lighter shade
-            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)", // Dimmer glow on tap
+            scale: 0.95, 
+            backgroundColor: "#e2e8f0", 
+            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)", 
             transition: {
               duration: 0.2,
               ease: "easeInOut",
             },
           }}
           initial={{
-            scale: 1, // Default scale
-            backgroundColor: "black", // Initial background color (dark slate)
-            color: "#ffffff", // Initial text color
+            scale: 1, 
+            backgroundColor: "black", 
+            color: "#ffffff", 
           }}
           onClick={handleGetStarted}
         >

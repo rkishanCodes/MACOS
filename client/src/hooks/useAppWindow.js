@@ -1,4 +1,3 @@
-// useAppWindow.js
 import { useSelector } from "react-redux";
 import { selectApps } from "../redux/slices/appSlice";
 import useResizable from "./useResizable";

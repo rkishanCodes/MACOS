@@ -86,7 +86,7 @@ const Dock = () => {
       dispatch(setDeviceType({ isMobile: window.innerWidth <= 800 }));
     };
 
-    handleResize(); // Set initial state
+    handleResize(); 
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);

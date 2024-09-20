@@ -2,9 +2,8 @@
 export default {
     darkMode: ["class"],
     content: [
-    "./public/index.html", // Include index.html in the public directory
-    "./src/**/*.{js,jsx,ts,tsx}", // Include all JS/JSX/TS/TSX files in src
-    // Add other paths if necessary, e.g., components in other directories
+    "./public/index.html", 
+    "./src/**/*.{js,jsx,ts,tsx}", 
   ],
   theme: {
   	extend: {

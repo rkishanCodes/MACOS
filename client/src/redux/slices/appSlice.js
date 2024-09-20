@@ -220,7 +220,7 @@ const appSlice = createSlice({
     },
 
     minimizeAllOtherAppsOnMobile: (state, action) => {
-      if (!state.isMobile) return; // Only proceed if on mobile
+      if (!state.isMobile) return; 
 
       const { clickedApp } = action.payload;
       Object.keys(state).forEach((app) => {
@@ -237,7 +237,6 @@ const appSlice = createSlice({
         }
       });
 
-      // Restore the clicked app if it was minimized
       if (state[clickedApp].minimize) {
         state[clickedApp].minimize = false;
         state[clickedApp].active = true;

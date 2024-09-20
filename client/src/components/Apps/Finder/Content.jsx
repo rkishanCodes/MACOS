@@ -134,7 +134,7 @@ const Content = ({
       );
     }
     setRenameItem(null);
-    setNewName(""); // Clear the new name after renaming
+    setNewName(""); 
   };
 
   const handleAddToTag = (item, tag) => {

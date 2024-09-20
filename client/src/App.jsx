@@ -31,12 +31,11 @@ const App = () => {
       }
     };
 
-    pingBackend(); // Ping when the frontend loads
+    pingBackend(); 
 
-    // Optionally, set an interval to ping every few minutes to prevent idle time
-    const interval = setInterval(pingBackend, 5 * 60 * 1000); // Every 5 minutes
+    const interval = setInterval(pingBackend, 5 * 60 * 1000); 
 
-    return () => clearInterval(interval); // Clear interval when the component unmounts
+    return () => clearInterval(interval); 
   }, []);
 
   
@@ -44,7 +43,7 @@ const App = () => {
     (state) => state.boot
   );
 
-  // console.log(isDesktop);
+
 
   return (
     <AnimatePresence>

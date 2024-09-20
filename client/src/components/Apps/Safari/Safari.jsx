@@ -6,11 +6,11 @@ import ContentSafari from "./ContentSafari";
 import HeaderSafari from "./HeaderSafari";
 
 const Safari = () => {
-  const [tabs, setTabs] = useState([
-    { id: 1, url: "https://www.apple.com", title: "Apple" },
-  ]);
-  const [activeTab, setActiveTab] = useState(1);
-  const [inputUrl, setInputUrl] = useState("https://www.apple.com");
+  // const [tabs, setTabs] = useState([
+  //   { id: 1, url: "https://www.apple.com", title: "Apple" },
+  // ]);
+  // const [activeTab, setActiveTab] = useState(1);
+  // const [inputUrl, setInputUrl] = useState("https://www.apple.com");
 
   // const addTab = () => {
   //   const newTab = {
@@ -42,13 +42,13 @@ const Safari = () => {
   //   setInputUrl(e.target.value);
   // };
 
-  const handleUrlSubmit = (e) => {
-    e.preventDefault();
-    const updatedTabs = tabs.map((tab) =>
-      tab.id === activeTab ? { ...tab, url: inputUrl, title: inputUrl } : tab
-    );
-    setTabs(updatedTabs);
-  };
+  // const handleUrlSubmit = (e) => {
+  //   e.preventDefault();
+  //   const updatedTabs = tabs.map((tab) =>
+  //     tab.id === activeTab ? { ...tab, url: inputUrl, title: inputUrl } : tab
+  //   );
+  //   setTabs(updatedTabs);
+  // };
 
   return (
     <ResizableWindow appName="safari">

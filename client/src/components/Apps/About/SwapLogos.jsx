@@ -10,12 +10,11 @@ const SwapLogos = () => {
         <div className="h-12  overflow-hidden ">
           <motion.div
             className="w-12 h-12 border-[1px] rounded-full relative top-[-50%] transform translate-y-[50%] "
-            animate={{ rotate: [0, 180, 180, 360, 360] }} // Add an extra keyframe for the pause
+            animate={{ rotate: [0, 180, 180, 360, 360] }} 
             transition={{
-              duration: 6, // Total duration for one full cycle (2s for each half rotation + 2s pause + 2s final pause)
-              ease: "easeInOut",
-              times: [0, 0.25, 0.5, 0.75, 1], // Adjust timing to include the extra pause
-              repeat: Infinity, // Repeat infinitely
+              duration: 6, 
+              times: [0, 0.25, 0.5, 0.75, 1], 
+              repeat: Infinity, 
             }}
           >
             <img
@@ -33,12 +32,12 @@ const SwapLogos = () => {
           </motion.div>
           <motion.div
             className="w-12 h-12 border-[1px] rounded-full relative bottom-[50%] translate-y-[-100%]"
-            animate={{ rotate: [0, 180, 180, 360, 360] }} // Add an extra keyframe for the pause
+            animate={{ rotate: [0, 180, 180, 360, 360] }} 
             transition={{
-              duration: 6, // Total duration for one full cycle (2s for each half rotation + 2s pause + 2s final pause)
+              duration: 6, 
               ease: "easeInOut",
-              times: [0, 0.25, 0.5, 0.75, 1], // Adjust timing to include the extra pause
-              repeat: Infinity, // Repeat infinitely
+              times: [0, 0.25, 0.5, 0.75, 1], 
+              repeat: Infinity,
             }}
           >
             <img
@@ -64,12 +63,12 @@ const SwapLogos = () => {
         <div className="h-12  overflow-hidden ">
           <motion.div
             className="w-12 h-12 border-[1px] rounded-full relative top-[-50%] transform translate-y-[50%] "
-            animate={{ rotate: [0, 180, 180, 360, 360] }} // Add an extra keyframe for the pause
+            animate={{ rotate: [0, 180, 180, 360, 360] }}  
             transition={{
-              duration: 6, // Total duration for one full cycle (2s for each half rotation + 2s pause + 2s final pause)
+              duration: 6, 
               ease: "easeInOut",
-              times: [0, 0.25, 0.5, 0.75, 1], // Adjust timing to include the extra pause
-              repeat: Infinity, // Repeat infinitely
+              times: [0, 0.25, 0.5, 0.75, 1], 
+              repeat: Infinity, 
             }}
           >
             <img
@@ -87,12 +86,12 @@ const SwapLogos = () => {
           </motion.div>
           <motion.div
             className="w-12 h-12 border-[1px] rounded-full relative bottom-[50%] translate-y-[-100%]"
-            animate={{ rotate: [0, 180, 180, 360, 360] }} // Add an extra keyframe for the pause
+            animate={{ rotate: [0, 180, 180, 360, 360] }} 
             transition={{
-              duration: 6, // Total duration for one full cycle (2s for each half rotation + 2s pause + 2s final pause)
+              duration: 6,
               ease: "easeInOut",
-              times: [0, 0.25, 0.5, 0.75, 1], // Adjust timing to include the extra pause
-              repeat: Infinity, // Repeat infinitely
+              times: [0, 0.25, 0.5, 0.75, 1], 
+              repeat: Infinity, 
             }}
           >
             <img
@@ -118,12 +117,12 @@ const SwapLogos = () => {
         <div className="h-12  overflow-hidden ">
           <motion.div
             className="w-12 h-12 border-[1px] rounded-full relative top-[-50%] transform translate-y-[50%] "
-            animate={{ rotate: [0, 180, 180, 360, 360] }} // Add an extra keyframe for the pause
+            animate={{ rotate: [0, 180, 180, 360, 360] }}
             transition={{
-              duration: 6, // Total duration for one full cycle (2s for each half rotation + 2s pause + 2s final pause)
+              duration: 6, 
               ease: "easeInOut",
-              times: [0, 0.25, 0.5, 0.75, 1], // Adjust timing to include the extra pause
-              repeat: Infinity, // Repeat infinitely
+              times: [0, 0.25, 0.5, 0.75, 1],
+              repeat: Infinity, 
             }}
           >
             <img
@@ -141,12 +140,12 @@ const SwapLogos = () => {
           </motion.div>
           <motion.div
             className="w-12 h-12 border-[1px] rounded-full relative bottom-[50%] translate-y-[-100%]"
-            animate={{ rotate: [0, 180, 180, 360, 360] }} // Add an extra keyframe for the pause
+            animate={{ rotate: [0, 180, 180, 360, 360] }} e
             transition={{
-              duration: 6, // Total duration for one full cycle (2s for each half rotation + 2s pause + 2s final pause)
+              duration: 6, 
               ease: "easeInOut",
-              times: [0, 0.25, 0.5, 0.75, 1], // Adjust timing to include the extra pause
-              repeat: Infinity, // Repeat infinitely
+              times: [0, 0.25, 0.5, 0.75, 1], 
+              repeat: Infinity, 
             }}
           >
             <img
