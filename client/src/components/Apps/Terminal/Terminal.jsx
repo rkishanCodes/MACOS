@@ -203,8 +203,8 @@ const Terminal = () => {
       ].includes(filename)
     ) {
       return `Nice try! But I can't let you delete ${
-        filename == "-rf" ? "all system files" : `${filename}`
-      }. It's like trying to erase your own shadow – entertaining, but ultimately futile.`;
+        filename == "-rf" ? "all system" : `${filename}`
+      } files.`;
     }
     const current = getCurrentFolder();
     if (!current) return "Invalid directory";
