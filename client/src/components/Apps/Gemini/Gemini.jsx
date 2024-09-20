@@ -6,12 +6,14 @@ import userIcon from "../../../assets/geminiUser.svg";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Gemini = () => {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showInitial, setShowInitial] = useState(true);
+  const isMobile = useSelector((state) => state.apps.isMobile);
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -79,9 +81,11 @@ const Gemini = () => {
                 Hello
               </h6>
             </div>
-            <h6 className="text-[2rem] font-extrabold text-zinc-600">
-              How can I help you today?
-            </h6>
+            {!isMobile && (
+              <h6 className="text-[2rem] font-extrabold text-zinc-600">
+                How can I help you today?
+              </h6>
+            )}
           </div>
         )}
 
