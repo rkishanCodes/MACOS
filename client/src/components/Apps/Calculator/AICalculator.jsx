@@ -49,7 +49,7 @@ export default function Home({ containerSize }) {
       }
     };
 
-    handleResize(); 
+    handleResize();
 
     const resizeObserver = new ResizeObserver(handleResize);
     if (containerRef.current) {
@@ -124,8 +124,12 @@ export default function Home({ containerSize }) {
       const ctx = canvas.getContext("2d");
       if (ctx) {
         const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const x = e.type.includes("mouse")
+          ? e.clientX - rect.left
+          : e.touches[0].clientX - rect.left;
+        const y = e.type.includes("mouse")
+          ? e.clientY - rect.top
+          : e.touches[0].clientY - rect.top;
         ctx.beginPath();
         ctx.moveTo(x, y);
         setIsDrawing(true);
@@ -142,8 +146,12 @@ export default function Home({ containerSize }) {
       const ctx = canvas.getContext("2d");
       if (ctx) {
         const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const x = e.type.includes("mouse")
+          ? e.clientX - rect.left
+          : e.touches[0].clientX - rect.left;
+        const y = e.type.includes("mouse")
+          ? e.clientY - rect.top
+          : e.touches[0].clientY - rect.top;
         ctx.strokeStyle = color;
         ctx.lineTo(x, y);
         ctx.stroke();
@@ -160,7 +168,6 @@ export default function Home({ containerSize }) {
 
     if (canvas) {
       const backendURL = import.meta.env.VITE_CAL_API;
-
 
       const response = await axios({
         method: "post",
@@ -232,16 +239,6 @@ export default function Home({ containerSize }) {
         >
           Reset
         </Button>
-        {/* <div className="z-20 flex-wrap justify-center">
-          {SWATCHES.map((swatch) => (
-            <ColorSwatch
-              key={swatch}
-              color={swatch}
-              onClick={() => setColor(swatch)}
-              size="sm"
-            />
-          ))}
-        </div> */}
         <h1>Draw for Math</h1>
         <Button
           onClick={runRoute}
@@ -264,6 +261,7 @@ export default function Home({ containerSize }) {
           onTouchStart={startDrawing}
           onTouchMove={draw}
           onTouchEnd={stopDrawing}
+          willReadFrequently={true}
         />
 
         {latexExpression &&
