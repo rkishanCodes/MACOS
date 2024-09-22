@@ -97,12 +97,10 @@ export default function Home({ containerSize }) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    // Prevent default behavior for mouse wheel and touch move events
     function preventDefault(e) {
       e.preventDefault();
     }
 
-    // Detect passive support for modern Chrome
     let supportsPassive = false;
     try {
       window.addEventListener(
@@ -120,27 +118,23 @@ export default function Home({ containerSize }) {
     const wheelEvent =
       "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
 
-    // Disable scrolling
     function disableScroll() {
       window.addEventListener("DOMMouseScroll", preventDefault, false); // older Firefox
       window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
       window.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
     }
 
-    // Enable scrolling
     function enableScroll() {
       window.removeEventListener("DOMMouseScroll", preventDefault, false);
       window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
       window.removeEventListener("touchmove", preventDefault, wheelOpt);
     }
 
-    // Disable scroll on mount
     disableScroll();
 
-    // Re-enable scroll when component unmounts
     return () => {
       enableScroll();
-      document.body.style.overflow = ""; // Restore original overflow behavior
+      document.body.style.overflow = ""; 
     };
   }, []);
 
