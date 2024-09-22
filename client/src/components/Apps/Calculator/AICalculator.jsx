@@ -94,6 +94,58 @@ export default function Home({ containerSize }) {
     }
   }, [canvasSize]);
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    // Prevent default behavior for mouse wheel and touch move events
+    function preventDefault(e) {
+      e.preventDefault();
+    }
+
+    // Detect passive support for modern Chrome
+    let supportsPassive = false;
+    try {
+      window.addEventListener(
+        "test",
+        null,
+        Object.defineProperty({}, "passive", {
+          get: function () {
+            supportsPassive = true;
+          },
+        })
+      );
+    } catch (e) {}
+
+    const wheelOpt = supportsPassive ? { passive: false } : false;
+    const wheelEvent =
+      "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
+
+    // Disable scrolling
+    function disableScroll() {
+      window.addEventListener("DOMMouseScroll", preventDefault, false); // older Firefox
+      window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+      window.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
+      window.addEventListener("keydown", preventDefaultForScrollKeys, false);
+    }
+
+    // Enable scrolling
+    function enableScroll() {
+      window.removeEventListener("DOMMouseScroll", preventDefault, false);
+      window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+      window.removeEventListener("touchmove", preventDefault, wheelOpt);
+      window.removeEventListener("keydown", preventDefaultForScrollKeys, false);
+    }
+
+    // Disable scroll on mount
+    disableScroll();
+
+    // Re-enable scroll when component unmounts
+    return () => {
+      enableScroll();
+      document.body.style.overflow = ""; // Restore original overflow behavior
+    };
+  }, []);
+
   const renderLatexToCanvas = (expression, answer) => {
     const latex = `\\(\\LARGE{${expression} = ${answer}}\\)`;
     setLatexExpression([...latexExpression, latex]);
