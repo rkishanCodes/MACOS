@@ -67,6 +67,7 @@ const Dock = () => {
 
       if (apps[appName]?.minimize) {
         dispatch(restoreApp({ app: appName }));
+      
       }
 
       dispatch(
