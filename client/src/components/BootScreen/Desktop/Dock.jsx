@@ -82,7 +82,7 @@ const Dock = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      dispatch(setDeviceType({ isMobile: window.innerWidth <= 800 }));
+      dispatch(setDeviceType({ isMobile: window.innerWidth <= 1024 }));
     };
 
     handleResize();
