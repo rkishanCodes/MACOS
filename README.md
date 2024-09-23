@@ -156,6 +156,6 @@ This project is designed to enhance user interaction by simulating a MacOS-like 
    ```
 5. Create a pull request.
 
+
 ## Live Demo
 Check out the live version of the project here: [MacOS - Website](https://macosai.vercel.app)
-
