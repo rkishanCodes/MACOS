@@ -31,11 +31,42 @@ import { motion } from "framer-motion";
 
 const projectsArr = [
   {
+    title: "MACOS ",
+    description: [
+      "Developed a custom MacOS experience with applications like Finder, Safari, Terminal, and an AI-powered calculator.",
+      "Launched the first-ever AI calculator for Mac, enhancing user experience through personalized task assistance.",
+      "Ensured seamless syncing between Finder and Terminal, improving overall functionality and user engagement.",
+    ],
+    images: [
+      {
+        top: git,
+        bottom: js,
+      },
+      {
+        top: tailwind,
+        bottom: css,
+      },
+      {
+        top: redux,
+        bottom: reactJs,
+      },
+      {
+        top: gsap,
+        bottom: framerMotion,
+      },
+      {
+        top: nodeJs,
+        bottom: python,
+      },
+    ],
+    link: "https://macosai.vercel.app/",
+  },
+  {
     title: "Let's Insight",
     description: [
-      "Used D3js for datavisualization",
-      "JWT and Google auth for authentication",
-      "its a mini SAAS",
+      "Developed a full-stack application using React and Node.js for visualizing data with interactive charts using Chart.js.",
+      "Integrated Google Auth for user authentication and secured sessions with JWT and Bcrypt.",
+      "Ensured efficient data storage with MongoDB while enhancing user experience and data protection.",
     ],
     images: [
       {
@@ -64,32 +95,7 @@ const projectsArr = [
         bottom: chartJs,
       },
     ],
-  },
-  {
-    title: "MacOS Portfolio",
-    description: [
-      "Used Framer Motion for cool aniamtions",
-      "redux for store management",
-      "Finder and terminal is in sync",
-    ],
-    images: [
-      {
-        top: git,
-        bottom: js,
-      },
-      {
-        top: tailwind,
-        bottom: css,
-      },
-      {
-        top: redux,
-        bottom: reactJs,
-      },
-      {
-        top: gsap,
-        bottom: framerMotion,
-      },
-    ],
+    link: "https://github.com/rkishanCodes/Lets-Insight",
   },
 
   // {
@@ -131,9 +137,9 @@ const projectsArr = [
   {
     title: "Street2Site",
     description: [
-      "used advanced animations",
-      "desgnes featuers like service",
-      "Responseieve",
+      "Built dynamic animations using Framer Motion and GSAP to create smooth, engaging user interactions.",
+      "Developed responsive and SEO-optimized web pages, enhancing website performance and user retention.",
+      "Collaborated with a team to deliver scalable web design solutions for SMEs, improving brand value and efficiency.",
     ],
     images: [
       {
@@ -153,13 +159,14 @@ const projectsArr = [
         bottom: framerMotion,
       },
     ],
+    link: "https://street2site.com",
   },
   {
     title: "AQI prediction",
     description: [
-      "used advance modeels",
-      "foudnout insights",
-      "worked in research paper",
+      "Built an AQI prediction app using regression models with 98.76% accuracy on a custom dataset.",
+      "Developed a Flask web app for users to input air quality data and receive predictions.",
+      "Improved access to accurate AQI information through a user-friendly interface.",
     ],
     images: [
       {
@@ -176,6 +183,7 @@ const projectsArr = [
         bottom: vsc,
       },
     ],
+    link: "https://aqi-prediction-using-regression-models.onrender.com/",
   },
 ];
 
@@ -188,19 +196,25 @@ const Projects = () => {
           title={project.title}
           description={project.description}
           images={project.images}
+          link={project.link}
         />
       ))}
     </div>
   );
 };
 
-const ProjectItem = ({ title, description, images }) => {
+const ProjectItem = ({ title, description, images, link }) => {
   return (
     <div className=" w-[80%]  mb-8 rounded-[5vh] border-2 border-white/40 flex flex-col  justify-around  relative left-[50%] transform translate-x-[-50%] px-2 py-4">
       <div className="flex items-center justify-between">
         <h1 className="text-white text-[1.5rem] font-[900] pl-6">{title}</h1>
-        <a href="" className="pr-6">
-          Code
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pr-6 underline"
+        >
+          {title === "Let's Insight" ? "GitHub" : "Live"}
         </a>
       </div>
       <ul>
@@ -214,7 +228,9 @@ const ProjectItem = ({ title, description, images }) => {
         ))}
       </ul>
       <div>
-        <h4 className="text-white text-[1.125rem] font-[900] pl-6 m-2">Tools</h4>
+        <h4 className="text-white text-[1.125rem] font-[900] pl-6 m-2">
+          Tools
+        </h4>
         <SwapLogos images={images} />
       </div>
     </div>

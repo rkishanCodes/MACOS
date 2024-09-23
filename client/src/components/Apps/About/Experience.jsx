@@ -8,27 +8,29 @@ export const Experience = () => {
     <div ref={containerRef} className="bg-zinc-900 overflow-y-auto h-full pt-4">
       <TextParallaxContent
         imgUrl="https://cdn.sanity.io/images/tlr8oxjg/production/5d89f75fb4e6732aef0fdbe99d2215b2f456368a-1456x816.png?w=3840&q=100&fit=clip&auto=format"
-        subheading="Quality"
-        heading="Never compromise."
+        subheading="Co-Founder & Software Engineer"
+        heading=" Empowered SMEs through High-Quality Web Design
+ "
         containerRef={containerRef}
       >
         <Street2SiteContent />
       </TextParallaxContent>
       <TextParallaxContent
-        imgUrl="https://content.jdmagicbox.com/v2/comp/bangalore/w7/080pxx80.xx80.180810152617.m2w7/catalogue/ekennis-electronic-city-phase-1-bangalore-computer-training-institutes-uzjm9v6jwc.jpg"
-        subheading="Collaborate"
-        heading="Built for all of us."
-        containerRef={containerRef}
-      >
-        <EkennisContent />
-      </TextParallaxContent>
-      <TextParallaxContent
         imgUrl="https://images.unsplash.com/photo-1523800503107-5bc3ba2a6f81?q=80&w=2848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        subheading="Modern"
-        heading="Dress for the best."
+        subheading="Front End Developer"
+        heading="Built Web Applications with React and RESTful APIs"
         containerRef={containerRef}
       >
         <VtechContent />
+      </TextParallaxContent>
+      <TextParallaxContent
+        imgUrl="https://content.jdmagicbox.com/v2/comp/bangalore/w7/080pxx80.xx80.180810152617.m2w7/catalogue/ekennis-electronic-city-phase-1-bangalore-computer-training-institutes-uzjm9v6jwc.jpg"
+        subheading="	Software Developer Intern"
+        heading="Enhancing Web Performance and User Experience
+"
+        containerRef={containerRef}
+      >
+        <EkennisContent />
       </TextParallaxContent>
     </div>
   );
@@ -130,65 +132,20 @@ const OverlayCopy = ({ subheading, heading, containerRef }) => {
   );
 };
 
-const ExampleContent = () => (
-  <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
-    <h2 className="col-span-1 text-3xl font-bold md:col-span-4 text-white">
-      Additional content explaining the above card here
-    </h2>
-    <div className="col-span-1 md:col-span-8">
-      <p className="mb-4 text-xl text-neutral-400 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,
-        blanditiis soluta eius quam modi aliquam quaerat odit deleniti minima
-        maiores voluptate est ut saepe accusantium maxime doloremque nulla
-        consectetur possimus.
-      </p>
-      <p className="mb-8 text-xl text-neutral-400 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-        reiciendis blanditiis aliquam aut fugit sint.
-      </p>
-    </div>
-  </div>
-);
-
-const EkennisContent = () => (
-  <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
-    <h2 className="col-span-1 text-3xl font-bold md:col-span-4 text-white">
-      Ekennis
-      <h6>Software Developer Intern</h6>
-      <h6>Aug 2023 - Nov 2023</h6>
-    </h2>
-    <div className="col-span-1 md:col-span-8">
-      <p className="mb-4 text-xl text-neutral-400 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,
-        blanditiis soluta eius quam modi aliquam quaerat odit deleniti minima
-        maiores voluptate est ut saepe accusantium maxime doloremque nulla
-        consectetur possimus.
-      </p>
-      <p className="mb-8 text-xl text-neutral-400 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-        reiciendis blanditiis aliquam aut fugit sint.
-      </p>
-    </div>
-  </div>
-);
-
 const Street2SiteContent = () => (
   <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
     <h2 className="col-span-1 text-3xl font-bold md:col-span-4 text-white">
       Street2Site
-      <h6>FreeLancer</h6>
       <h6>Dec 23 - Present</h6>
     </h2>
     <div className="col-span-1 md:col-span-8">
       <p className="mb-4 text-xl text-neutral-400 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,
-        blanditiis soluta eius quam modi aliquam quaerat odit deleniti minima
-        maiores voluptate est ut saepe accusantium maxime doloremque nulla
-        consectetur possimus.
+        Co-founded Street2Site to empower small and medium-sized businesses to
+        enhance their brand value through high-quality web design projects.
       </p>
       <p className="mb-8 text-xl text-neutral-400 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-        reiciendis blanditiis aliquam aut fugit sint.
+        Directed the successful execution of projects by integrating hands-on
+        coding with strategic problem-solving.
       </p>
     </div>
   </div>
@@ -198,19 +155,39 @@ const VtechContent = () => (
   <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
     <h2 className="col-span-1 text-3xl font-bold md:col-span-4 text-white">
       VTech Integrated Solutions
-      <h6>Software Developer</h6>
       <h6>Mar 2024 - May 2024</h6>
     </h2>
     <div className="col-span-1 md:col-span-8">
       <p className="mb-4 text-xl text-neutral-400 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi,
-        blanditiis soluta eius quam modi aliquam quaerat odit deleniti minima
-        maiores voluptate est ut saepe accusantium maxime doloremque nulla
-        consectetur possimus.
+        Gained valuable experience working with React and building RESTful APIs
+        while developing interactive and efficient web applications.
       </p>
       <p className="mb-8 text-xl text-neutral-400 md:text-2xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-        reiciendis blanditiis aliquam aut fugit sint.
+        Collaborated closely with a mentor, learning industry best practices for
+        software development, improving debugging skills, and enhancing the
+        overall structure and performance of the applications I worked on.
+      </p>
+    </div>
+  </div>
+);
+
+const EkennisContent = () => (
+  <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 pb-24 pt-12 md:grid-cols-12">
+    <h2 className="col-span-1 text-3xl font-bold md:col-span-4 text-white">
+      Ekennis
+      <h6>Aug 2023 - Nov 2023</h6>
+    </h2>
+    <div className="col-span-1 md:col-span-8">
+      <p className="mb-4 text-xl text-neutral-400 md:text-2xl">
+        Gained hands-on experience in web development by building dynamic web
+        pages, optimizing websites on platforms like Wix and WordPress, and
+        enhancing overall performance through CMS integration.
+      </p>
+      <p className="mb-8 text-xl text-neutral-400 md:text-2xl">
+        Improved website functionality and user experience by implementing
+        custom complex forms using Velo language, designing responsive layouts,
+        and conducting thorough application testing and debugging, resulting in
+        faster load times and more engaging interactions.
       </p>
     </div>
   </div>

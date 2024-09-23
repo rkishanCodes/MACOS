@@ -84,7 +84,7 @@ const Schedule = () => {
       />
       <AchievementItem
         title="Tech Fest"
-        content="As Vice President of the IT Club, I successfully orchestrated the Tech Fest event, engaging over 450 students and boosting participation by 90%."
+        content="As Vice President of the IT Club, I successfully orchestrated the Tech Fest event, engaging over 450 students and boosting participation by 85%."
       />
       <AchievementItem
         title="Startup"
