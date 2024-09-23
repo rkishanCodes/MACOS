@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export const Experience = () => {
@@ -9,8 +9,7 @@ export const Experience = () => {
       <TextParallaxContent
         imgUrl="https://cdn.sanity.io/images/tlr8oxjg/production/5d89f75fb4e6732aef0fdbe99d2215b2f456368a-1456x816.png?w=3840&q=100&fit=clip&auto=format"
         subheading="Co-Founder & Software Engineer"
-        heading=" Empowered SMEs through High-Quality Web Design
- "
+        heading=" Empowered SMEs through High-Quality Web Design"
         containerRef={containerRef}
       >
         <Street2SiteContent />
