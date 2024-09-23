@@ -154,7 +154,7 @@ This project is designed to enhance user interaction by simulating a MacOS-like 
    ```bash
    git push origin feature-name
    ```
-
+5. Create a pull request.
 
 
 ## Live Demo
