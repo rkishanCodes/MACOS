@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
-import { FiArrowRight } from "react-icons/fi";
 import userLogo from "../../../assets/kishan.jpeg";
 import styles from "./bubble.module.css";
 
@@ -76,17 +75,26 @@ const HeaderBlock = () => (
         className={styles.zincText}
       />
       <BubbleText text="unique " className={`${styles.whiteText} underline`} />
-      <BubbleText text="website like this." className={styles.zincText} />
+      <BubbleText text="websites like this." className={styles.zincText} />
     </h1>
-    <a
-      href="https://www.linkedin.com/in/r-kishan-34913631a/"
-      className={`flex items-center gap-1 ${styles.redText} hover:underline`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <BubbleText text="Contact me " className={styles.redText} />
-      <FiArrowRight />
-    </a>
+    <div className="flex items-center justify-around">
+      <a
+        href="https://www.linkedin.com/in/rkishancodes/"
+        className={` ${styles.redText} hover:underline`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <BubbleText text="Contact me " className={styles.redText} />
+      </a>
+      <a
+        href="https://drive.google.com/file/d/1bzrsbWCZpRQBrwP83zQ3gQ3jBLpGfRHt/view?usp=sharing"
+        className={` ${styles.redText} hover:underline`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <BubbleText text="Resume " className={styles.redText} />
+      </a>
+    </div>
   </Block>
 );
 

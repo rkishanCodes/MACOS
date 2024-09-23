@@ -46,7 +46,7 @@ export const AboutFooter = ({ setActiveTab, scrollableRef }) => {
           heading="Connect"
           subheading="Reach out and stay in touch"
           imgSrc={connectImg}
-          href="https://www.linkedin.com/in/r-kishan-34913631a/"
+          href="https://www.linkedin.com/in/rkishancodes/"
           external={true}
         />
       </div>

@@ -25,7 +25,7 @@ const iconMapping = [
   {
     name: "LinkedIn",
     icon: linkedInIcon,
-    link: "https://www.linkedin.com/in/r-kishan-34913631a/",
+    link: "hhttps://www.linkedin.com/in/rkishancodes/",
   },
   {
     name: "Google",
