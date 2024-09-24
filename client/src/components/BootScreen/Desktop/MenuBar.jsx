@@ -24,7 +24,7 @@ const MenuBar = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [showControlCentre, setShowControlCentre] = useState(false);
   const controlCentreRef = useRef(null);
-  const menuRef = useRef(null);  
+  const menuRef = useRef(null);
   const toggleRef = useRef(null);
 
   const activeAppName = useSelector((state) => state.apps.activeApp);
@@ -32,8 +32,6 @@ const MenuBar = () => {
   const isMobile = useSelector((state) => state.apps.isMobile);
   const capitalizeFirstLetter = useCapitalizeFirstLetter();
   const dispatch = useDispatch();
-
-
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -121,30 +119,26 @@ const MenuBar = () => {
       {
         name: "Report an issue",
         cmd: " ",
-        action: () => console.log("Report an issue"),
       },
     ],
     File: [
       {
         name: "New Window",
         cmd: "⌘N",
-        action: () => console.log("New Window"),
       },
     ],
     Edit: [
-      { name: "Undo", cmd: "⌘Z", action: () => document.execCommand("undo") },
-      { name: "Redo", cmd: "⇧⌘Z", action: () => document.execCommand("redo") },
-      { name: "Cut", cmd: "⌘X", action: () => document.execCommand("cut") },
-      { name: "Copy", cmd: "⌘C", action: () => document.execCommand("copy") },
-      { name: "Paste", cmd: "⌘V", action: () => document.execCommand("paste") },
+      { name: "Undo", cmd: "⌘Z" },
+      { name: "Redo", cmd: "⇧⌘Z" },
+      { name: "Cut", cmd: "⌘X" },
+      { name: "Copy", cmd: "⌘C" },
+      { name: "Paste", cmd: "⌘V" },
     ],
     Apple: [
       {
         name: "About this Mac",
         cmd: " ",
-        action: () => console.log("About this Mac"),
       },
-      { name: "Settings...", cmd: " ", action: () => console.log("Settings") },
       { name: "Lock Screen", cmd: "⌃⌘Q ", action: handleLockScreen },
       { name: "Restart", cmd: " ", action: handleRestart },
     ],
@@ -152,12 +146,10 @@ const MenuBar = () => {
       {
         name: `About ${capitalizeFirstLetter(activeAppName)}`,
         cmd: " ",
-        action: () => console.log(`About ${activeAppName}`),
       },
       {
         name: "Settings...",
         cmd: " ",
-        action: () => console.log("App Settings"),
       },
       {
         name: `Quit ${capitalizeFirstLetter(activeAppName)}`,
@@ -205,7 +197,7 @@ const MenuBar = () => {
           <li
             key={index}
             className="flex items-center justify-between py-[2px] hover:bg-hover-finder-bg-blue px-2 hover:rounded-md cursor-pointer"
-            onClick={menuItem.action}
+            onClick={menuItem.action && menuItem.action}
           >
             <span>{menuItem.name}</span>
             <span>{menuItem.cmd}</span>
@@ -264,7 +256,7 @@ const MenuBar = () => {
       <div className="flex gap-4 items-center">
         {!isMobile && (
           <div
-            ref={toggleRef} 
+            ref={toggleRef}
             className="flex flex-col gap-0 cursor-pointer"
             onClick={handleControlCentreToggle}
           >
