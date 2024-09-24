@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeApp: "finder",
+  activeApp: "about",
   finder: {
     minimize: false,
     fullScreen: false,
