@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../../ui/button";
 import axios from "axios";
 import Draggable from "react-draggable";
+import { useSelector } from "react-redux";
 
 export default function Home({ containerSize }) {
   const canvasRef = useRef(null);
@@ -14,6 +15,10 @@ export default function Home({ containerSize }) {
   const [latexPosition, setLatexPosition] = useState({ x: 10, y: 200 });
   const [latexExpression, setLatexExpression] = useState([]);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
+  const isMobile = useSelector((state) => state.apps.isMobile);
+  const isMinimize = useSelector(
+    (state) => state.apps["calculator"]["minimize"]
+  );
 
   useEffect(() => {
     if (latexExpression.length > 0 && window.MathJax) {
@@ -95,8 +100,6 @@ export default function Home({ containerSize }) {
   }, [canvasSize]);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-
     function preventDefault(e) {
       e.preventDefault();
     }
@@ -119,9 +122,9 @@ export default function Home({ containerSize }) {
       "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
 
     function disableScroll() {
-      window.addEventListener("DOMMouseScroll", preventDefault, false); // older Firefox
-      window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-      window.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
+      window.addEventListener("DOMMouseScroll", preventDefault, false); 
+      window.addEventListener(wheelEvent, preventDefault, wheelOpt); 
+      window.addEventListener("touchmove", preventDefault, wheelOpt); 
     }
 
     function enableScroll() {
@@ -130,13 +133,19 @@ export default function Home({ containerSize }) {
       window.removeEventListener("touchmove", preventDefault, wheelOpt);
     }
 
-    disableScroll();
+    if (isMobile && !isMinimize) {
+      document.body.style.overflow = "hidden";
+      disableScroll();
+    } else {
+      document.body.style.overflow = "";
+      enableScroll();
+    }
 
     return () => {
       enableScroll();
-      document.body.style.overflow = ""; 
+      document.body.style.overflow = "";
     };
-  }, []);
+  }, [isMobile, isMinimize]);
 
   const renderLatexToCanvas = (expression, answer) => {
     const latex = `\\(\\LARGE{${expression} = ${answer}}\\)`;
@@ -148,6 +157,9 @@ export default function Home({ containerSize }) {
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      setLatexPosition({ x: centerX, y: centerY });
     }
   };
 
@@ -305,14 +317,17 @@ export default function Home({ containerSize }) {
           onTouchStart={startDrawing}
           onTouchMove={draw}
           onTouchEnd={stopDrawing}
-          willReadFrequently={true}
+          willreadfrequently={"true"} 
         />
 
         {latexExpression &&
           latexExpression.map((latex, index) => (
             <Draggable
               key={index}
-              defaultPosition={latexPosition}
+              defaultPosition={{
+                x: latexPosition.x - 50, 
+                y: latexPosition.y - 20, 
+              }}
               onStop={(e, data) => setLatexPosition({ x: data.x, y: data.y })}
               bounds="parent"
             >
