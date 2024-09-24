@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import appleLogo from "../../assets/Apple_logo_white.png";
 import bootSound from "../../assets/mac_boot_sound.mp3";
 import { useDispatch, useSelector } from "react-redux";
-import { setBoot, setDesktop, setLock } from "../../redux/slices/bootSlice";
+import { setBoot, setLock } from "../../redux/slices/bootSlice";
 
 const BootScreen = () => {
   const [progress, setProgress] = useState(0);
