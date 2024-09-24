@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Hello.module.css";
 import gsap from "gsap";
-
 import { motion } from "framer-motion";
-import { setHello, setBoot,setAudio } from "../../redux/slices/bootSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { setHello, setBoot, setAudio } from "../../redux/slices/bootSlice";
+import { useDispatch } from "react-redux";
 
 const Hello = () => {
   const elementRef = useRef(null);
@@ -14,7 +13,6 @@ const Hello = () => {
 
   useEffect(() => {
     const tl = gsap.timeline();
-
     const interval = setTimeout(() => {
       setView(true);
     }, 5000);
@@ -41,7 +39,11 @@ const Hello = () => {
   };
 
   return (
-    <div className={styles.container} ref={elementRef}>
+    <div
+      className={styles.container}
+      ref={elementRef}
+      style={{ backgroundColor: "black", height: "100vh", width: "100vw" }} // Setting the background color here
+    >
       <div className={styles.hello__div}>
         <svg className={styles.hello__svg} viewBox="0 0 1230.94 414.57">
           <path
@@ -59,31 +61,31 @@ const Hello = () => {
       </div>
       {view && (
         <motion.button
-          className="text-white absolute bottom-[20%] border-2 rounded-full px-6 py-3 border-slate-100  bg-white"
+          className="text-white absolute bottom-[20%] border-2 rounded-full px-6 py-3 border-slate-100 bg-white"
           whileHover={{
-            scale: 1.1, 
-            backgroundColor: "#ffffff", 
-            color: "#000000", 
+            scale: 1.1,
+            backgroundColor: "#ffffff",
+            color: "#000000",
             boxShadow: "0px 0px 15px rgba(255, 255, 255, 0.8)",
-            fontWeight: "600", 
+            fontWeight: "600",
             transition: {
-              duration: 0.3, 
-              ease: "easeInOut", 
+              duration: 0.3,
+              ease: "easeInOut",
             },
           }}
           whileTap={{
-            scale: 0.95, 
-            backgroundColor: "#e2e8f0", 
-            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)", 
+            scale: 0.95,
+            backgroundColor: "#e2e8f0",
+            boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.3)",
             transition: {
               duration: 0.2,
               ease: "easeInOut",
             },
           }}
           initial={{
-            scale: 1, 
-            backgroundColor: "black", 
-            color: "#ffffff", 
+            scale: 1,
+            backgroundColor: "#ffffff", 
+            color: "#000000", 
           }}
           onClick={handleGetStarted}
         >
