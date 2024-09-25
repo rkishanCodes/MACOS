@@ -87,7 +87,7 @@ const HeaderBlock = () => (
         <BubbleText text="Contact me " className={styles.redText} />
       </a>
       <a
-        href="https://drive.google.com/file/d/1bzrsbWCZpRQBrwP83zQ3gQ3jBLpGfRHt/view?usp=sharing"
+        href="https://drive.google.com/file/d/18AO6pNpn4omnLf22Q82aF6Ir3fl8O32a/view?usp=sharing"
         className={` ${styles.redText} hover:underline`}
         target="_blank"
         rel="noopener noreferrer"
