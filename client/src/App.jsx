@@ -45,7 +45,7 @@ const App = () => {
         />
         <meta
           name="keywords"
-          content="Portfolio, macO, R Kishan, R Kishan Codes"
+          content="Portfolio, macOS, R Kishan, R Kishan Codes"
         />
         <meta name="author" content="R Kishan" />
         <link rel="canonical" href="https://macosai.vercel.app/" />
