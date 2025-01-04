@@ -14,7 +14,7 @@ const App = () => {
         const response = await fetch(`${import.meta.env.VITE_GEMINI_API}/ping`);
         if (!response.ok) console.error("Failed to ping the backend of gemini api");
       } catch (error) {
-        console.error("Error pinging the backend:", error);
+        console.error("Error pinging the backend:  ", error);
       }
 
       try {
