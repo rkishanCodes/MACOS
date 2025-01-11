@@ -20,7 +20,7 @@ const App = () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_CAL_API}/ping`);
         if (!response.ok)
-          console.error("Failed to ping the backend calculator ");
+          console.error("Failed to ping the backend calculator  ");
       } catch (error) {
         console.error("Error pinging the backend:", error);
       }
